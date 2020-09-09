@@ -59,7 +59,7 @@
 
 		<template #team>
 			<div class="text-center border rounded-lg p-3 p-lg-5">
-				<!-- <div class="avatar m-auto">{{avatar "3|3-19|8|10|2|0-5|28-19|0"}}</div> -->
+				<Avataaars class="m-auto avatar pb-3" id="4-4-14-2-2-5-2-0-0-8-3-0" />
 				<h2>Antoine Kahlouche</h2>
 				<p class="text-muted">{{$t("text.creator")}}</p>
 			</div>
@@ -73,7 +73,7 @@
 			<div class="row">
 				<div v-for="(value,key) in credits" :key="key" class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
 					<div class="card h-100">
-						<p class="font-weight-bold card-header">{{$t("title."+value.title)}}</p>
+						<p class="font-weight-bold card-header">{{$t("title." + value.title)}}</p>
 						<div class="card-body">
 							<p class="card-text">
 								<b>{{$t("text.source")}} :&nbsp;</b>
@@ -107,6 +107,7 @@
 </template>
 
 <script>
+import Avataaars from "@/components/Avataaars.vue"
 import ListMenu from "@/layouts/ListMenu.vue"
 
 export default {
@@ -122,7 +123,7 @@ export default {
 				update: false
 			},
 			{
-				title: "map_data - données",
+				title: "map_data",
 				source: "OpenStreetMap",
 				sourceLink: "https://www.openstreetmap.org",
 				license: "ODbL",
@@ -130,7 +131,7 @@ export default {
 				update: false
 			},
 			{
-				title: "map_generate - génération",
+				title: "map_generate",
 				source: "OpenMapTiles",
 				sourceLink: "https://openmaptiles.org",
 				license: "ODbL",
@@ -138,7 +139,7 @@ export default {
 				update: false
 			},
 			{
-				title: "terms_usage",
+				title: "usage",
 				source: "Jurismatic",
 				sourceLink: "http://www.jurismatic.com",
 				license: "Creative Commons",
@@ -172,10 +173,14 @@ export default {
 		]
 	}),
 	components: {
+		Avataaars,
 		ListMenu
 	}
 }
 </script>
 
-<style>
+<style scoped>
+.avatar {
+	width: 30rem;
+}
 </style>

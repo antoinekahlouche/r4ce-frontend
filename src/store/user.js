@@ -1,5 +1,5 @@
 import Vue from "vue"
-import i18n, { validLocale } from "@/locales"
+import i18n, { validLocale } from "@/plugins/i18n"
 
 export default {
 	namespaced: true,

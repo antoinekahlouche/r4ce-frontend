@@ -47,7 +47,7 @@ export default {
 	},
 	props: {
 		title: { type: String, required: true },
-		links: { type: Object }
+		links: Object
 	},
 	mounted: function () {
 		const active = this.$route.query.active

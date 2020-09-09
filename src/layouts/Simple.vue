@@ -27,7 +27,7 @@ export default {
 	},
 	props: {
 		title: { type: String, required: true },
-		links: { type: Object }
+		links: Object
 	}
 }
 </script>
