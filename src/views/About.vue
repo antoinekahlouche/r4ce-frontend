@@ -1,5 +1,181 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+	<ListMenu title="about">
+		<template #legal>
+			<div class="border rounded-lg p-3 p-lg-5">
+				<div class="mb-5">
+					<h2>{{$t("text.editor")}}</h2>Antoine Kahlouche SASU
+					<br />3 rue Arletty
+					<br />92400 Courbevoie
+					<br />FRANCE
+					<br />
+					<br />contact@r4ce.co
+					<br />
+					<a href="https://antoine.kahlouche.fr" target="_blank">antoine.kahlouche.fr</a>
+					<br />
+					<br />Capital : 1000€
+					<br />SIRET : 829 748 938 00018 RCS Nanterre
+					<br />TVA : FR 40 8297 48938
+				</div>
+
+				<div class="mb-5">
+					<h2>{{$t("text.editorial_manager")}}</h2>M. Antoine Kahlouche
+				</div>
+
+				<div>
+					<h2>{{$t("text.host")}}</h2>Amazon Web Services LLC
+					<br />P.O. Box 81226
+					<br />Seattle, WA 98108-1226
+					<br />USA
+					<br />
+					<br />
+					<a href="https://aws.amazon.com" target="_blank">aws.amazon.com</a>
+				</div>
+			</div>
+		</template>
+
+		<template #usage>
+			<div class="border rounded-lg p-3 p-lg-5">
+				<div v-for="(value,key) in $t('usage')" :key="key">
+					<div v-if="key.endsWith('title')" class="mb-5">
+						<h2 v-if="key.split('_').length === 2">{{key.split('_')[0]}} {{value}}</h2>
+						<h3 v-if="key.split('_').length === 3">{{key.split('_')[0]}}.{{key.split('_')[1]}} {{value}}</h3>
+					</div>
+					<div v-else-if="key.endsWith('content')" class="mb-5" v-html="value"></div>
+				</div>
+			</div>
+		</template>
+
+		<template #gdpr>
+			<div class="border rounded-lg p-3 p-lg-5">
+				<div v-for="(value,key) in $t('gdpr')" :key="key">
+					<div v-if="key.endsWith('title')" class="mb-5">
+						<h2 v-if="key.split('_').length === 2">{{key.split('_')[0]}} {{value}}</h2>
+						<h3 v-if="key.split('_').length === 3">{{key.split('_')[0]}}.{{key.split('_')[1]}} {{value}}</h3>
+					</div>
+					<div v-else-if="key.endsWith('content')" class="mb-5" v-html="value"></div>
+				</div>
+			</div>
+		</template>
+
+		<template #team>
+			<div class="text-center border rounded-lg p-3 p-lg-5">
+				<!-- <div class="avatar m-auto">{{avatar "3|3-19|8|10|2|0-5|28-19|0"}}</div> -->
+				<h2>Antoine Kahlouche</h2>
+				<p class="text-muted">{{$t("text.creator")}}</p>
+			</div>
+		</template>
+
+		<template #social>
+			<div class="alert alert-primary" role="alert">{{$t("alert.social_network_inexisten")}}</div>
+		</template>
+
+		<template #credit>
+			<div class="row">
+				<div v-for="(value,key) in credits" :key="key" class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+					<div class="card h-100">
+						<p class="font-weight-bold card-header">{{$t("title."+value.title)}}</p>
+						<div class="card-body">
+							<p class="card-text">
+								<b>{{$t("text.source")}} :&nbsp;</b>
+								<a :href="value.sourceLink" target="_blank">{{value.source}}</a>
+								<br />
+								<b>{{$t("text.license")}} :&nbsp;</b>
+								<a :href="value.licenseLink" target="_blank">{{value.license}}</a>
+								<br />
+								<b>{{$t("text.update")}} :&nbsp;</b>
+								{{$t("text." + (value.update ? "yes" : "no"))}}
+								<br />
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<template #contact>
+			<form action="/contact" method="POST">
+				<div class="form-group">
+					<textarea class="form-control p-4" rows="5" name="message" required></textarea>
+				</div>
+				<br />
+				<div class="text-center">
+					<button class="btn btn-primary" disabled>{{$t("button.send")}}</button>
+				</div>
+			</form>
+		</template>
+	</ListMenu>
 </template>
+
+<script>
+import ListMenu from "@/layouts/ListMenu.vue"
+
+export default {
+	name: "About",
+	data: () => ({
+		credits: [
+			{
+				title: "avatar",
+				source: "Avataaars",
+				sourceLink: "https://avataaars.com",
+				license: "specific",
+				licenseLink: "https://avataaars.com",
+				update: false
+			},
+			{
+				title: "map_data - données",
+				source: "OpenStreetMap",
+				sourceLink: "https://www.openstreetmap.org",
+				license: "ODbL",
+				licenseLink: "https://opendatacommons.org/licenses/odbl",
+				update: false
+			},
+			{
+				title: "map_generate - génération",
+				source: "OpenMapTiles",
+				sourceLink: "https://openmaptiles.org",
+				license: "ODbL",
+				licenseLink: "https://wiki.openstreetmap.org/wiki/Open_Database_License",
+				update: false
+			},
+			{
+				title: "terms_usage",
+				source: "Jurismatic",
+				sourceLink: "http://www.jurismatic.com",
+				license: "Creative Commons",
+				licenseLink: "https://creativecommons.org/licenses/by-nc-sa/3.0/fr/legalcode",
+				update: true
+			},
+			{
+				title: "gdpr",
+				source: "Jurismatic",
+				sourceLink: "http://www.jurismatic.com",
+				license: "Creative Commons",
+				licenseLink: "https://creativecommons.org/licenses/by-nc-sa/3.0/fr/legalcode",
+				update: true
+			},
+			{
+				title: "drawings",
+				source: "unDaw",
+				sourceLink: "https://undraw.co",
+				license: "specific",
+				licenseLink: "https://undraw.co/license",
+				update: false
+			},
+			{
+				title: "icons",
+				source: "Font Awesome",
+				sourceLink: "https://fontawesome.com",
+				license: "specific",
+				licenseLink: "https://fontawesome.com/license",
+				update: true
+			}
+		]
+	}),
+	components: {
+		ListMenu
+	}
+}
+</script>
+
+<style>
+</style>
