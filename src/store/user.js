@@ -4,7 +4,8 @@ import i18n, { validLocale } from "@/plugins/i18n"
 export default {
 	namespaced: true,
 	state: {
-		locale: "fr"
+		locale: "fr",
+		name: null
 	},
 	getters: {},
 	mutations: {
@@ -17,6 +18,7 @@ export default {
 			if (!validLocale(locale)) return
 			i18n.locale = locale
 			Vue.config.lang = locale
+			document.querySelector("html").setAttribute("lang", locale)
 			commit("locale", locale)
 		}
 	}

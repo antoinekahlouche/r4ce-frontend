@@ -1,7 +1,9 @@
 <template>
 	<label>
-		<b>{{$t("text." + text)}}</b>
-		<span v-if="required" class="text-danger">&nbsp;*</span>
+		<b>
+			{{$t("text." + text)}}
+			<span v-if="required" class="text-danger">&nbsp;*</span>
+		</b>
 	</label>
 </template>
 

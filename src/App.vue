@@ -31,4 +31,9 @@ h3 {
 a {
 	text-decoration: unset !important;
 }
+
+.btn {
+	padding-left: 2.5rem;
+	padding-right: 2.5rem;
+}
 </style>

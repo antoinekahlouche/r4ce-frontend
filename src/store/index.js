@@ -23,3 +23,6 @@ export default new Vuex.Store({
 		})
 	]
 })
+
+// mutations : sync commit
+// actions : async dispatch

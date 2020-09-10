@@ -5,24 +5,30 @@ export default {
 	},
 	getters: {},
 	mutations: {
-		active(state, active) {
-			state.active = active
+		active(state, value) {
+			state.active = value
 		}
 	},
 	actions: {
 		active({ commit }, path) {
 			const splittedPath = path.split("/")
 
-			if (!splittedPath || !splittedPath[2]) {
+			if (!splittedPath) {
 				commit("active", null)
+				return
+			}
+
+			if (!splittedPath[2]) {
+				commit("active", "event")
 				return
 			}
 
 			if (["signin", "signup"].includes(splittedPath[2])) {
 				commit("active", "profile")
-			} else {
-				commit("active", splittedPath[2])
+				return
 			}
+
+			commit("active", splittedPath[2])
 		}
 	}
 }

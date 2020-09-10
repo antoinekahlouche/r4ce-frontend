@@ -16,7 +16,7 @@ export default {
 	name: "Alerts",
 	methods: {
 		close(index) {
-			this.$store.dispatch("alert/close", index)
+			this.$store.commit("alert/close", index)
 		}
 	}
 }
@@ -29,5 +29,3 @@ button {
 	text-decoration: unset;
 }
 </style>
-
-

@@ -91,18 +91,6 @@
 				</div>
 			</div>
 		</template>
-
-		<template #contact>
-			<form action="/contact" method="POST">
-				<div class="form-group">
-					<textarea class="form-control p-4" rows="5" name="message" required></textarea>
-				</div>
-				<br />
-				<div class="text-center">
-					<button class="btn btn-primary" disabled>{{$t("button.send")}}</button>
-				</div>
-			</form>
-		</template>
 	</ListMenu>
 </template>
 

@@ -5,8 +5,8 @@ export default {
 	},
 	getters: {},
 	mutations: {
-		open(state, data) {
-			state.list.push(data)
+		open(state, value) {
+			state.list.push(value)
 		},
 		close(state, index) {
 			state.list.splice(index, 1)
@@ -15,15 +15,5 @@ export default {
 			state.list = []
 		}
 	},
-	actions: {
-		open({ commit }, data) {
-			commit("open", data)
-		},
-		close({ commit }, index) {
-			commit("close", index)
-		},
-		clear({ commit }) {
-			commit("clear")
-		}
-	}
+	actions: {}
 }

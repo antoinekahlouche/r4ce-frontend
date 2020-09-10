@@ -3,8 +3,6 @@ import axios from "axios"
 import router from "@/router"
 import store from "@/store"
 
-Vue.prototype.$axios = axios
-
 axios.defaults.baseURL = process.env.NODE_ENV === "production" ? "https://r4ce.co/" : "http://localhost:8080/"
 axios.defaults.withCredentials = true
 
@@ -62,3 +60,5 @@ axios.interceptors.response.use(
 		return error
 	}
 )
+
+export default axios
