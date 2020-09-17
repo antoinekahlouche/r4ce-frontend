@@ -5,11 +5,7 @@
 			<Breadcrumb v-if="links" :title="title" :links="links" />
 			<Alerts />
 			<h1 class="mb-3 mb-lg-5">{{$t("title." + title)}}</h1>
-			<div class="border rounded-lg p-3 p-lg-5">
-				<slot name="content" />
-			</div>
-			<br />
-			<slot name="actions" />
+			<slot />
 		</div>
 		<Footer />
 	</div>

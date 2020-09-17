@@ -1,12 +1,22 @@
 <template>
 	<div id="app" class="d-flex flex-column">
+		<GDPR />
 		<router-view class="flex-grow-1 d-flex flex-column" />
 	</div>
 </template>
 
 <script>
+import GDPR from "@/components/GDPR.vue"
+
 export default {
-	name: "App"
+	name: "App",
+	components: {
+		GDPR
+	},
+	mounted: function () {
+		// Enable popovers everywhere
+		$('[data-toggle="popover"]').popover()
+	}
 }
 </script>
 
@@ -30,10 +40,5 @@ h3 {
 
 a {
 	text-decoration: unset !important;
-}
-
-.btn {
-	padding-left: 2.5rem;
-	padding-right: 2.5rem;
 }
 </style>

@@ -22,7 +22,12 @@
 
 				<div class="col">
 					<div class="tab-content">
-						<div v-for="(value,key) in $slots" :key="key" :id="'ListMenu_content_'+key" class="tab-pane">
+						<div
+							v-for="(value,key) in $slots"
+							:key="key"
+							:id="'ListMenu_content_' + key"
+							class="tab-pane"
+						>
 							<slot :name="key" />
 						</div>
 					</div>
@@ -49,17 +54,26 @@ export default {
 		title: { type: String, required: true },
 		links: Object
 	},
-	mounted: function () {
-		const active = this.$route.query.active
-		if (active) {
-			$("#ListMenu_menu_" + active).tab("show")
-		} else {
-			$(".list-group-item:first-child").tab("show")
+	watch: {
+		"$route.query.active": function (value) {
+			this.show()
 		}
 	},
+	mounted: function () {
+		this.show()
+	},
 	methods: {
+		show: function () {
+			const active = this.$route.query.active
+			if (active) {
+				$("#ListMenu_menu_" + active).tab("show")
+			} else {
+				$(".list-group-item:first-child").tab("show")
+			}
+		},
 		changeMenu: function (menu) {
 			const { active, ...otherQuery } = this.$route.query
+			if (active === menu) return
 			this.$router.replace({ path: this.$route.currentPath, query: { active: menu, ...otherQuery } })
 		}
 	}

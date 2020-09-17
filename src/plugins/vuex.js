@@ -1,25 +1,21 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import createPersistedState from "vuex-persistedstate"
-import alert from "@/store/alert"
-import map from "@/store/map"
-import nav from "@/store/nav"
-import search from "@/store/search"
-import user from "@/store/user"
+import alerts from "@/store/alerts"
+import events from "@/store/events"
+import profile from "@/store/profile"
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 	modules: {
-		alert,
-		map,
-		nav,
-		search,
-		user
+		alerts,
+		events,
+		profile
 	},
 	plugins: [
 		createPersistedState({
-			paths: ["user"]
+			paths: ["profile"]
 		})
 	]
 })

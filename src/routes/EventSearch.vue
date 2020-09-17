@@ -1,16 +1,12 @@
 <template>
 	<Simple title="search">
-		<template #content>
-			<div class="m-auto container-sm">
+		<form @submit="submit">
+			<Bloc container="sm">
 				<div class="form-group">
 					<Label text="sport" required />
 					<select name="sport" class="form-control" v-model="sport">
 						<option value>{{$t("text.all")}}</option>
-						<option
-							v-for="sport in sportDetails.sport"
-							:key="sport"
-							:value="sport"
-						>{{$t("sport." + sport)}}</option>
+						<option v-for="sport in event.sport()" :key="sport" :value="sport">{{$t("sport." + sport)}}</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -18,7 +14,7 @@
 					<select name="discipline" class="form-control" :disabled="!sport" v-model="discipline">
 						<option value>{{$t("text.all")}}</option>
 						<option
-							v-for="discipline in sportDetails.disciplineBySport[sport]"
+							v-for="discipline in event.discipline(sport)"
 							:key="discipline"
 							:value="discipline"
 						>{{$t("discipline." + discipline)}}</option>
@@ -29,7 +25,7 @@
 					<select name="distance" class="form-control" :disabled="!sport" v-model="distance">
 						<option value>{{$t("text.all")}}</option>
 						<option
-							v-for="distance in sportDetails.distanceBySport[sport]"
+							v-for="distance in event.distance(sport)"
 							:key="distance"
 							:value="distance"
 						>{{$t("distance." + distance)}}</option>
@@ -40,7 +36,7 @@
 					<select name="format" class="form-control" v-model="format">
 						<option value>{{$t("text.all")}}</option>
 						<option
-							v-for="format in sportDetails.format"
+							v-for="format in event.format()"
 							:key="format"
 							:value="format"
 						>{{$t("format." + format)}}</option>
@@ -62,96 +58,101 @@
 						<input name="to" type="date" class="form-control" required v-model="to" />
 					</div>
 				</div>
-			</div>
-		</template>
-
-		<template #actions>
+			</Bloc>
 			<div class="text-center mt-3">
-				<router-link to="/event/map" class="btn btn-primary">{{$t("title.search")}}</router-link>
+				<button type="submit" class="btn btn-primary">{{$t("button.search")}}</button>
 			</div>
 			<br />
 			<div class="text-center">
-				<router-link to="/event/add">{{$t("title.event_add")}}</router-link>
+				<router-link to="/event/add">{{$t("button.event_add")}}</router-link>
 			</div>
-		</template>
+		</form>
 	</Simple>
 </template>
 
 <script>
-import Button from "@/components/Label.vue";
-import Label from "@/components/Label.vue";
-import Simple from "@/layouts/Simple.vue";
-import sportDetails from "@/constantes/sportDetails.js";
+import Bloc from "@/components/Bloc.vue"
+import Button from "@/components/Label.vue"
+import Label from "@/components/Label.vue"
+import Simple from "@/layouts/Simple.vue"
+import event from "@/helpers/event.js"
 
 export default {
 	name: "EventSearch",
 	components: {
+		Bloc,
 		Button,
 		Label,
-		Simple,
+		Simple
 	},
-	data: () => ({ sportDetails }),
+	data: () => ({ event }),
 	computed: {
 		sport: {
 			get() {
-				return this.$store.state.search.sport;
+				return this.$store.state.events.search.sport
 			},
 			set(value) {
-				this.$store.commit("search/sport", value);
-				this.$store.commit("search/distance", "");
-				this.$store.commit("search/discipline", "");
-			},
+				this.$store.dispatch("events/sport", value)
+				this.$store.dispatch("events/distance", "")
+				this.$store.dispatch("events/discipline", "")
+			}
 		},
 		discipline: {
 			get() {
-				return this.$store.state.search.discipline;
+				return this.$store.state.events.search.discipline
 			},
 			set(value) {
-				this.$store.commit("search/discipline", value);
-			},
+				this.$store.dispatch("events/discipline", value)
+			}
 		},
 		distance: {
 			get() {
-				return this.$store.state.search.distance;
+				return this.$store.state.events.search.distance
 			},
 			set(value) {
-				this.$store.commit("search/distance", value);
-			},
+				this.$store.dispatch("events/distance", value)
+			}
 		},
 		format: {
 			get() {
-				return this.$store.state.search.format;
+				return this.$store.state.events.search.format
 			},
 			set(value) {
-				this.$store.commit("search/format", value);
-			},
+				this.$store.dispatch("events/format", value)
+			}
 		},
 		where: {
 			get() {
-				return this.$store.state.search.where;
+				return this.$store.state.events.search.where
 			},
 			set(value) {
-				this.$store.commit("search/where", value);
-			},
+				this.$store.dispatch("events/where", value)
+			}
 		},
 		from: {
 			get() {
-				return this.$store.state.search.from;
+				return this.$store.state.events.search.from
 			},
 			set(value) {
-				this.$store.commit("search/from", value);
-			},
+				this.$store.dispatch("events/from", value)
+			}
 		},
 		to: {
 			get() {
-				return this.$store.state.search.to;
+				return this.$store.state.events.search.to
 			},
 			set(value) {
-				this.$store.commit("search/to", value);
-			},
-		},
+				this.$store.dispatch("events/to", value)
+			}
+		}
 	},
-};
+	methods: {
+		submit: function (event) {
+			this.$router.push("/event/map")
+			event.preventDefault()
+		}
+	}
+}
 </script>
 
 <style scoped>

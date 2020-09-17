@@ -5,7 +5,7 @@ const messages = {
 	fr: require("@/locales/fr.json")
 }
 
-const userLocale = (localStorage.vuex && JSON.parse(localStorage.vuex).user.locale) || (navigator.language || navigator.userLanguage || "").split("-")[0]
+const userLocale = (localStorage.vuex && JSON.parse(localStorage.vuex).profile && JSON.parse(localStorage.vuex).profile.locale) || (navigator.language || navigator.userLanguage || "").split("-")[0]
 const locale = validLocale(userLocale) ? userLocale : "fr"
 
 Vue.use(VueI18n)

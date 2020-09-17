@@ -2,7 +2,7 @@ import Vue from "vue"
 import App from "@/App.vue"
 import "@/registerServiceWorker"
 import router from "@/plugins/router.js"
-import store from "@/store"
+import store from "@/plugins/vuex.js"
 import i18n from "@/plugins/i18n.js"
 
 Vue.config.productionTip = false
