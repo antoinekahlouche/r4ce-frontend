@@ -12,10 +12,7 @@ import Header from "@/components/Header.vue"
 
 export default {
 	name: "Fullscreen",
-	components: {
-		Footer,
-		Header
-	}
+	components: { Footer, Header }
 }
 </script>
 

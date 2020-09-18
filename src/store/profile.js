@@ -5,7 +5,8 @@ export default {
 	namespaced: true,
 	state: {
 		locale: "fr",
-		user: null
+		user: null,
+		terms: null
 	},
 	getters: {},
 	mutations: {
@@ -14,6 +15,9 @@ export default {
 		},
 		USER(state, value) {
 			state.user = value
+		},
+		TERMS(state, value) {
+			state.terms = value
 		}
 	},
 	actions: {
@@ -26,6 +30,9 @@ export default {
 		},
 		user({ commit }, value) {
 			commit("USER", value)
+		},
+		terms({ commit }, value) {
+			commit("TERMS", value)
 		}
 	}
 }

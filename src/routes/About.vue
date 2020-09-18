@@ -160,10 +160,7 @@ export default {
 			}
 		]
 	}),
-	components: {
-		Avataaars,
-		ListMenu
-	}
+	components: { Avataaars, ListMenu }
 }
 </script>
 

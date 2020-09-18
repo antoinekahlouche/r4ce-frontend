@@ -45,11 +45,7 @@ import Header from "@/components/Header.vue"
 
 export default {
 	name: "ListMenu",
-	components: {
-		Breadcrumb,
-		Footer,
-		Header
-	},
+	components: { Breadcrumb, Footer, Header },
 	props: {
 		title: { type: String, required: true },
 		links: Object

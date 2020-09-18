@@ -21,15 +21,13 @@ import Avataaars from "vuejs-avataaars"
 import avataaars from "@/helpers/avataaars.js"
 
 export default {
-	components: {
-		Avataaars
-	},
+	components: { Avataaars },
 	props: {
 		id: { type: String, required: true }
 	},
 	methods: {
 		value: function (index) {
-			return avataaars.details[Object.keys(avataaars.details)[index]][this.id.split("-")[index]]
+			return avataaars.options[Object.keys(avataaars.options)[index]][this.id.split("-")[index]]
 		}
 	}
 }

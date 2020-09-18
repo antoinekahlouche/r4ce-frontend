@@ -14,10 +14,7 @@ import Simple from "@/layouts/Simple.vue"
 
 export default {
 	name: "Error",
-	components: {
-		Bloc,
-		Simple
-	},
+	components: { Bloc, Simple },
 	data: () => ({}),
 	props: {
 		code: Number

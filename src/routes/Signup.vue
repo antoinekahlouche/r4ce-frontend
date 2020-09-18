@@ -1,6 +1,6 @@
 <template>
 	<Simple title="signup">
-		<form @submit="submit">
+		<form @submit="signup">
 			<Bloc container="sm">
 				<div class="form-row">
 					<div class="form-group col-md-6">
@@ -58,37 +58,37 @@ import Simple from "@/layouts/Simple.vue"
 
 export default {
 	name: "Signup",
-	components: {
-		Bloc,
-		Label,
-		Simple
-	},
+	components: { Bloc, Label, Simple },
 	data: () => ({
 		loading: false,
-		firstName: "null",
-		lastName: "null",
-		email: "null@a",
-		password: "null",
-		usage: true,
-		gdpr: true
+		firstName: null,
+		lastName: null,
+		email: null,
+		password: null,
+		usage: false,
+		gdpr: false
 	}),
 	methods: {
-		submit: async function (event) {
+		signup: async function (event) {
 			event.preventDefault()
 			this.loading = true
 
 			const response = await axios.post("/signup", {
 				avatar: avataaars.random(),
-				firstName: this.firstName,
-				lastName: this.lastName,
 				email: this.email,
-				password: this.password
+				firstName: this.firstName,
+				gdprVersion: this.$t("gdpr.version"),
+				lang: this.$store.stateprofile.locale,
+				lastName: this.lastName,
+				password: this.password,
+				usageVersion: this.$t("usage.version")
 			})
 
 			if (response.data.alert) {
 				this.$store.dispatch("alerts/open", { type: "warning", alert: response.data.alert })
 			} else if (response.data.user) {
-				this.$store.dispatch("profile/user", { user: response.data.user })
+				this.$store.dispatch("profile/user", response.data.user)
+				this.$store.dispatch("profile/terms", response.data.terms)
 				if (this.$route.query && this.$route.query.redirect) {
 					this.$router.push(this.$route.query.redirect)
 				} else {

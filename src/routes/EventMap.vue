@@ -23,9 +23,7 @@ import Fullscreen from "@/layouts/Fullscreen.vue"
 
 export default {
 	name: "EventMap",
-	components: {
-		Fullscreen
-	},
+	components: { Fullscreen },
 	data: () => ({
 		loading: true
 	}),

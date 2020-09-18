@@ -19,12 +19,7 @@ import Header from "@/components/Header.vue"
 
 export default {
 	name: "Simple",
-	components: {
-		Alerts,
-		Breadcrumb,
-		Footer,
-		Header
-	},
+	components: { Alerts, Breadcrumb, Footer, Header },
 	props: {
 		title: { type: String, required: true },
 		links: Object

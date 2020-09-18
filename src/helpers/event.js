@@ -1,4 +1,4 @@
-const details = {
+const options = {
 	sport: {
 		RUN: {
 			discipline: [],
@@ -13,21 +13,21 @@ const details = {
 }
 
 function sport() {
-	return Object.keys(details.sport)
+	return Object.keys(options.sport)
 }
 
 function discipline(sport) {
 	if (!sport) return
-	return details.sport[sport].discipline
+	return options.sport[sport].discipline
 }
 
 function distance(sport) {
 	if (!sport) return
-	return details.sport[sport].distance
+	return options.sport[sport].distance
 }
 
 function format() {
-	return details.format
+	return options.format
 }
 
 export default { sport, discipline, distance, format }

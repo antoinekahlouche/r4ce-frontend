@@ -10,9 +10,7 @@ import GDPR from "@/components/GDPR.vue"
 
 export default {
 	name: "App",
-	components: {
-		GDPR
-	},
+	components: { GDPR },
 	mounted: function () {
 		// Enable popovers everywhere
 		$('[data-toggle="popover"]').popover()
@@ -40,5 +38,10 @@ h3 {
 
 a {
 	text-decoration: unset !important;
+}
+
+.btn {
+	padding-left: 2.5rem;
+	padding-right: 2.5rem;
 }
 </style>

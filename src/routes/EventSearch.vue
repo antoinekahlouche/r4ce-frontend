@@ -79,12 +79,7 @@ import event from "@/helpers/event.js"
 
 export default {
 	name: "EventSearch",
-	components: {
-		Bloc,
-		Button,
-		Label,
-		Simple
-	},
+	components: { Bloc, Button, Label, Simple },
 	data: () => ({ event }),
 	computed: {
 		sport: {

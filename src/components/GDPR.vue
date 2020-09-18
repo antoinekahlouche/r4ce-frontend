@@ -33,7 +33,7 @@
 export default {
 	name: "GDPR",
 	mounted: () => {
-		// if (this.$store.state.profile.user.acceptance.gdpr !== this.$t("gdpr.version")) {
+		// if (this.$store.state.profile.terms.gdpr !== this.$t("gdpr.version")) {
 		// 	$(".toast").toast("show")
 		// }
 	}
