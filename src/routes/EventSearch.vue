@@ -143,7 +143,7 @@ export default {
 	},
 	methods: {
 		submit: function (event) {
-			this.$router.push("/event/map")
+			this.$router.push("EventMap")
 			event.preventDefault()
 		}
 	}

@@ -1,6 +1,6 @@
 <template>
 	<Simple title="signup">
-		<form @submit="signup">
+		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-row">
 					<div class="form-group col-md-6">
@@ -69,7 +69,7 @@ export default {
 		gdpr: false
 	}),
 	methods: {
-		signup: async function (event) {
+		submit: async function (event) {
 			event.preventDefault()
 			this.loading = true
 
@@ -78,25 +78,22 @@ export default {
 				email: this.email,
 				firstName: this.firstName,
 				gdprVersion: this.$t("gdpr.version"),
-				lang: this.$store.stateprofile.locale,
+				locale: this.$store.state.profile.locale,
 				lastName: this.lastName,
 				password: this.password,
 				usageVersion: this.$t("usage.version")
 			})
 
-			if (response.data.alert) {
-				this.$store.dispatch("alerts/open", { type: "warning", alert: response.data.alert })
-			} else if (response.data.user) {
+			if (response.data.user && response.data.terms) {
 				this.$store.dispatch("profile/user", response.data.user)
 				this.$store.dispatch("profile/terms", response.data.terms)
 				if (this.$route.query && this.$route.query.redirect) {
 					this.$router.push(this.$route.query.redirect)
 				} else {
-					this.$router.push("/profile")
+					this.$router.push("Profile")
 				}
-			} else {
-				this.$router.push("/500")
 			}
+
 			this.loading = false
 			return
 		},

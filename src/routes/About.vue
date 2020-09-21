@@ -100,6 +100,7 @@ import ListMenu from "@/layouts/ListMenu.vue"
 
 export default {
 	name: "About",
+	components: { Avataaars, ListMenu },
 	data: () => ({
 		credits: [
 			{
@@ -159,8 +160,7 @@ export default {
 				update: true
 			}
 		]
-	}),
-	components: { Avataaars, ListMenu }
+	})
 }
 </script>
 

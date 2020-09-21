@@ -1,15 +1,15 @@
 <template>
 	<Simple title="signin">
-		<form @submit="signin">
+		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">
 					<Label text="email" required />
-					<input type="email" class="form-control" name="email" required />
+					<input type="email" class="form-control" v-model="email" required />
 				</div>
 
 				<div class="form-group">
 					<Label text="password" required />
-					<input type="password" class="form-control" name="password" required />
+					<input type="password" class="form-control" v-model="password" required />
 				</div>
 			</Bloc>
 
@@ -41,7 +41,7 @@ export default {
 		password: null
 	}),
 	methods: {
-		signin: async function (event) {
+		submit: async function (event) {
 			event.preventDefault()
 			this.loading = true
 
@@ -50,19 +50,16 @@ export default {
 				password: this.password
 			})
 
-			if (response.data.alert) {
-				this.$store.dispatch("alerts/open", { type: "warning", alert: response.data.alert })
-			} else if (response.data.user) {
+			if (response.data && response.data.user) {
 				this.$store.dispatch("profile/user", response.data.user)
 				this.$store.dispatch("profile/terms", response.data.terms)
 				if (this.$route.query && this.$route.query.redirect) {
 					this.$router.push(this.$route.query.redirect)
 				} else {
-					this.$router.push("/profile")
+					this.$router.push("Profile")
 				}
-			} else {
-				this.$router.push("/500")
 			}
+
 			this.loading = false
 			return
 		},

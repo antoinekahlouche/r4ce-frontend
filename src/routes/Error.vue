@@ -1,6 +1,7 @@
 <template>
 	<Simple title="error">
-		<Bloc class="row justify-content-center">
+		<div class="alert alert-danger" role="alert">{{$t("alert." + code)}}</div>
+		<Bloc class="text-center">
 			<img v-if="code === 401" src="@/assets/undraw_authentication_fsn5.svg" />
 			<img v-else-if="code === 404" src="@/assets/undraw_page_not_found_su7k.svg" />
 			<img v-else src="@/assets/undraw_warning_cyit.svg" />
@@ -15,12 +16,15 @@ import Simple from "@/layouts/Simple.vue"
 export default {
 	name: "Error",
 	components: { Bloc, Simple },
-	data: () => ({}),
+	data: () => ({
+		// code: null
+	}),
 	props: {
-		code: Number
+		code: { type: Number, required: true }
 	},
 	mounted: function () {
-		this.$store.dispatch("alerts/open", { type: "danger", alert: this.code })
+		// this.code = this.$route.params.code
+		// this.$store.dispatch("alert/open", { type: "danger", message: this.code })
 	}
 }
 </script>

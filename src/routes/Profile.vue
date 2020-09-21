@@ -144,7 +144,7 @@ export default {
 			const response = await axios.post("/signout")
 			console.log(response)
 			this.$store.dispatch("profile/user", null)
-			this.$router.push("/signin")
+			this.$router.push("Signin")
 			this.loading = false
 			return
 		},
