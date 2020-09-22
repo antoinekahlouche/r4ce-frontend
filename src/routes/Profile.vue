@@ -1,5 +1,5 @@
 <template>
-	<ListMenu title="profile">
+	<ListMenu title="profile" withSignout>
 		<template #details>
 			<form @submit="saveUser">
 				<Bloc container="sm">
@@ -19,14 +19,6 @@
 					</div>
 				</Bloc>
 				<div class="text-center">
-					<button type="button" class="btn btn-danger mr-4" :disabled="loading" @click="signout">
-						<span
-							class="spinner-border spinner-border-sm mr-1"
-							role="status"
-							:class="{'d-none':!loading}"
-						></span>
-						{{$t("button.signout")}}
-					</button>
 					<button type="submit" class="btn btn-success" :disabled="loading">
 						<span
 							class="spinner-border spinner-border-sm mr-1"
@@ -135,16 +127,6 @@ export default {
 				email: this.email
 			})
 
-			this.loading = false
-			return
-		},
-		signout: async function () {
-			this.loading = true
-
-			const response = await axios.post("/signout")
-			console.log(response)
-			this.$store.dispatch("profile/user", null)
-			this.$router.push("Signin")
 			this.loading = false
 			return
 		},

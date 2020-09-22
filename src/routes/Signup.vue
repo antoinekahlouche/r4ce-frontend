@@ -90,7 +90,7 @@ export default {
 				if (this.$route.query && this.$route.query.redirect) {
 					this.$router.push(this.$route.query.redirect)
 				} else {
-					this.$router.push("Profile")
+					this.$router.push("/profile")
 				}
 			}
 
@@ -98,11 +98,11 @@ export default {
 			return
 		},
 		to: function () {
-			let jsonTo = { path: "signin" }
+			let str = "/signin"
 			if (this.$route.query && this.$route.query.redirect) {
-				jsonTo.query = { redirect: this.$route.query.redirect }
+				str += "?redirect=" + this.$route.query.redirect
 			}
-			return jsonTo
+			return str
 		}
 	}
 }

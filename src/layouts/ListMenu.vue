@@ -18,6 +18,24 @@
 							v-on:click="changeMenu(key)"
 						>{{$t("title." + key)}}</div>
 					</div>
+
+					<div v-if="withSignout" class="list-group">
+						<br />
+						<button
+							id="signoutMenuButton"
+							type="button"
+							class="btn btn-danger text-left"
+							:disabled="loading"
+							@click="signout"
+						>
+							<span
+								class="spinner-border spinner-border-sm mr-1"
+								role="status"
+								:class="{'d-none':!loading}"
+							></span>
+							{{$t("button.signout")}}
+						</button>
+					</div>
 				</div>
 
 				<div class="col">
@@ -39,6 +57,7 @@
 </template>
 
 <script>
+import axios from "@/plugins/axios.js"
 import Breadcrumb from "@/components/Breadcrumb.vue"
 import Footer from "@/components/Footer.vue"
 import Header from "@/components/Header.vue"
@@ -48,8 +67,12 @@ export default {
 	components: { Breadcrumb, Footer, Header },
 	props: {
 		title: { type: String, required: true },
-		links: Object
+		links: Object,
+		withSignout: Boolean
 	},
+	data: () => ({
+		loading: false
+	}),
 	watch: {
 		"$route.query.active": function (value) {
 			this.show()
@@ -71,6 +94,16 @@ export default {
 			const { active, ...otherQuery } = this.$route.query
 			if (active === menu) return
 			this.$router.replace({ path: this.$route.currentPath, query: { active: menu, ...otherQuery } })
+		},
+		signout: async function () {
+			this.loading = true
+
+			const response = await axios.post("/signout")
+			console.log(response)
+			this.$store.dispatch("profile/user", null)
+			this.$router.push("/signin")
+			this.loading = false
+			return
 		}
 	}
 }
@@ -79,5 +112,9 @@ export default {
 <style scoped>
 .list-group-item {
 	cursor: pointer;
+}
+
+#signoutMenuButton {
+	padding: 12px 20px 12px 20px;
 }
 </style>

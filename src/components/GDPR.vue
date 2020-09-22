@@ -14,7 +14,7 @@
 				<div class="clearfix">
 					<div class="float-right">
 						<router-link
-							:to="{path: '/about', query: {active: 'gdpr'}}"
+							to="/about?active=gdpr"
 							class="mr-2"
 						>{{$t("button.more_info")}}</router-link>
 						<button

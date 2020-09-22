@@ -108,12 +108,10 @@ const router = new VueRouter({
 					component: load("Signup")
 				},
 				{
-					name: "Sitemap",
 					path: "sitemap",
 					component: load("Sitemap")
 				},
 				{
-					name: "Error",
 					path: "*",
 					props: { code: 404 },
 					component: load("Error")

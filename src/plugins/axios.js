@@ -10,9 +10,9 @@ axios.interceptors.response.use(
 	function(response) {
 		console.log(response)
 		if (response.status !== 200) {
-			if (response.status === 401) router.push({ name: "Error", query: { code: "401" } })
-			else if (response.status === 404) router.push({ name: "Error", query: { code: "404" } })
-			else router.push({ name: "Error", query: { code: "500" } })
+			if (response.status === 401) router.push("/error?code=401")
+			else if (response.status === 404) router.push("/error?code=404")
+			else router.push("/error?code=500")
 		} else if (response.data.alert) {
 			store.dispatch("alert/open", response.data.alert)
 		}
@@ -22,7 +22,7 @@ axios.interceptors.response.use(
 
 	function(error) {
 		console.log(error)
-		router.push({ name: "Error", query: { code: "500" } })
+		router.push("/error?code=500")
 		return error
 	}
 )

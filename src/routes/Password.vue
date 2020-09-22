@@ -56,29 +56,35 @@ export default {
 			return
 		},
 		submitGet: async function (event) {
-			await axios.post("/passwordRenew", {
+			const response = await axios.post("/passwordRenew", {
 				email: this.email,
 				locale: this.$store.state.profile.locale
 			})
-			this.$store.dispatch("alert/open", {
-				type: "success",
-				message: "email_password_sent",
-				displayPage: "Signin"
-			})
-			this.$router.push("Signin")
+
+			if (!response.data) {
+				this.$store.dispatch("alert/open", {
+					type: "success",
+					message: "email_password_sent",
+					displayPage: "Signin"
+				})
+				this.$router.push("/signin")
+			}
 		},
 		submitSet: async function (event) {
-			await axios.post("/passwordUpdate", {
+			const response = await axios.post("/passwordUpdate", {
 				email: this.email,
 				token: this.token,
 				password: this.password
 			})
-			this.$store.dispatch("alert/open", {
-				type: "success",
-				message: "password_updated",
-				displayPage: "Signin"
-			})
-			this.$router.push("Signin")
+
+			if (!response.data) {
+				this.$store.dispatch("alert/open", {
+					type: "success",
+					message: "password_updated",
+					displayPage: "Signin"
+				})
+				this.$router.push("/signin")
+			}
 		}
 	}
 }
