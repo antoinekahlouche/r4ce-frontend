@@ -60,6 +60,12 @@ export default {
 				email: this.email,
 				locale: this.$store.state.profile.locale
 			})
+			this.$store.dispatch("alert/open", {
+				type: "success",
+				message: "email_password_sent",
+				displayPage: "Signin"
+			})
+			this.$router.push("Signin")
 		},
 		submitSet: async function (event) {
 			await axios.post("/passwordUpdate", {
