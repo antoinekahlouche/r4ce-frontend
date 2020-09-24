@@ -14,13 +14,13 @@
 			</Bloc>
 
 			<div class="text-center">
-				<button type="submit" class="btn btn-primary">{{$t("button.signin")}}</button>
+				<button type="submit" class="btn btn-primary">{{ $t("button.signin") }}</button>
 			</div>
 			<br />
 			<div class="text-center">
-				<router-link to="/password">{{$t("button.password")}}</router-link>
+				<router-link to="/password">{{ $t("button.password") }}</router-link>
 				<br />
-				<router-link :to="to()">{{$t("button.signup")}}</router-link>
+				<router-link :to="to()">{{ $t("button.signup") }}</router-link>
 			</div>
 		</form>
 	</Simple>
@@ -28,9 +28,9 @@
 
 <script>
 import axios from "@/plugins/axios.js"
-import Bloc from "@/components/Bloc.vue"
-import Label from "@/components/Label.vue"
-import Simple from "@/layouts/Simple.vue"
+import Bloc from "@/components/Bloc"
+import Label from "@/components/Label"
+import Simple from "@/layouts/Simple"
 
 export default {
 	name: "Signin",

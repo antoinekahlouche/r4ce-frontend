@@ -6,19 +6,19 @@
 					<Label text="email" required />
 					<input type="email" class="form-control" v-model="email" required :disabled="token" />
 				</div>
-				<div class="form-group" :class="{'d-none': !token}">
+				<div class="form-group" :class="{ 'd-none': !token }">
 					<Label text="password" required />
 					<input type="password" class="form-control" v-model="password" :required="token" />
 				</div>
 			</Bloc>
 
 			<div class="text-center">
-				<button v-if="token" type="submit" class="btn btn-primary">{{$t("button.password_new")}}</button>
-				<button v-else type="submit" class="btn btn-primary">{{$t("button.password")}}</button>
+				<button v-if="token" type="submit" class="btn btn-primary">{{ $t("button.password_new") }}</button>
+				<button v-else type="submit" class="btn btn-primary">{{ $t("button.password") }}</button>
 			</div>
 			<br />
 			<div class="text-center">
-				<router-link to="/signin">{{$t("button.signin")}}</router-link>
+				<router-link to="/signin">{{ $t("button.signin") }}</router-link>
 			</div>
 		</form>
 	</Simple>
@@ -26,9 +26,9 @@
 
 <script>
 import axios from "@/plugins/axios.js"
-import Bloc from "@/components/Bloc.vue"
-import Label from "@/components/Label.vue"
-import Simple from "@/layouts/Simple.vue"
+import Bloc from "@/components/Bloc"
+import Label from "@/components/Label"
+import Simple from "@/layouts/Simple"
 
 export default {
 	name: "Password",
@@ -65,7 +65,7 @@ export default {
 				this.$store.dispatch("alert/open", {
 					type: "success",
 					message: "email_password_sent",
-					displayPage: "Signin"
+					displayPage: "signin"
 				})
 				this.$router.push("/signin")
 			}
@@ -81,7 +81,7 @@ export default {
 				this.$store.dispatch("alert/open", {
 					type: "success",
 					message: "password_updated",
-					displayPage: "Signin"
+					displayPage: "signin"
 				})
 				this.$router.push("/signin")
 			}

@@ -1,5 +1,5 @@
 import Vue from "vue"
-import App from "@/App.vue"
+import App from "@/App"
 import "@/registerServiceWorker"
 import router from "@/plugins/router.js"
 import store from "@/plugins/vuex.js"

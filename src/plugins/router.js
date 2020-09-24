@@ -17,92 +17,92 @@ const router = new VueRouter({
 			},
 			children: [
 				{
-					name: "About",
+					name: "about",
 					path: "about",
 					component: load("About")
 				},
 				{
-					name: "Admin",
+					name: "admin",
 					path: "admin",
 					meta: { isSignedIn: true, isVerified: true, isAdmin: true },
 					component: load("Admin")
 				},
 				{
-					name: "Error",
+					name: "error",
 					path: "error/:code",
 					props: route => ({ code: parseInt(route.query.code) }),
 					component: load("Error")
 				},
 				{
-					name: "EventAdd",
+					name: "event_add",
 					path: "event/add",
 					meta: { isSignedIn: true, isVerified: true },
 					component: load("EventAdd")
 				},
 				{
-					name: "EventAdmin",
+					name: "event_admin",
 					path: "event/admin/:permalink",
 					meta: { isSignedIn: true, isVerified: true, isEventAdminStrict: true },
 					component: load("EventAdmin")
 				},
 				{
-					name: "EventClaim",
+					name: "event_claim",
 					path: "event/claim/:permalink",
 					meta: { isSignedIn: true, isVerified: true },
 					component: load("EventClaim")
 				},
 				{
-					name: "EventDetails",
+					name: "event_details",
 					path: "event/details/:permalink",
 					component: load("EventDetails")
 				},
 				{
-					name: "Eventlanding",
+					name: "event_landing",
 					path: "event",
 					component: load("Eventlanding")
 				},
 				{
-					name: "EventMap",
+					name: "event_map",
 					path: "event/map",
 					component: load("EventMap")
 				},
 				{
-					name: "EventReview",
+					name: "event_review",
 					path: "event/review",
 					meta: { isSignedIn: true, isVerified: true, isAdmin: true },
 					component: load("EventReview")
 				},
 				{
-					name: "EventSearch",
+					name: "event_search",
 					path: "",
 					alias: "event/search",
 					component: load("EventSearch")
 				},
 				{
-					name: "EventUpdate",
+					name: "event_update",
 					path: "event/update",
 					meta: { isSignedIn: true, isVerified: true },
 					component: load("EventUpdate")
 				},
 				{
-					name: "Password",
+					name: "password",
 					path: "password",
 					component: load("Password")
 				},
 				{
-					name: "Profile",
+					name: "profile",
 					path: "profile",
 					meta: { isSignedIn: true },
 					component: load("Profile")
 				},
 				{
-					name: "Signin",
+					name: "signin",
 					path: "signin",
 					meta: { isSignedIn: false },
 					component: load("Signin")
 				},
 				{
-					name: "Signup",
+					name: "signup",
 					path: "signup",
 					meta: { isSignedIn: false },
 					component: load("Signup")
@@ -128,14 +128,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-	// console.log(from, to)
 	if (to.meta.isSignedIn && !store.state.profile.user) {
-		store.dispatch("alert/open", { type: "warning", message: "restriction_authenticated", displayPage: "Signin" })
+		store.dispatch("alert/open", { type: "warning", message: "restriction_authenticated", displayPage: "signin" })
 		next("/signin?redirect=" + to.path)
 	} else if (to.meta.isSignedIn !== undefined && !to.meta.isSignedIn && store.state.profile.user) {
 		next("/profile")
 	} else if (to.meta.isVerified && !store.state.profile.user.isVerified) {
-		store.dispatch("alert/open", { type: "warning", message: "restriction_unverified", displayPage: "Profile" })
+		store.dispatch("alert/open", { type: "warning", message: "restriction_unverified", displayPage: "profile" })
 		next("/profile")
 	} else if (to.meta.isEventAdmin) {
 		next("/error?code=401")
@@ -149,7 +148,7 @@ router.beforeEach((to, from, next) => {
 })
 
 function load(component) {
-	return () => import(/* webpackChunkName: "[request]" */ `@/routes/${component}.vue`)
+	return () => import(/* webpackChunkName: "[request]" */ `@/routes/${component}`)
 }
 
 export default router

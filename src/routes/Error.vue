@@ -1,6 +1,6 @@
 <template>
 	<Simple title="error">
-		<div class="alert alert-danger" role="alert">{{$t("alert." + code)}}</div>
+		<div class="alert alert-danger" role="alert">{{ $t("alert." + code) }}</div>
 		<Bloc class="text-center">
 			<img v-if="code === 401" src="@/assets/undraw_authentication_fsn5.svg" />
 			<img v-else-if="code === 404" src="@/assets/undraw_page_not_found_su7k.svg" />
@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import Bloc from "@/components/Bloc.vue"
-import Simple from "@/layouts/Simple.vue"
+import Bloc from "@/components/Bloc"
+import Simple from "@/layouts/Simple"
 
 export default {
 	name: "Error",

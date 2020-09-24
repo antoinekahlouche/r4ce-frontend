@@ -1,25 +1,20 @@
 <template>
 	<Fullscreen>
 		<div id="eventMap_map" class="flex-fill">
-			<div
-				id="searchInfo"
-				class="alert alert-primary fade show m-3 position-absolute pointer"
-				role="alert"
-				onclick="window.location = '/event/search'"
-			>
+			<div id="searchInfo" class="alert alert-primary fade show m-3 position-absolute pointer" role="alert" onclick="window.location = '/event/search'">
 				<!-- <span>{{$t( "text.im_searching")}} <b>{{$t( sport}}</b> - <b>{{$t( discipline}}</b> - <b>{{$t( distance}}</b> - <b>{{$t( format}}</b> {{$t( "text.in"}} France {{$t( "text.from"}} <b>{{from}}</b> {{$t( "text.to"}} <b>{{to}}</b></span> -->
 			</div>
 		</div>
-		<div id="map_spinner" class="position-absolute" :class="{'d-none': !loading}">
+		<div id="map_spinner" class="position-absolute" :class="{ 'd-none': !loading }">
 			<div class="spinner-border" role="status">
-				<span class="sr-only">{{$t( "text.loading")}}...</span>
+				<span class="sr-only">{{ $t("text.loading") }}...</span>
 			</div>
 		</div>
 	</Fullscreen>
 </template>
 
 <script>
-import Fullscreen from "@/layouts/Fullscreen.vue"
+import Fullscreen from "@/layouts/Fullscreen"
 
 export default {
 	name: "EventMap",
