@@ -37,24 +37,24 @@
 
 			<div class="text-center">
 				<button type="submit" class="btn btn-primary" :disabled="loading">
-					<span class="spinner-border spinner-border-sm mr-1" role="status" :class="{'d-none':!loading}"></span>
-					{{$t("button.signup")}}
+					<span class="spinner-border spinner-border-sm mr-1" role="status" :class="{ 'd-none': !loading }"></span>
+					{{ $t("button.signup") }}
 				</button>
 			</div>
 			<br />
 			<div class="text-center">
-				<router-link :to="to()">{{$t("button.signin")}}</router-link>
+				<router-link :to="to()">{{ $t("button.signin") }}</router-link>
 			</div>
 		</form>
 	</Simple>
 </template>
 
 <script>
-import avataaars from "@/helpers/avataaars.js"
+import { random } from "@/helpers/avataaars.js"
 import axios from "@/plugins/axios.js"
-import Bloc from "@/components/Bloc.vue"
-import Label from "@/components/Label.vue"
-import Simple from "@/layouts/Simple.vue"
+import Bloc from "@/components/Bloc"
+import Label from "@/components/Label"
+import Simple from "@/layouts/Simple"
 
 export default {
 	name: "Signup",
@@ -69,12 +69,12 @@ export default {
 		gdpr: false
 	}),
 	methods: {
-		submit: async function (event) {
+		submit: async function(event) {
 			event.preventDefault()
 			this.loading = true
 
 			const response = await axios.post("/signup", {
-				avatar: avataaars.random(),
+				avatar: random(),
 				email: this.email,
 				firstName: this.firstName,
 				gdprVersion: this.$t("gdpr.version"),
@@ -84,7 +84,7 @@ export default {
 				usageVersion: this.$t("usage.version")
 			})
 
-			if (response.data.user && response.data.terms) {
+			if (response.data && response.data.user && response.data.terms) {
 				this.$store.dispatch("profile/user", response.data.user)
 				this.$store.dispatch("profile/terms", response.data.terms)
 				if (this.$route.query && this.$route.query.redirect) {
@@ -97,7 +97,7 @@ export default {
 			this.loading = false
 			return
 		},
-		to: function () {
+		to: function() {
 			let str = "/signin"
 			if (this.$route.query && this.$route.query.redirect) {
 				str += "?redirect=" + this.$route.query.redirect
@@ -108,5 +108,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
