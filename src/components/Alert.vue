@@ -1,7 +1,7 @@
 <template>
 	<div v-if="alert.type" class="mb-lg-5">
 		<div class="alert alert-dismissible" :class="'alert-' + alert.type" role="alert">
-			{{$t("alert." + alert.message)}}
+			<span v-html="$t('alert.' + alert.message)"></span>
 			<button @click="close()" type="button" class="close">
 				<span>&times;</span>
 			</button>

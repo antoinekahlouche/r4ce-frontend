@@ -132,10 +132,10 @@
 			"SilverGray": "Gris"
 		},
 		"facial_hair_type": {
-			"Blank": "Barbe",
-			"BeardMedium": "Barbe majestueuse",
-			"BeardLight": "Barbe moyenne",
-			"BeardMagestic": "Imberbe",
+			"Blank": "Imberbe",
+			"BeardMedium": "Barbe moyenne",
+			"BeardLight": "Barbe légère",
+			"BeardMajestic": "Barbe majestueuse",
 			"MoustacheFancy": "Moustache fantaisie",
 			"MoustacheMagnum": "Moustache Magnum"
 		},

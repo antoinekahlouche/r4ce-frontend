@@ -3,6 +3,7 @@
 		<Header />
 		<div class="p-3 p-lg-5 flex-grow-1">
 			<Breadcrumb v-if="links" :title="title" :links="links" />
+			<Alert />
 			<h1 class="mb-3 mb-lg-5">{{$t("title." + title)}}</h1>
 
 			<div class="row">
@@ -57,6 +58,7 @@
 </template>
 
 <script>
+import Alert from "@/components/Alert.vue"
 import axios from "@/plugins/axios.js"
 import Breadcrumb from "@/components/Breadcrumb.vue"
 import Footer from "@/components/Footer.vue"
@@ -64,7 +66,7 @@ import Header from "@/components/Header.vue"
 
 export default {
 	name: "ListMenu",
-	components: { Breadcrumb, Footer, Header },
+	components: { Alert, Breadcrumb, Footer, Header },
 	props: {
 		title: { type: String, required: true },
 		links: Object,

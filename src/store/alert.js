@@ -22,10 +22,10 @@ export default {
 		open({ commit }, value) {
 			commit("OPEN", value)
 		},
-		close({ commit, state }, pageFrom) {
-			if (!pageFrom || !state.displayPage) {
+		close({ commit, state }, pages) {
+			if (!pages.from || !state.displayPage) {
 				commit("CLOSE")
-			} else if (state.displayPage && state.displayPage === pageFrom) {
+			} else if (state.displayPage && state.displayPage === pages.from && pages.from !== pages.to) {
 				commit("CLOSE")
 			}
 		}
