@@ -141,8 +141,6 @@ router.beforeEach((to, from, next) => {
 	} else if (to.meta.isAdmin && ![store.state.profile.user.roles].includes("GLOBAL_ADMIN")) {
 		next("/error?code=401")
 	} else {
-		store.dispatch("alert/close", { from: from.name, to: to.name })
-		store.dispatch("profile/locale", to.params.locale)
 		next()
 	}
 })

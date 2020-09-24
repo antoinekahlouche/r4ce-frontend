@@ -1,6 +1,6 @@
 <template>
 	<div id="app" class="d-flex flex-column">
-		<Head />
+		<Watcher />
 		<GDPR />
 		<router-view class="flex-grow-1 d-flex flex-column" />
 	</div>
@@ -8,12 +8,12 @@
 
 <script>
 import GDPR from "@/components/GDPR"
-import Head from "@/components/Head"
+import Watcher from "@/components/Watcher"
 
 export default {
 	name: "App",
-	components: { GDPR, Head },
-	mounted: function () {
+	components: { GDPR, Watcher },
+	mounted: function() {
 		// Enable popovers everywhere
 		$('[data-toggle="popover"]').popover()
 	}
