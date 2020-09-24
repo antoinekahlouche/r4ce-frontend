@@ -25,7 +25,6 @@ export default {
 			if (!validLocale(value)) return
 			i18n.locale = value
 			Vue.config.lang = value
-			document.querySelector("html").setAttribute("lang", value)
 			commit("LOCALE", value)
 		},
 		user({ commit }, value) {

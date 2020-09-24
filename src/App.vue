@@ -1,16 +1,18 @@
 <template>
 	<div id="app" class="d-flex flex-column">
+		<Head />
 		<GDPR />
 		<router-view class="flex-grow-1 d-flex flex-column" />
 	</div>
 </template>
 
 <script>
-import GDPR from "@/components/GDPR.vue"
+import GDPR from "@/components/GDPR"
+import Head from "@/components/Head"
 
 export default {
 	name: "App",
-	components: { GDPR },
+	components: { GDPR, Head },
 	mounted: function () {
 		// Enable popovers everywhere
 		$('[data-toggle="popover"]').popover()
