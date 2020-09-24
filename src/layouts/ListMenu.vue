@@ -53,15 +53,15 @@ export default {
 		loading: false
 	}),
 	watch: {
-		"$route.query.active": function (value) {
+		"$route.query.active": function(value) {
 			this.show()
 		}
 	},
-	mounted: function () {
+	mounted: function() {
 		this.show()
 	},
 	methods: {
-		show: function () {
+		show: function() {
 			const active = this.$route.query.active
 			if (active) {
 				$("#ListMenu_menu_" + active).tab("show")
@@ -69,12 +69,12 @@ export default {
 				$(".list-group-item:first-child").tab("show")
 			}
 		},
-		changeMenu: function (menu) {
+		changeMenu: function(menu) {
 			const { active, ...otherQuery } = this.$route.query
 			if (active === menu) return
 			this.$router.replace({ path: this.$route.currentPath, query: { active: menu, ...otherQuery } })
 		},
-		signout: async function () {
+		signout: async function() {
 			this.loading = true
 
 			const response = await axios.post("/signout", { withCredentials: true })

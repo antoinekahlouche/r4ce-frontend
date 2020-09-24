@@ -32,6 +32,11 @@ export default {
 		},
 		terms({ commit }, value) {
 			commit("TERMS", value)
+		},
+		uniqTerms({ commit, state }, value) {
+			const newTerms = state.terms || {}
+			newTerms[value.key] = value.value
+			commit("TERMS", newTerms)
 		}
 	}
 }

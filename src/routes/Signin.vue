@@ -14,7 +14,10 @@
 			</Bloc>
 
 			<div class="text-center">
-				<button type="submit" class="btn btn-primary">{{ $t("button.signin") }}</button>
+				<button type="submit" class="btn btn-primary" :disabled="loading">
+					<span class="spinner-border spinner-border-sm mr-1" role="status" :class="{ 'd-none': !loading }"></span>
+					{{ $t("button.signin") }}
+				</button>
 			</div>
 			<br />
 			<div class="text-center">
@@ -41,7 +44,7 @@ export default {
 		password: null
 	}),
 	methods: {
-		submit: async function (event) {
+		submit: async function(event) {
 			event.preventDefault()
 			this.loading = true
 
@@ -63,8 +66,7 @@ export default {
 			this.loading = false
 			return
 		},
-
-		to: function () {
+		to: function() {
 			let str = "/signup"
 			if (this.$route.query && this.$route.query.redirect) {
 				str += "?redirect=" + this.$route.query.redirect
@@ -75,5 +77,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
