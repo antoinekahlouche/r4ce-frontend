@@ -119,12 +119,17 @@ export default {
 			event.preventDefault()
 			this.loading = true
 
-			// const response = await axios.post("/user", {
-			// 	firstName: this.firstName,
-			// 	lastName: this.lastName,
-			// 	email: this.email
-			// })
-			const response = await axios.get("/event")
+			const response = await axios.post("/user", {
+				firstName: this.firstName,
+				lastName: this.lastName,
+				email: this.email
+			})
+
+			if (response.data && response.data.user) {
+				this.$store.dispatch("profile/user", response.data.user)
+				this.$store.dispatch("alert/open", { type: "success", message: "profile_updated" })
+			}
+
 			this.loading = false
 			return
 		},
@@ -132,22 +137,17 @@ export default {
 			event.preventDefault()
 			this.loading = true
 
-			const response = await axios.post(
-				"/user",
-				{
-					firstName: this.firstName,
-					lastName: this.lastName,
-					email: this.email
-				},
-				{ withCredentials: true }
-			)
+			const response = await axios.post("/avatar", {
+				avatar: this.avataaarId
+			})
+
+			if (response.data && response.data.user) {
+				this.$store.dispatch("profile/user", response.data.user)
+				this.$store.dispatch("alert/open", { type: "success", message: "avatar_updated" })
+			}
 
 			this.loading = false
 			return
-		},
-		updateAvatar: function(key, option) {
-			console.log(key, option)
-			// this.avataaar =
 		}
 	}
 }

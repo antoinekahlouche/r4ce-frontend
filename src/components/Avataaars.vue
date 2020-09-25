@@ -1,5 +1,5 @@
 <template>
-	<Avataaars :accessoriesType="accessoriesType" :clotheType="clotheType" :clotheColor="clotheColor" :eyebrowType="eyebrowType" :eyeType="eyeType" :facialHairColor="facialHairColor" :facialHairType="facialHairType" :graphicType="graphicType" :hairColor="hairColor" :mouthType="mouthType" :skinColor="skinColor" :topType="topType"></Avataaars>
+	<Avataaars style="width:100%; max-width:500px;" :accessoriesType="accessoriesType" :clotheType="clotheType" :clotheColor="clotheColor" :eyebrowType="eyebrowType" :eyeType="eyeType" :facialHairColor="facialHairColor" :facialHairType="facialHairType" :graphicType="graphicType" :hairColor="hairColor" :mouthType="mouthType" :skinColor="skinColor" :topType="topType"></Avataaars>
 </template>
 
 <script>
@@ -26,15 +26,15 @@ export default {
 		topType: ""
 	}),
 	watch: {
-		id: function (value) {
+		id: function(value) {
 			this.display(value)
 		}
 	},
-	mounted: function () {
+	mounted: function() {
 		this.display(this.id)
 	},
 	methods: {
-		display: function (id) {
+		display: function(id) {
 			const splittedId = id.split("-")
 			this.accessoriesType = avataaars.options["accessories_type"][splittedId[0]]
 			this.clotheType = avataaars.options["clothe_type"][splittedId[1]]
@@ -53,5 +53,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

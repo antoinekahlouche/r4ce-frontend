@@ -77,7 +77,7 @@ export default {
 		signout: async function() {
 			this.loading = true
 
-			const response = await axios.post("/signout", { withCredentials: true })
+			const response = await axios.post("/signout")
 			this.$store.dispatch("profile/user", null)
 			this.$router.push("/signin")
 			this.loading = false

@@ -54,8 +54,7 @@ export default {
 				{
 					type: "GDPR",
 					version: this.$t("gdpr.version")
-				},
-				{ withCredentials: !!this.$store.state.profile.user }
+				}
 			)
 
 			if (response.data.terms) {
