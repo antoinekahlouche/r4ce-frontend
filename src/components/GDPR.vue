@@ -1,6 +1,6 @@
 <template>
 	<form @submit="submit">
-		<div class="toast position-fixed m-4" role="alert" data-animation="false" data-autohide="false">
+		<div class="toast position-fixed m-4" :class="{ show: show }" role="alert" data-animation="false" data-autohide="false">
 			<div class="toast-header">
 				<strong class="my-2">{{ $t("title.gdpr") }}</strong>
 			</div>
@@ -21,27 +21,17 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios.js"
+import axios from "@/plugins/axios"
+import version from "@/helpers/version"
 
 export default {
 	name: "GDPR",
 	data: () => ({
 		loading: false
 	}),
-	mounted: async function() {
-		if (!this.$store.state.profile.terms || !this.$store.state.profile.terms.GDPR) {
-			const response = await axios.get("/terms")
-
-			if (Object.keys(response.data.terms).length === 0) {
-				$(".toast").toast("show")
-				return
-			}
-
-			this.$store.dispatch("profile/terms", response.data.terms)
-		}
-
-		if (this.$store.state.profile.terms.GDPR.version < this.$t("gdpr.version")) {
-			$(".toast").toast("show")
+	computed: {
+		show() {
+			return this.$store.getters["terms/showGDPRToast"]
 		}
 	},
 	methods: {
@@ -49,18 +39,12 @@ export default {
 			event.preventDefault()
 			this.loading = true
 
-			const response = await axios.post(
-				"/terms",
-				{
-					type: "GDPR",
-					version: this.$t("gdpr.version")
-				}
-			)
+			const response = await axios.post("/terms", {
+				type: "GDPR",
+				version: version.GDPR
+			})
 
-			if (response.data.terms) {
-				this.$store.dispatch("profile/uniqTerms", { key: "GDPR", value: response.data.terms })
-				$(".toast").toast("hide")
-			}
+			this.$store.dispatch("terms/set", response.data)
 
 			this.loading = false
 			return

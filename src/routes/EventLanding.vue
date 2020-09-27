@@ -2,9 +2,12 @@
 
 <script>
 export default {
-	name: "EventLanding"
+	name: "EventLanding",
+	route: {
+		name: "event_landing",
+		path: "event"
+	}
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

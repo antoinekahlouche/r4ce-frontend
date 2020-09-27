@@ -4,7 +4,7 @@
 
 <script>
 import Avataaars from "@antoinekahlouche/avataaars"
-import avataaars from "@/helpers/avataaars.js"
+import avataaars from "@/helpers/avataaars"
 
 export default {
 	components: { Avataaars },

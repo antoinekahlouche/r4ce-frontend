@@ -2,9 +2,13 @@
 
 <script>
 export default {
-	name: "Admin"
+	name: "Admin",
+	route: {
+		name: "admin",
+		path: "admin",
+		meta: { isSignedIn: true, isVerified: true, isAdmin: true }
+	}
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

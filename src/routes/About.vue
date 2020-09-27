@@ -102,6 +102,10 @@ import ListMenu from "@/layouts/ListMenu"
 
 export default {
 	name: "About",
+	route: {
+		name: "about",
+		path: "about"
+	},
 	components: { Avataaars, ListMenu },
 	data: () => ({
 		credits: [

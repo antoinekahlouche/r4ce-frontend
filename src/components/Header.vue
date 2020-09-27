@@ -5,26 +5,18 @@
 				<div class="navbar-brand my-1 align-middle m-0">R4CE</div>
 			</router-link>
 
-			<button
-				class="navbar-toggler"
-				type="button"
-				data-toggle="collapse"
-				data-target="#Navbar_links"
-				aria-controls="navbarLinks"
-				aria-expanded="false"
-				aria-label="Toggle navigation"
-			>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar_links" aria-controls="navbarLinks" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
 			<div class="collapse navbar-collapse" id="Navbar_links">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item" :class="{ active: eventActif }">
-						<router-link to="/event/search" class="nav-link">{{$t("title.events")}}</router-link>
+						<router-link to="/event/search" class="nav-link">{{ $t("title.events") }}</router-link>
 					</li>
 
 					<li class="nav-item" :class="{ active: profileActif }">
-						<router-link to="/profile" class="nav-link">{{$t("title.profile")}}</router-link>
+						<router-link to="/profile" class="nav-link">{{ $t("title.profile") }}</router-link>
 					</li>
 				</ul>
 			</div>
@@ -41,10 +33,10 @@ export default {
 	}),
 	watch: {
 		"$route.path": {
-			handler: function (path) {
+			handler: function(path) {
 				const splittedPath = path.split("/")
 
-				if ([undefined, "event"].includes(splittedPath[2])) {
+				if ([undefined, "", "event"].includes(splittedPath[2])) {
 					this.eventActif = true
 					this.profileActif = false
 				} else if (["signin", "signup", "profile"].includes(splittedPath[2])) {

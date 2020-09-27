@@ -4,18 +4,18 @@
 			<form @submit="saveUser">
 				<Bloc container="sm">
 					<div class="form-group">
-						<Label text="first_name" required />
-						<input type="text" class="form-control" v-model="firstName" required />
+						<Label for="first_name" text="first_name" required />
+						<input id="first_name" type="text" class="form-control" v-model="firstName" required />
 					</div>
 
 					<div class="form-group">
-						<Label text="last_name" required />
-						<input type="text" class="form-control" v-model="lastName" required />
+						<Label for="last_name" text="last_name" required />
+						<input id="last_name" type="text" class="form-control" v-model="lastName" required />
 					</div>
 
 					<div class="form-group">
-						<Label text="email" required />
-						<input type="email" class="form-control" v-model="email" required />
+						<Label for="email" text="email" required />
+						<input id="email" type="email" class="form-control" v-model="email" required />
 					</div>
 				</Bloc>
 				<div class="text-center">
@@ -34,8 +34,8 @@
 						<Avataaars class="m-auto avatar pb-3" :id="avataaarId" />
 					</div>
 					<div v-for="key in avataaars.order.display" :key="key" class="form-group">
-						<Label :text="key" required />
-						<select class="form-control" required v-model="avatar[key]">
+						<Label :for="key" :text="key" required />
+						<select :id="key" class="form-control" required v-model="avatar[key]">
 							<option v-for="option in avataaars.options[key]" :key="option" :value="option">{{ $t("avatar." + key + "." + option) }}</option>
 						</select>
 					</div>
@@ -52,23 +52,24 @@
 		<template #comments>
 			<div></div>
 		</template>
-
-		<template #admin>
-			<div></div>
-		</template>
 	</ListMenu>
 </template>
 
 <script>
 import Avataaars from "@/components/Avataaars"
-import avataaars, { toLabel, toIndex } from "@/helpers/avataaars.js"
-import axios from "@/plugins/axios.js"
+import avataaars, { toLabel, toIndex } from "@/helpers/avataaars"
+import axios from "@/plugins/axios"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import ListMenu from "@/layouts/ListMenu"
 
 export default {
 	name: "Profile",
+	route: {
+		name: "profile",
+		path: "profile",
+		meta: { isSignedIn: true }
+	},
 	components: { Avataaars, Bloc, Label, ListMenu },
 	data: () => ({
 		avataaars: avataaars,
@@ -92,16 +93,16 @@ export default {
 		email: null
 	}),
 	mounted: function() {
-		this.firstName = this.$store.state.profile.user.firstName
-		this.lastName = this.$store.state.profile.user.lastName
-		this.email = this.$store.state.profile.user.email
+		this.firstName = this.$store.state.user.firstName
+		this.lastName = this.$store.state.user.lastName
+		this.email = this.$store.state.user.email
 
-		const splittedAvataaarId = this.$store.state.profile.user.avatar.split("-")
+		const splittedAvataaarId = this.$store.state.user.avatar.split("-")
 		avataaars.order.id.forEach((name, index) => {
 			this.avatar[name] = toLabel(name, splittedAvataaarId[index])
 		})
 
-		if (!this.$store.state.profile.user.verified) {
+		if (!this.$store.state.user.verified) {
 			this.$store.dispatch("alert/open", {
 				type: "warning",
 				message: "user_unverified",
@@ -126,7 +127,7 @@ export default {
 			})
 
 			if (response.data && response.data.user) {
-				this.$store.dispatch("profile/user", response.data.user)
+				this.$store.dispatch("user/set", response.data.user)
 				this.$store.dispatch("alert/open", { type: "success", message: "profile_updated" })
 			}
 
@@ -142,7 +143,7 @@ export default {
 			})
 
 			if (response.data && response.data.user) {
-				this.$store.dispatch("profile/user", response.data.user)
+				this.$store.dispatch("user/set", response.data.user)
 				this.$store.dispatch("alert/open", { type: "success", message: "avatar_updated" })
 			}
 

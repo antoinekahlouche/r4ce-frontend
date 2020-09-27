@@ -3,13 +3,13 @@
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">
-					<Label text="email" required />
-					<input type="email" class="form-control" v-model="email" required />
+					<Label for="email" text="email" required />
+					<input id="email" type="email" class="form-control" v-model="email" required />
 				</div>
 
 				<div class="form-group">
-					<Label text="password" required />
-					<input type="password" class="form-control" v-model="password" required />
+					<Label for="password" text="password" required />
+					<input id="password" type="password" class="form-control" v-model="password" required />
 				</div>
 			</Bloc>
 
@@ -30,13 +30,19 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios.js"
+import axios from "@/plugins/axios"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import Simple from "@/layouts/Simple"
+import i18n from "@/plugins/i18n"
 
 export default {
 	name: "Signin",
+	route: {
+		name: "signin",
+		path: "signin",
+		meta: { isSignedIn: false }
+	},
 	components: { Bloc, Label, Simple },
 	data: () => ({
 		loading: false,
@@ -54,8 +60,8 @@ export default {
 			})
 
 			if (response.data && response.data.user) {
-				this.$store.dispatch("profile/user", response.data.user)
-				this.$store.dispatch("profile/terms", response.data.terms)
+				await this.$store.dispatch("user/set", response.data.user)
+				await this.$store.dispatch("terms/set", response.data.terms)
 				if (this.$route.query && this.$route.query.redirect) {
 					this.$router.push(this.$route.query.redirect)
 				} else {

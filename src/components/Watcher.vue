@@ -1,6 +1,8 @@
 <template></template>
 
 <script>
+import i18n, { setLocale } from "@/plugins/i18n"
+
 export default {
 	name: "Head",
 	watch: {
@@ -42,12 +44,7 @@ export default {
 			deep: true,
 			immediate: true,
 			handler: function(locale) {
-				if (!locale) return
-
-				if (this.$store.state.profile.locale !== locale) {
-					this.$store.dispatch("profile/locale", locale)
-					document.querySelector("html").setAttribute("lang", locale)
-				}
+				if (locale && i18n.locale !== locale) setLocale(locale)
 			}
 		}
 	}

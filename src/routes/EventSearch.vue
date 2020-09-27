@@ -63,74 +63,79 @@ import Bloc from "@/components/Bloc"
 import Button from "@/components/Label"
 import Label from "@/components/Label"
 import Simple from "@/layouts/Simple"
-import event from "@/helpers/event.js"
+import event from "@/helpers/event"
 
 export default {
 	name: "EventSearch",
+	route: {
+		name: "event_search",
+		path: "",
+		alias: "event/search"
+	},
 	components: { Bloc, Button, Label, Simple },
 	data: () => ({ event }),
 	computed: {
 		sport: {
 			get() {
-				return this.$store.state.events.search.sport
+				return this.$store.state.search.sport
 			},
 			set(value) {
-				this.$store.dispatch("events/sport", value)
-				this.$store.dispatch("events/distance", "")
-				this.$store.dispatch("events/discipline", "")
+				this.$store.dispatch("search/sport", value)
+				this.$store.dispatch("search/distance", "")
+				this.$store.dispatch("search/discipline", "")
 			}
 		},
 		discipline: {
 			get() {
-				return this.$store.state.events.search.discipline
+				return this.$store.state.search.discipline
 			},
 			set(value) {
-				this.$store.dispatch("events/discipline", value)
+				this.$store.dispatch("search/discipline", value)
 			}
 		},
 		distance: {
 			get() {
-				return this.$store.state.events.search.distance
+				return this.$store.state.search.distance
 			},
 			set(value) {
-				this.$store.dispatch("events/distance", value)
+				this.$store.dispatch("search/distance", value)
 			}
 		},
 		format: {
 			get() {
-				return this.$store.state.events.search.format
+				return this.$store.state.search.format
 			},
 			set(value) {
-				this.$store.dispatch("events/format", value)
+				this.$store.dispatch("search/format", value)
 			}
 		},
 		where: {
 			get() {
-				return this.$store.state.events.search.where
+				return this.$store.state.search.where
 			},
 			set(value) {
-				this.$store.dispatch("events/where", value)
+				this.$store.dispatch("search/where", value)
 			}
 		},
 		from: {
 			get() {
-				return this.$store.state.events.search.from
+				return this.$store.state.search.from
 			},
 			set(value) {
-				this.$store.dispatch("events/from", value)
+				this.$store.dispatch("search/from", value)
 			}
 		},
 		to: {
 			get() {
-				return this.$store.state.events.search.to
+				return this.$store.state.search.to
 			},
 			set(value) {
-				this.$store.dispatch("events/to", value)
+				this.$store.dispatch("search/to", value)
 			}
 		}
 	},
 	methods: {
-		submit: function (event) {
+		submit: function(event) {
 			this.$router.push("/event/map")
 			event.preventDefault()
 		}
@@ -138,5 +143,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

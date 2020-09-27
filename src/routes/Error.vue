@@ -15,6 +15,11 @@ import Simple from "@/layouts/Simple"
 
 export default {
 	name: "Error",
+	route: {
+		name: "error",
+		path: "error",
+		props: route => ({ code: parseInt(route.query.code) })
+	},
 	components: { Bloc, Simple },
 	props: {
 		code: { type: Number, required: true }
@@ -22,4 +27,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+img {
+	width: 100%;
+	max-width: 800px;
+}
+</style>

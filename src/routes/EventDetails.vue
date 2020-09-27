@@ -2,9 +2,12 @@
 
 <script>
 export default {
-	name: "EventDetails"
+	name: "EventDetails",
+	route: {
+		name: "event_details",
+		path: "event/details/:permalink"
+	}
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

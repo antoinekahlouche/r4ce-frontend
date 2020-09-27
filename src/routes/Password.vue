@@ -32,6 +32,10 @@ import Simple from "@/layouts/Simple"
 
 export default {
 	name: "Password",
+	route: {
+		name: "password",
+		path: "password"
+	},
 	components: { Bloc, Label, Simple },
 	data: () => ({
 		loading: false,
@@ -39,26 +43,27 @@ export default {
 		password: null,
 		token: null
 	}),
-	mounted: function () {
+	mounted: function() {
 		this.token = this.$route.query.token
 		this.email = this.$route.query.email
 	},
 	methods: {
-		submit: async function (event) {
+		submit: async function(event) {
 			event.preventDefault()
 			this.loading = true
 			if (this.token) {
-				await this.submitSet(event)
+				await this.submitPost(event)
 			} else {
 				await this.submitGet(event)
 			}
 			this.loading = false
 			return
 		},
-		submitGet: async function (event) {
-			const response = await axios.post("/passwordRenew", {
-				email: this.email,
-				locale: this.$store.state.profile.locale
+		submitGet: async function(event) {
+			const response = await axios.get("/password", {
+				params: {
+					email: this.email
+				}
 			})
 
 			if (!response.data) {
@@ -70,8 +75,8 @@ export default {
 				this.$router.push("/signin")
 			}
 		},
-		submitSet: async function (event) {
-			const response = await axios.post("/passwordUpdate", {
+		submitPost: async function(event) {
+			const response = await axios.post("/password", {
 				email: this.email,
 				token: this.token,
 				password: this.password
@@ -90,5 +95,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

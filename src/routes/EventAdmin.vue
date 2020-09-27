@@ -2,9 +2,13 @@
 
 <script>
 export default {
-	name: "EventAdmin"
+	name: "EventAdmin",
+	route: {
+		name: "event_admin",
+		path: "event/admin/:permalink",
+		meta: { isSignedIn: true, isVerified: true, isEventAdminStrict: true }
+	}
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

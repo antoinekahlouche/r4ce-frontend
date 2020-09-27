@@ -1,20 +1,17 @@
 import Vue from "vue"
 import Vuex from "vuex"
-import createPersistedState from "vuex-persistedstate"
-import alert from "@/store/alert"
-import events from "@/store/events"
-import profile from "@/store/profile"
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-	modules: { alert, events, profile },
-	plugins: [
-		createPersistedState({
-			paths: ["profile"]
-		})
-	]
-})
+// Dynamic modules from store folder
+const stores = require.context("@/store", false, /^.*\.js$/)
+const modules = stores.keys().reduce((result, path) => {
+	const name = path.substring(2, path.length - 3)
+	result[name] = stores(path).default
+	return result
+}, {})
+
+export default new Vuex.Store({ modules })
 
 // mutations : sync commit
 // actions : async dispatch

@@ -228,6 +228,7 @@
 	},
 	"button": {
 		"accept": "Accepter",
+		"add": "Ajouter",
 		"add_race": "Ajouter une épreuve",
 		"cancel": "Annuler",
 		"delete": "Supprimer",
@@ -333,8 +334,7 @@
 		"15_title": "Modifications",
 		"15_content": "<p>Nous nous réservons le droit, à notre seule discrétion, de modifier à tout moment la présente charte, en totalité ou en partie. Ces modifications entreront en vigueur à compter de la publication de la nouvelle charte. Votre utilisation du site suite à l'entrée en vigueur de ces modifications vaudra reconnaissance et acceptation de la nouvelle charte. A défaut et si cette nouvelle charte ne vous convient pas, vous ne devrez plus accéder au site.</p>",
 		"16_title": "Entrée en vigueur",
-		"16_content": "<p>La présente charte est entrée en vigueur le 21/02/2020.</p>",
-		"version": "1"
+		"16_content": "<p>La présente charte est entrée en vigueur le 21/02/2020.</p>"
 	},
 	"label": {
 		"accept_terms_usage": "J'accepte les <a href='/about?active=usage'>conditions générales d'utilisation</a>",
@@ -347,6 +347,7 @@
 		"discipline": "Discipline",
 		"distance": "Distance",
 		"email": "Email",
+		"event_allready_present": "J'ai vérifié que l'événement n'éxiste pas déjà, y compris sur une année précédente (dans le cas contraire vous pouvez le modifier)",
 		"eyebrow_type": "Sourcils",
 		"eye_type": "Yeux",
 		"facial_hair_color": "Couleur de la barbe",
@@ -363,7 +364,8 @@
 		"skin_color": "Couleur de peau",
 		"sport": "Sport",
 		"to": "Au",
-		"top_type": "Cheveux"
+		"top_type": "Cheveux",
+		"valid_info": "Je m'engage à fournir des informaions valides"
 	},
 	"mail": {
 		"claim_event": "Vous venez de revendiquer l'évènement suivant",
@@ -446,7 +448,6 @@
 		"type": "Type",
 		"update": "Modification",
 		"update_agreement": "Je m'engage à maintenir les informations à jour",
-		"valid_info": "Je m'engage à fournir des informaions valides",
 		"website": "Site internet",
 		"year": "Année",
 		"yes": "Oui",
@@ -581,7 +582,6 @@
 		"20_title": "Loi applicable et juridiction",
 		"20_content": "<p>Les présentes conditions générales sont régies par la loi française.</p><p>En cas de contestation sur la validité, l'interprétation et/ou l'exécution des présentes conditions générales, les parties conviennent que les tribunaux de Paris seront exclusivement compétents pour en juger, sauf règles de procédure impératives contraires.</p>",
 		"21_title": "Entrée en vigueur",
-		"21_content": "<p>Les présentes conditions générales sont entrées en vigueur le 21/02/2020</p>",
-		"version": "1"
+		"21_content": "<p>Les présentes conditions générales sont entrées en vigueur le 21/02/2020</p>"
 	}
 }

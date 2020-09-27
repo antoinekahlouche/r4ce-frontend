@@ -18,11 +18,15 @@ import Fullscreen from "@/layouts/Fullscreen"
 
 export default {
 	name: "EventMap",
+	route: {
+		name: "event_map",
+		path: "event/map"
+	},
 	components: { Fullscreen },
 	data: () => ({
 		loading: true
 	}),
-	mounted: function () {
+	mounted: function() {
 		const map = new mapboxgl.Map({
 			container: "eventMap_map",
 			style: "https://s3.eu-west-3.amazonaws.com/r4ce.map/style/style.json",
@@ -78,13 +82,3 @@ export default {
 	color: var(--main-color);
 }
 </style>
-
-
-
-
-
-
-
-
-
-	

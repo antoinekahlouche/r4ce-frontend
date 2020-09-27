@@ -50,14 +50,20 @@
 </template>
 
 <script>
-import { random } from "@/helpers/avataaars.js"
-import axios from "@/plugins/axios.js"
+import { random } from "@/helpers/avataaars"
+import axios from "@/plugins/axios"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import Simple from "@/layouts/Simple"
+import i18n from "@/plugins/i18n"
 
 export default {
 	name: "Signup",
+	route: {
+		name: "signup",
+		path: "signup",
+		meta: { isSignedIn: false }
+	},
 	components: { Bloc, Label, Simple },
 	data: () => ({
 		loading: false,
@@ -78,15 +84,15 @@ export default {
 				email: this.email,
 				firstName: this.firstName,
 				gdprVersion: this.$t("gdpr.version"),
-				locale: this.$store.state.profile.locale,
+				locale: i18n.locale,
 				lastName: this.lastName,
 				password: this.password,
 				usageVersion: this.$t("usage.version")
 			})
 
 			if (response.data && response.data.user && response.data.terms) {
-				this.$store.dispatch("profile/user", response.data.user)
-				this.$store.dispatch("profile/terms", response.data.terms)
+				this.$store.dispatch("user/set", response.data.user)
+				this.$store.dispatch("terms/set", response.data.terms)
 				if (this.$route.query && this.$route.query.redirect) {
 					this.$router.push(this.$route.query.redirect)
 				} else {
