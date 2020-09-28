@@ -13,7 +13,9 @@ export default {
 				if (!newName) return
 
 				// Alerts
-				this.$store.dispatch("alert/close", { from: oldName, to: newName })
+				if (this.$store.state.alert.type) {
+					this.$store.dispatch("alert/close", { from: oldName, to: newName })
+				}
 
 				// Title tag
 				document.title = process.env.VUE_APP_PAGE_PREFIX + " - " + this.$t("title." + newName)

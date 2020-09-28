@@ -18,5 +18,5 @@ async function mount() {
 		render: h => h(App)
 	}).$mount("#app")
 
-	await store.dispatch("terms/get")
+	store.dispatch("terms/get")
 }

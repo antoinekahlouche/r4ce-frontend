@@ -5,6 +5,9 @@ import i18n from "@/plugins/i18n"
 
 const initialState = {
 	signedIn: false,
+
+	comments: [],
+
 	avatar: null,
 	email: null,
 	firstName: null,
@@ -19,32 +22,61 @@ export default {
 	state: { ...initialState },
 	getters: null,
 	mutations: {
-		SET(state, value) {
-			for (const key in initialState) {
-				state[key] = value[key]
-			}
-			state.signedIn = true
+		COMMENTS(state, value) {
+			state.comments = value
+		},
+		USER(state, value) {
+			state.avatar = value.avatar
+			state.comments = value.comments
+			state.email = value.email
+			state.firstName = value.firstName
+			state.lastName = value.lastName
+			state.locale = value.locale
+			state.role = value.role
+			state.verified = value.verified
 		},
 		RESET(state) {
 			for (const key in initialState) {
 				state[key] = initialState[key]
 			}
+		},
+		SIGNEDIN(state) {
+			state.signedIn = true
+		},
+		VERIFIED(state) {
+			state.verified = true
 		}
 	},
 	actions: {
-		async get({ commit }) {
+		store({ commit }, user) {
+			if (user) {
+				commit("SIGNEDIN", user)
+				commit("USER", user)
+				setLocale(user.locale)
+			}
+		},
+		storeComments({ commit }, comments) {
+			if (comments) {
+				commit("COMMENTS", comments)
+			}
+		},
+		async get({ dispatch }) {
 			const response = await axios.get("/user")
 
 			if (!response.data) return false
-
-			if (response.data.user) {
-				commit("SET", response.data.user)
-				setLocale(response.data.user.locale)
-			}
+			dispatch("store", response.data.user)
 
 			return true
 		},
-		async signup({ commit, rootGetters }, { email, firstName, lastName, password }) {
+		async getComments({ dispatch }) {
+			const response = await axios.get("/comments")
+
+			if (!response.data) return false
+			dispatch("storeComments", response.data.comments)
+
+			return true
+		},
+		async signup({ dispatch, rootGetters }, { email, firstName, lastName, password }) {
 			const response = await axios.post("/signup", {
 				avatar: random(),
 				email,
@@ -58,28 +90,18 @@ export default {
 
 			if (!response.data) return false
 			if (response.data.alert) return false
-
-			if (response.data.user) {
-				commit("SET", response.data.user)
-			}
-			if (response.data.terms) {
-				commit("terms/SET", response.data.terms, { root: true })
-			}
+			dispatch("store", response.data.user)
+			dispatch("terms/store", response.data.terms, { root: true })
 
 			return true
 		},
-		async signin({ commit }, { email, password }) {
+		async signin({ dispatch }, { email, password }) {
 			const response = await axios.post("/signin", { email, password })
 
 			if (!response.data) return false
 			if (response.data.alert) return false
-
-			if (response.data.user) {
-				commit("SET", response.data.user)
-			}
-			if (response.data.terms) {
-				commit("terms/SET", response.data.terms, { root: true })
-			}
+			dispatch("store", response.data.user)
+			dispatch("terms/store", response.data.terms, { root: true })
 
 			return true
 		},
@@ -87,29 +109,48 @@ export default {
 			await axios.post("/signout")
 			commit("RESET")
 		},
-		async updateAvatar({ commit }, avatar) {
-			const response = await axios.post("/avatar", { avatar })
+		async updateAvatar({ dispatch }, avatar) {
+			const response = await axios.post("/avatar", avatar)
 
 			if (!response.data) return false
-
 			if (response.data.user) {
-				commit("user/SET", response.data.user)
-				commit("alert/OPEN", { type: "success", message: "avatar_updated" }, { root: true })
+				dispatch("store", response.data.user)
+				dispatch("alert/open", { type: "success", message: "avatar_updated" }, { root: true })
 			}
 
 			return true
 		},
-		async updateUser({ commit }, { firstName, lastName, locale, email }) {
+		async updateUser({ dispatch }, { firstName, lastName, locale, email }) {
 			const response = await axios.post("/user", { firstName, lastName, locale, email })
 
 			if (!response.data) return false
-
 			if (response.data.user) {
-				commit("SET", response.data.user)
-				commit("alert/OPEN", { type: "success", message: "profile_updated" }, { root: true })
+				dispatch("store", response.data.user)
+				dispatch("alert/open", { type: "success", message: "profile_updated" }, { root: true })
 			}
 
 			return true
+		},
+		async getPassword({ dispatch }, { email }) {
+			await axios.get("/password", { params: { email } })
+			dispatch("alert/open", { type: "success", message: "email_password_sent", displayPage: "signin" }, { root: true })
+		},
+		async setPassword({ dispatch }, { email, token, password }) {
+			await axios.post("/password", { email, token, password })
+			dispatch("alert/open", { type: "success", message: "password_updated", displayPage: "signin" }, { root: true })
+		},
+		async getVerify({ dispatch }) {
+			const response = await axios.get("/verify")
+			if (!response.data.alert) {
+				dispatch("alert/open", { type: "success", message: "email_verification_sent" }, { root: true })
+			}
+		},
+		async setVerify({ commit, dispatch }, { token }) {
+			const response = await axios.post("/verify", { token })
+			if (!response.data.alert) {
+				commit("VERIFIED")
+				dispatch("alert/open", { type: "success", message: "email_verified" }, { root: true })
+			}
 		}
 	}
 }

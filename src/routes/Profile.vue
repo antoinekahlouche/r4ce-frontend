@@ -2,6 +2,9 @@
 	<ListMenu title="profile" withSignout>
 		<template #details>
 			<form @submit="saveUser">
+				<div v-if="!$store.state.user.verified && !verifyLinkSend" class="alert alert-warning" role="alert">
+					{{ $t("alert.user_unverified") }} <a href="#" @click="sendVerifyLink()">{{ $t("text.resend_verify") }}</a>
+				</div>
 				<Bloc container="sm">
 					<div class="form-group">
 						<Label for="first_name" text="first_name" required />
@@ -57,7 +60,35 @@
 		</template>
 
 		<template #comments>
-			<div></div>
+			<div>
+				<ul v-if="$store.state.user.comments && $store.state.user.comments.length > 0" class="list-group">
+					<li href="#" v-for="comment in $store.state.user.comments" :key="comment._id" class="list-group-item pt-4">
+						{{ comment }}
+						<div>
+							<span class="font-weight-bold h5">
+								<!-- TODO {{this.event}} -->
+							</span>
+							<span class="float-right">
+								<!-- {{rating this.rating}} -->
+							</span>
+						</div>
+						<!-- <p>{{this.race}} {{#if this.year}} - {{/if}} {{this.year}} {{#if this.time}} - {{/if}} {{this.time}}</p> -->
+
+						<!-- <p>{{this.message}}</p> -->
+
+						<!-- <span class="float-right">
+						<form action="/comment/remove" method="POST">
+							<input type="hidden" name="idComment" value="{{this._id}}" />
+							<a href="#" onclick="this.parentNode.submit()">{{__ "button.delete"}}</a>
+						</form>
+					</span> -->
+					</li>
+				</ul>
+				<!-- {{pagination comment_pageCount comment_active comment_link}} -->
+				<div v-else class="alert alert-primary" role="alert">
+					{{ $t("alert.comment_list_empty") }}
+				</div>
+			</div>
 		</template>
 	</ListMenu>
 </template>
@@ -97,9 +128,10 @@ export default {
 		firstName: null,
 		lastName: null,
 		locale: null,
-		email: null
+		email: null,
+		verifyLinkSend: false
 	}),
-	mounted: function() {
+	mounted: async function() {
 		this.firstName = this.$store.state.user.firstName
 		this.lastName = this.$store.state.user.lastName
 		this.locale = this.$store.state.user.locale
@@ -110,13 +142,8 @@ export default {
 			this.avatar[name] = toLabel(name, splittedAvataaarId[index])
 		})
 
-		if (!this.$store.state.user.verified) {
-			this.$store.dispatch("alert/open", {
-				type: "warning",
-				message: "user_unverified",
-				displayPage: "profile"
-			})
-		}
+		// TODO on comments display
+		// this.$store.dispatch("user/getComments")
 	},
 	computed: {
 		avataaarId: function() {
@@ -148,6 +175,10 @@ export default {
 
 			this.loading = false
 			return
+		},
+		sendVerifyLink() {
+			this.$store.dispatch("user/getVerify")
+			this.verifyLinkSend = true
 		}
 	}
 }

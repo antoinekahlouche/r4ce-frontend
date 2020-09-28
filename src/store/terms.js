@@ -21,26 +21,34 @@ export default {
 		versions: () => versions
 	},
 	mutations: {
-		SET(state, value) {
+		TERMS(state, value) {
 			for (const key in initialState) {
 				state[key] = value[key]
 			}
 		}
 	},
 	actions: {
-		async get({ commit }) {
-			const response = await axios.get("/terms")
-			commit("SET", response.data.terms)
+		store({ commit }, terms) {
+			if (terms) {
+				commit("TERMS", terms)
+			}
 		},
-		async set({ commit }, type) {
+		async get({ dispatch }) {
+			const response = await axios.get("/terms")
+
+			if (!response.data) return false
+			dispatch("store", response.data.terms)
+
+			return true
+		},
+		async set({ dispatch }, type) {
 			const response = await axios.post("/terms", {
 				type,
 				version: versions[type]
 			})
 
 			if (!response.data) return false
-
-			commit("SET", response.data)
+			dispatch("store", response.data)
 
 			return true
 		}

@@ -52,7 +52,7 @@
 		"user_connected": "Connecté",
 		"user_created": "Utilisateur créer, un e-mail vous a été envoyé pour le vérifier",
 		"user_inexistent": "L'utilisateur n'existe pas",
-		"user_unverified": "<form action='/verify' method='POST'>Votre e-mail n'a pas encore été vérifié, si vous n'avez pas reçu l'e-mail vous pouvez <a href='#' onclick='this.parentNode.submit()'>renvoyer un e-mail de vérification</a></form>"
+		"user_unverified": "Votre e-mail n'a pas encore été vérifié."
 	},
 	"avatar": {
 		"accessories_type": {
@@ -441,6 +441,7 @@
 		"race": "Épreuve",
 		"rating": "Note de l'évènement",
 		"represent_event": "Je représente l'organisation de cet évènement",
+		"resend_verify": "Renvoyer un e-mail de vérification",
 		"review_empty": "Rien à traiter",
 		"social_network": "Réseaux sociaux",
 		"source": "Source",
@@ -501,7 +502,8 @@
 		"terms_sale": "CGV",
 		"usage": "CGU",
 		"update": "Modifier",
-		"user": "Utilisateur"
+		"user": "Utilisateur",
+		"verify": "Vérification de l'e-mail"
 	},
 	"usage": {
 		"1_title": "Objet",

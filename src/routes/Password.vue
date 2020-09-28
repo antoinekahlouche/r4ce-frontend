@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios.js"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import Simple from "@/layouts/Simple"
@@ -60,36 +59,16 @@ export default {
 			return
 		},
 		submitGet: async function(event) {
-			const response = await axios.get("/password", {
-				params: {
-					email: this.email
-				}
-			})
-
-			if (!response.data) {
-				this.$store.dispatch("alert/open", {
-					type: "success",
-					message: "email_password_sent",
-					displayPage: "signin"
-				})
-				this.$router.push("/signin")
-			}
+			await this.$store.dispatch("user/getPassword", { email: this.email })
+			this.$router.push("/signin")
 		},
 		submitPost: async function(event) {
-			const response = await axios.post("/password", {
+			await this.$store.dispatch("user/setPassword", {
 				email: this.email,
 				token: this.token,
 				password: this.password
 			})
-
-			if (!response.data) {
-				this.$store.dispatch("alert/open", {
-					type: "success",
-					message: "password_updated",
-					displayPage: "signin"
-				})
-				this.$router.push("/signin")
-			}
+			this.$router.push("/signin")
 		}
 	}
 }
