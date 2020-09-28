@@ -12,6 +12,3 @@ const modules = stores.keys().reduce((result, path) => {
 }, {})
 
 export default new Vuex.Store({ modules })
-
-// mutations : sync commit
-// actions : async dispatch

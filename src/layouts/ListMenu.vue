@@ -36,7 +36,6 @@
 
 <script>
 import Alert from "@/components/Alert"
-import axios from "@/plugins/axios"
 import Breadcrumb from "@/components/Breadcrumb"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
@@ -77,9 +76,9 @@ export default {
 		signout: async function() {
 			this.loading = true
 
-			const response = await axios.post("/signout")
-			await this.$store.dispatch("user/reset")
+			await this.$store.dispatch("user/signout")
 			this.$router.push("/signin")
+
 			this.loading = false
 			return
 		}

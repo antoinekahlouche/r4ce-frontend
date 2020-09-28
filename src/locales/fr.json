@@ -359,6 +359,7 @@
 		"hair_color": "Couleur de cheveux",
 		"in": "En",
 		"last_name": "Nom",
+		"locale": "Langue",
 		"mouth_type": "Bouche",
 		"password": "Mot de passe",
 		"skin_color": "Couleur de peau",
@@ -366,6 +367,9 @@
 		"to": "Au",
 		"top_type": "Cheveux",
 		"valid_info": "Je m'engage à fournir des informaions valides"
+	},
+	"locale": {
+		"french": "Français"
 	},
 	"mail": {
 		"claim_event": "Vous venez de revendiquer l'évènement suivant",

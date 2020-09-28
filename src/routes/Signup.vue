@@ -50,12 +50,9 @@
 </template>
 
 <script>
-import { random } from "@/helpers/avataaars"
-import axios from "@/plugins/axios"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import Simple from "@/layouts/Simple"
-import i18n from "@/plugins/i18n"
 
 export default {
 	name: "Signup",
@@ -79,20 +76,14 @@ export default {
 			event.preventDefault()
 			this.loading = true
 
-			const response = await axios.post("/signup", {
-				avatar: random(),
+			const success = await this.$store.dispatch("user/signup", {
 				email: this.email,
 				firstName: this.firstName,
-				gdprVersion: this.$t("gdpr.version"),
-				locale: i18n.locale,
 				lastName: this.lastName,
-				password: this.password,
-				usageVersion: this.$t("usage.version")
+				password: this.password
 			})
 
-			if (response.data && response.data.user && response.data.terms) {
-				this.$store.dispatch("user/set", response.data.user)
-				this.$store.dispatch("terms/set", response.data.terms)
+			if (success) {
 				if (this.$route.query && this.$route.query.redirect) {
 					this.$router.push(this.$route.query.redirect)
 				} else {

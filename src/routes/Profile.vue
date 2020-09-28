@@ -17,6 +17,13 @@
 						<Label for="email" text="email" required />
 						<input id="email" type="email" class="form-control" v-model="email" required />
 					</div>
+
+					<div class="form-group">
+						<Label for="locale" text="locale" required />
+						<select id="locale" class="form-control" v-model="locale" required disabled>
+							<option value="fr">{{ $t("locale.french") }}</option>
+						</select>
+					</div>
 				</Bloc>
 				<div class="text-center">
 					<button type="submit" class="btn btn-success" :disabled="loading">
@@ -58,7 +65,6 @@
 <script>
 import Avataaars from "@/components/Avataaars"
 import avataaars, { toLabel, toIndex } from "@/helpers/avataaars"
-import axios from "@/plugins/axios"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import ListMenu from "@/layouts/ListMenu"
@@ -90,11 +96,13 @@ export default {
 		loading: false,
 		firstName: null,
 		lastName: null,
+		locale: null,
 		email: null
 	}),
 	mounted: function() {
 		this.firstName = this.$store.state.user.firstName
 		this.lastName = this.$store.state.user.lastName
+		this.locale = this.$store.state.user.locale
 		this.email = this.$store.state.user.email
 
 		const splittedAvataaarId = this.$store.state.user.avatar.split("-")
@@ -120,16 +128,12 @@ export default {
 			event.preventDefault()
 			this.loading = true
 
-			const response = await axios.post("/user", {
+			await this.$store.dispatch("user/updateUser", {
 				firstName: this.firstName,
 				lastName: this.lastName,
+				locale: this.locale,
 				email: this.email
 			})
-
-			if (response.data && response.data.user) {
-				this.$store.dispatch("user/set", response.data.user)
-				this.$store.dispatch("alert/open", { type: "success", message: "profile_updated" })
-			}
 
 			this.loading = false
 			return
@@ -138,14 +142,9 @@ export default {
 			event.preventDefault()
 			this.loading = true
 
-			const response = await axios.post("/avatar", {
+			await this.$store.dispatch("user/updateAvatar", {
 				avatar: this.avataaarId
 			})
-
-			if (response.data && response.data.user) {
-				this.$store.dispatch("user/set", response.data.user)
-				this.$store.dispatch("alert/open", { type: "success", message: "avatar_updated" })
-			}
 
 			this.loading = false
 			return

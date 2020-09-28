@@ -17,7 +17,7 @@ axios.interceptors.response.use(
 
 		if (response.status !== 200) {
 			if (response.status === 401) {
-				store.dispatch("user/reset")
+				store.dispatch("user/signout")
 				store.dispatch("alert/open", { type: "warning", message: "restriction_authenticated", displayPage: "signin" })
 				router.push("/signin")
 			} else if (response.status === 403) router.push("/error?code=403")

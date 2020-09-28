@@ -21,9 +21,6 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios"
-import version from "@/helpers/version"
-
 export default {
 	name: "GDPR",
 	data: () => ({
@@ -39,12 +36,7 @@ export default {
 			event.preventDefault()
 			this.loading = true
 
-			const response = await axios.post("/terms", {
-				type: "GDPR",
-				version: version.GDPR
-			})
-
-			this.$store.dispatch("terms/set", response.data)
+			await this.$store.dispatch("terms/set", "GDPR")
 
 			this.loading = false
 			return

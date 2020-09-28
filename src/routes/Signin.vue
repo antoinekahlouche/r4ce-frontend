@@ -30,11 +30,9 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import Simple from "@/layouts/Simple"
-import i18n from "@/plugins/i18n"
 
 export default {
 	name: "Signin",
@@ -54,14 +52,12 @@ export default {
 			event.preventDefault()
 			this.loading = true
 
-			const response = await axios.post("/signin", {
+			const success = await this.$store.dispatch("user/signin", {
 				email: this.email,
 				password: this.password
 			})
 
-			if (response.data && response.data.user) {
-				await this.$store.dispatch("user/set", response.data.user)
-				await this.$store.dispatch("terms/set", response.data.terms)
+			if (success) {
 				if (this.$route.query && this.$route.query.redirect) {
 					this.$router.push(this.$route.query.redirect)
 				} else {
