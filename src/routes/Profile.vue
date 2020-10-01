@@ -24,7 +24,7 @@
 					<div class="form-group">
 						<Label for="locale" text="locale" required />
 						<select id="locale" class="form-control" v-model="locale" required disabled>
-							<option value="fr">{{ $t("locale.french") }}</option>
+							<option value="fr">{{ $t("locale.fr") }}</option>
 						</select>
 					</div>
 				</Bloc>

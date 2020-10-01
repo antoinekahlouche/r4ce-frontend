@@ -1,7 +1,7 @@
 <template>
 	<ListMenu title="about">
 		<template #legal>
-			<div class="border rounded-lg p-3 p-lg-5">
+			<Bloc>
 				<div class="mb-5">
 					<h2>{{ $t("text.editor") }}</h2>
 					Antoine Kahlouche SASU <br />
@@ -32,11 +32,11 @@
 					<br />
 					<a href="https://aws.amazon.com" target="_blank">aws.amazon.com</a>
 				</div>
-			</div>
+			</Bloc>
 		</template>
 
 		<template #usage>
-			<div class="border rounded-lg p-3 p-lg-5">
+			<Bloc>
 				<div v-for="(value, key) in $t('usage')" :key="key">
 					<div v-if="key.endsWith('title')" class="mb-5">
 						<h2 v-if="key.split('_').length === 2">{{ key.split("_")[0] }} {{ value }}</h2>
@@ -44,11 +44,11 @@
 					</div>
 					<div v-else-if="key.endsWith('content')" class="mb-5" v-html="value"></div>
 				</div>
-			</div>
+			</Bloc>
 		</template>
 
 		<template #gdpr>
-			<div class="border rounded-lg p-3 p-lg-5">
+			<Bloc>
 				<div v-for="(value, key) in $t('gdpr')" :key="key">
 					<div v-if="key.endsWith('title')" class="mb-5">
 						<h2 v-if="key.split('_').length === 2">{{ key.split("_")[0] }} {{ value }}</h2>
@@ -56,15 +56,15 @@
 					</div>
 					<div v-else-if="key.endsWith('content')" class="mb-5" v-html="value"></div>
 				</div>
-			</div>
+			</Bloc>
 		</template>
 
 		<template #team>
-			<div class="text-center border rounded-lg p-3 p-lg-5">
+			<Bloc class="text-center">
 				<Avataaars class="m-auto avatar pb-3" id="4-4-14-2-2-5-2-0-0-8-3-0" />
 				<h2>Antoine Kahlouche</h2>
 				<p class="text-muted">{{ $t("text.creator") }}</p>
-			</div>
+			</Bloc>
 		</template>
 
 		<template #social>
@@ -98,6 +98,7 @@
 
 <script>
 import Avataaars from "@/components/Avataaars"
+import Bloc from "@/components/Bloc"
 import ListMenu from "@/layouts/ListMenu"
 
 export default {
@@ -106,7 +107,7 @@ export default {
 		name: "about",
 		path: "about"
 	},
-	components: { Avataaars, ListMenu },
+	components: { Avataaars, Bloc, ListMenu },
 	data: () => ({
 		credits: [
 			{

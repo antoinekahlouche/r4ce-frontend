@@ -48,7 +48,7 @@ export default {
 <style scoped>
 .toast {
 	bottom: 0;
-	z-index: 2;
+	z-index: 3;
 	background-color: #ffffff;
 }
 </style>

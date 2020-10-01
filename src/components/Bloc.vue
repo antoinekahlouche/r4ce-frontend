@@ -1,5 +1,5 @@
 <template>
-	<div class="border rounded-lg p-3 p-lg-5 mb-4">
+	<div class="border rounded-lg mb-4" :class="{ 'p-3 p-lg-5': !noPadding }">
 		<div v-if="container" :class="'m-auto container-' + container">
 			<slot />
 		</div>
@@ -11,10 +11,10 @@
 export default {
 	name: "Bloc",
 	props: {
-		container: String
+		container: String,
+		noPadding: Boolean
 	}
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -6,34 +6,34 @@
 					<Label text="sport" required />
 					<select name="sport" class="form-control" v-model="sport">
 						<option value>{{ $t("text.all") }}</option>
-						<option v-for="sport in event.sport()" :key="sport" :value="sport">{{ $t("sport." + sport) }}</option>
+						<option v-for="sport in eventHelper.sport()" :key="sport" :value="sport">{{ $t("sport." + sport) }}</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<Label text="discipline" required />
 					<select name="discipline" class="form-control" :disabled="!sport" v-model="discipline">
 						<option value>{{ $t("text.all") }}</option>
-						<option v-for="discipline in event.discipline(sport)" :key="discipline" :value="discipline">{{ $t("discipline." + discipline) }}</option>
+						<option v-for="discipline in eventHelper.discipline(sport)" :key="discipline" :value="discipline">{{ $t("discipline." + discipline) }}</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<Label text="distance" required />
 					<select name="distance" class="form-control" :disabled="!sport" v-model="distance">
 						<option value>{{ $t("text.all") }}</option>
-						<option v-for="distance in event.distance(sport)" :key="distance" :value="distance">{{ $t("distance." + distance) }}</option>
+						<option v-for="distance in eventHelper.distance(sport)" :key="distance" :value="distance">{{ $t("distance." + distance) }}</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<Label text="format" required />
 					<select name="format" class="form-control" v-model="format">
 						<option value>{{ $t("text.all") }}</option>
-						<option v-for="format in event.format()" :key="format" :value="format">{{ $t("format." + format) }}</option>
+						<option v-for="format in eventHelper.format()" :key="format" :value="format">{{ $t("format." + format) }}</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<Label text="in" required />
 					<select name="where" class="form-control" disabled v-model="where">
-						<option value="FR">{{ $t("country.FR") }}</option>
+						<option value="fr">{{ $t("country.fr") }}</option>
 					</select>
 				</div>
 				<div class="form-row">
@@ -52,7 +52,7 @@
 			</div>
 			<br />
 			<div class="text-center">
-				<router-link to="/event/add">{{ $t("button.event_add") }}</router-link>
+				<router-link to="/event/update">{{ $t("button.event_add") }}</router-link>
 			</div>
 		</form>
 	</Simple>
@@ -63,7 +63,7 @@ import Bloc from "@/components/Bloc"
 import Button from "@/components/Label"
 import Label from "@/components/Label"
 import Simple from "@/layouts/Simple"
-import event from "@/helpers/event"
+import eventHelper from "@/helpers/event"
 
 export default {
 	name: "EventSearch",
@@ -73,7 +73,7 @@ export default {
 		alias: "event/search"
 	},
 	components: { Bloc, Button, Label, Simple },
-	data: () => ({ event }),
+	data: () => ({ eventHelper }),
 	computed: {
 		sport: {
 			get() {

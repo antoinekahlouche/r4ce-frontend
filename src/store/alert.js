@@ -3,19 +3,22 @@ export default {
 	state: {
 		type: null,
 		message: null,
-		displayPage: null
+		displayPage: null,
+		details: null
 	},
-	getters: {},
+	getters: null,
 	mutations: {
 		OPEN(state, value) {
 			state.type = value.type
 			state.message = value.message
 			state.displayPage = value.displayPage
+			state.details = value.details
 		},
 		CLOSE(state) {
 			state.type = null
 			state.message = null
 			state.displayPage = null
+			state.details = null
 		}
 	},
 	actions: {

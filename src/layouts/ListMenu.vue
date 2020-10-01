@@ -3,13 +3,13 @@
 		<Header />
 		<div class="p-3 p-lg-5 flex-grow-1">
 			<Breadcrumb v-if="links" :title="title" :links="links" />
-			<Alert />
 			<h1 class="mb-3 mb-lg-5">{{ $t("title." + title) }}</h1>
+			<Alert />
 
 			<div class="row">
 				<div class="col-12 col-lg-3 mb-3">
 					<div class="list-group active-param" role="tablist">
-						<div v-for="(value, key) in $slots" :key="key" :id="'ListMenu_menu_' + key" class="list-group-item list-group-item-action" data-toggle="list" :href="'#ListMenu_content_' + key" v-on:click="changeMenu(key)">{{ $t("title." + key) }}</div>
+						<div v-for="(value, key) in $slots" :key="key" :id="'ListMenu_menu_' + key" class="list-group-item list-group-item-action pointer" data-toggle="list" :href="'#ListMenu_content_' + key" @click="changeMenu(key)">{{ $t("title." + key) }}</div>
 					</div>
 
 					<div v-if="withSignout" class="list-group">
@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style scoped>
-.list-group-item {
+.pointer {
 	cursor: pointer;
 }
 

@@ -7,7 +7,7 @@ export default {
 		distance: "",
 		discipline: "",
 		format: "",
-		where: "FR",
+		where: "fr",
 		from: moment().format(),
 		to: moment()
 			.add(1, "M")
