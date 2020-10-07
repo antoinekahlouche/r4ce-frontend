@@ -1,3 +1,4 @@
+import axios from "@/plugins/axios"
 import moment from "@/plugins/moment"
 
 export default {
@@ -7,13 +8,15 @@ export default {
 		distance: "",
 		discipline: "",
 		format: "",
-		where: "fr",
+		country: "FR",
 		from: moment().format(),
 		to: moment()
 			.add(1, "M")
 			.format()
 	},
-	getters: null,
+	getters: {
+		query: state => `sport=${state.sport}&distance=${state.distance}&discipline=${state.discipline}&format=${state.format}&country=${state.country}&from=${state.from}&to=${state.to}&`
+	},
 	mutations: {
 		SET(state, { key, value }) {
 			state[key] = value
@@ -32,14 +35,23 @@ export default {
 		format({ commit }, value) {
 			commit("SET", { key: "format", value })
 		},
-		where({ commit }, value) {
-			commit("SET", { key: "where", value })
+		country({ commit }, value) {
+			commit("SET", { key: "country", value })
 		},
 		from({ commit }, value) {
 			commit("SET", { key: "from", value })
 		},
 		to({ commit }, value) {
 			commit("SET", { key: "to", value })
+		},
+		async events({ dispatch, state }) {
+			const response = await axios.get("/events", { params: state })
+
+			if (!response.data) return false
+			dispatch("map/search", { ...state }, { root: true })
+			dispatch("map/events", response.data.events, { root: true })
+
+			return true
 		}
 	}
 }

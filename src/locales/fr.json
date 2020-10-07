@@ -255,7 +255,7 @@
 		"update": "Modifier"
 	},
 	"country": {
-		"fr": "France"
+		"FR": "France"
 	},
 	"discipline": {
 		"ANIM": "Animathlon",
@@ -386,7 +386,7 @@
 		"youtube": "YouTube"
 	},
 	"locale": {
-		"fr": "Français"
+		"FR": "Français"
 	},
 	"mail": {
 		"claim_event": "Vous venez de revendiquer l'évènement suivant",
@@ -411,6 +411,15 @@
 	"param": {
 		"date_format": "DD/MM/YYYY"
 	},
+	"role": {
+		"level": {
+			"ADMIN": "Administrateur"
+		},
+		"type": {
+			"EVENT": "Evènement",
+			"GLOBAL": "Global"
+		}
+	},
 	"sport": {
 		"RUN": "Course à pied",
 		"TRI": "Triathlon"
@@ -424,6 +433,7 @@
 		"comment": "Commentaire",
 		"coordinates_update": "Modifier les coordonnées",
 		"creator": "Créateur",
+		"details": "Détails",
 		"duration": "Temps",
 		"editor": "Editeur",
 		"editorial_manager": "Responsable éditorial",
@@ -442,6 +452,7 @@
 		"icons": "Icônes",
 		"im_searching": "Je recherche",
 		"in": "en",
+		"level": "Niveau",
 		"license": "Licence",
 		"loading": "Chargement",
 		"modo": "Modérateur",

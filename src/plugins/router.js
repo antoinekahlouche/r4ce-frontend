@@ -51,7 +51,7 @@ router.beforeEach((to, from, next) => {
 		next("/profile")
 	} else if (to.meta.isEventAdmin) {
 		next("/error?code=401")
-	} else if (to.meta.isAdmin && ![store.user.roles].includes("GLOBAL_ADMIN")) {
+	} else if (to.meta.isAdmin && !store.getters["user/isAdmin"]) {
 		next("/error?code=401")
 	} else {
 		next()

@@ -13,14 +13,23 @@ const initialState = {
 	firstName: null,
 	lastName: null,
 	locale: null,
-	role: null,
+	roles: null,
 	verified: false
 }
 
 export default {
 	namespaced: true,
 	state: { ...initialState },
-	getters: null,
+	getters: {
+		isAdmin: state => {
+			if (!state.roles) return false
+			if (state.roles.length === 0) return false
+			for (const role of state.roles) {
+				if (role.type === "GLOBAL" && role.level === "ADMIN") return true
+			}
+			return false
+		}
+	},
 	mutations: {
 		COMMENTS(state, value) {
 			state.comments = value
@@ -32,7 +41,7 @@ export default {
 			state.firstName = value.firstName
 			state.lastName = value.lastName
 			state.locale = value.locale
-			state.role = value.role
+			state.roles = value.roles
 			state.verified = value.verified
 		},
 		RESET(state) {
@@ -82,7 +91,7 @@ export default {
 				email,
 				firstName,
 				gdprVersion: rootGetters["terms/versions"].GDPR,
-				locale: i18n.locale,
+				locale: i18n.locale.toUpperCase(),
 				lastName,
 				password,
 				usageVersion: rootGetters["terms/versions"].USAGE
@@ -136,8 +145,10 @@ export default {
 			dispatch("alert/open", { type: "success", message: "email_password_sent", displayPage: "signin" }, { root: true })
 		},
 		async setPassword({ dispatch }, { email, token, password }) {
-			await axios.post("/password", { email, token, password })
+			const response = await axios.post("/password", { email, token, password })
+			if (response.data.alert) return false
 			dispatch("alert/open", { type: "success", message: "password_updated", displayPage: "signin" }, { root: true })
+			return true
 		},
 		async getVerify({ dispatch }) {
 			const response = await axios.get("/verify")

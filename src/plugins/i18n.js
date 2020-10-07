@@ -5,7 +5,7 @@ const messages = {
 	fr: require("@/locales/fr")
 }
 
-const userLocale = (localStorage.vuex && JSON.parse(localStorage.vuex).profile && JSON.parse(localStorage.vuex).profile.locale) || (navigator.language || navigator.userLanguage || "").split("-")[0]
+const userLocale = getLocale()
 const locale = validLocale(userLocale) ? userLocale : "fr"
 
 Vue.use(VueI18n)
@@ -17,6 +17,13 @@ const i18n = new VueI18n({
 	messages
 })
 export default i18n
+
+function getLocale() {
+	if (localStorage.vuex && JSON.parse(localStorage.vuex).profile) {
+		return JSON.parse(localStorage.vuex).user.locale.toLowerCase()
+	}
+	return (navigator.language || navigator.userLanguage || "").split("-")[0]
+}
 
 export function localeRegex() {
 	return `(${Object.keys(messages).join("|")})`

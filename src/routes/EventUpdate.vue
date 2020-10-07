@@ -25,7 +25,7 @@
 				<div class="form-group">
 					<Label text="country" required />
 					<select class="form-control" v-model="event.country" required>
-						<option value="fr">{{ $t("country.fr") }}</option>
+						<option value="FR">{{ $t("country.FR") }}</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -215,7 +215,7 @@ export default {
 					event: this.event
 				})
 
-				if (response.data && response.data.alert) {
+				if (response.data?.alert) {
 					this.$store.dispatch("alert/open", { type: response.data.alert.type, message: response.data.alert.message, displayPage: this.$route.name })
 				} else {
 					this.$store.dispatch("alert/open", {

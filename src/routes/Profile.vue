@@ -24,7 +24,7 @@
 					<div class="form-group">
 						<Label for="locale" text="locale" required />
 						<select id="locale" class="form-control" v-model="locale" required disabled>
-							<option value="fr">{{ $t("locale.fr") }}</option>
+							<option value="FR">{{ $t("locale.FR") }}</option>
 						</select>
 					</div>
 				</Bloc>
@@ -88,6 +88,28 @@
 				<div v-else class="alert alert-primary" role="alert">
 					{{ $t("alert.comment_list_empty") }}
 				</div>
+			</div>
+		</template>
+
+		<template #admin v-if="$store.state.user.roles && $store.state.user.roles.length > 0">
+			<div class="border rounded-lg">
+				<table class="table table-hover m-0">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">{{ $t("text.level") }}</th>
+							<th scope="col">{{ $t("text.type") }}</th>
+							<th scope="col">{{ $t("text.details") }}</th>
+						</tr>
+					</thead>
+					<tbody class="thead-light">
+						<tr v-for="role in $store.state.user.roles" :key="role._id" class="clickable-row pointer" @click="redirect(role)">
+							<td>{{ $t("role.level." + role.level) }}</td>
+							<td>{{ $t("role.type." + role.type) }}</td>
+							<td v-if="role.event">{{ role.event.name }}</td>
+							<td v-else></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</template>
 	</ListMenu>
@@ -179,6 +201,16 @@ export default {
 		sendVerifyLink() {
 			this.$store.dispatch("user/getVerify")
 			this.verifyLinkSend = true
+		},
+		redirect: function(role) {
+			switch (role.type) {
+				case "GLOBAL":
+					this.$router.push("/admin")
+					break
+
+				default:
+					break
+			}
 		}
 	}
 }

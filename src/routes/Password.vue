@@ -63,12 +63,15 @@ export default {
 			this.$router.push("/signin")
 		},
 		submitPost: async function(event) {
-			await this.$store.dispatch("user/setPassword", {
+			const success = await this.$store.dispatch("user/setPassword", {
 				email: this.email,
 				token: this.token,
 				password: this.password
 			})
-			this.$router.push("/signin")
+
+			if (success) {
+				this.$router.push("/signin")
+			}
 		}
 	}
 }

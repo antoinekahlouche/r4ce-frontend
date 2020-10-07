@@ -32,8 +32,8 @@
 				</div>
 				<div class="form-group">
 					<Label text="in" required />
-					<select name="where" class="form-control" disabled v-model="where">
-						<option value="fr">{{ $t("country.fr") }}</option>
+					<select name="country" class="form-control" disabled v-model="country">
+						<option value="FR">{{ $t("country.FR") }}</option>
 					</select>
 				</div>
 				<div class="form-row">
@@ -73,7 +73,9 @@ export default {
 		alias: "event/search"
 	},
 	components: { Bloc, Button, Label, Simple },
-	data: () => ({ eventHelper }),
+	data: () => ({
+		eventHelper
+	}),
 	computed: {
 		sport: {
 			get() {
@@ -109,12 +111,12 @@ export default {
 				this.$store.dispatch("search/format", value)
 			}
 		},
-		where: {
+		country: {
 			get() {
-				return this.$store.state.search.where
+				return this.$store.state.search.country
 			},
 			set(value) {
-				this.$store.dispatch("search/where", value)
+				this.$store.dispatch("search/country", value)
 			}
 		},
 		from: {
@@ -136,8 +138,8 @@ export default {
 	},
 	methods: {
 		submit: function(event) {
-			this.$router.push("/event/map")
 			event.preventDefault()
+			this.$router.push("/event/map?" + this.$store.getters["search/query"])
 		}
 	}
 }
