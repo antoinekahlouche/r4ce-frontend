@@ -1,5 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import persistedState from "vuex-persistedstate"
 
 Vue.use(Vuex)
 
@@ -11,4 +12,11 @@ const modules = stores.keys().reduce((result, path) => {
 	return result
 }, {})
 
-export default new Vuex.Store({ modules })
+export default new Vuex.Store({
+	modules,
+	plugins: [
+		persistedState({
+			paths: ["terms", "user"]
+		})
+	]
+})

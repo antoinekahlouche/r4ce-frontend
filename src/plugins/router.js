@@ -48,7 +48,7 @@ router.beforeEach((to, from, next) => {
 		next("/profile")
 	} else if (to.meta.isVerified && !store.state.user.verified) {
 		store.dispatch("alert/open", { type: "warning", message: "restriction_unverified", displayPage: "profile" })
-		next("/profile")
+		next(false)
 	} else if (to.meta.isEventAdmin) {
 		next("/error?code=401")
 	} else if (to.meta.isAdmin && !store.getters["user/isAdmin"]) {

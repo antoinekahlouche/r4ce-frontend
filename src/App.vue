@@ -13,7 +13,7 @@ import Watcher from "@/components/Watcher"
 export default {
 	name: "App",
 	components: { GDPR, Watcher },
-	mounted: function() {
+	mounted() {
 		// Enable popovers everywhere
 		$('[data-toggle="popover"]').popover()
 	}

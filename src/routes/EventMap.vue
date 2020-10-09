@@ -161,7 +161,7 @@ export default {
 					closeButton: false,
 					closeOnClick: true,
 					offset: 17,
-					maxWidth: "300px"
+					maxWidth: "90vw"
 				})
 					.setLngLat(e.features[0].geometry.coordinates.slice())
 					.setHTML('<div id="PopupMap" />')
@@ -181,13 +181,12 @@ export default {
 							closeButton: false,
 							closeOnClick: true,
 							offset: clusterCount < 10 ? 22 : clusterCount < 100 ? 32 : 42,
-							maxWidth: "300px"
+							maxWidth: "90vw"
 						})
 							.setLngLat(location)
 							.setHTML('<div id="PopupMap" />')
 							.addTo(this.map)
 
-						console.log(points.map(point => point.properties))
 						this.openPopup(
 							"#PopupMap",
 							points.map(point => point.properties)

@@ -9,7 +9,7 @@ export default {
 		"$route.name": {
 			deep: true,
 			immediate: true,
-			handler: function(newName, oldName) {
+			handler(newName, oldName) {
 				if (!newName) return
 
 				// Alerts
@@ -18,7 +18,9 @@ export default {
 				}
 
 				// Title tag
-				document.title = process.env.VUE_APP_PAGE_PREFIX + " - " + this.$t("title." + newName)
+				if (newName !== oldName) {
+					document.title = process.env.VUE_APP_PAGE_PREFIX + " - " + this.$t("title." + newName)
+				}
 
 				// TODO Meta tag
 				// var description = this.$t("description." + name)
@@ -45,7 +47,7 @@ export default {
 		"$route.params.locale": {
 			deep: true,
 			immediate: true,
-			handler: function(locale) {
+			handler(locale) {
 				if (locale && i18n.locale !== locale) setLocale(locale)
 			}
 		}

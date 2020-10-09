@@ -9,9 +9,6 @@
 <script>
 import Bloc from "@/components/Bloc"
 import Simple from "@/layouts/Simple"
-import mapHelper from "@/helpers/map"
-import eventHelper from "@/helpers/event"
-import axios from "@/plugins/axios"
 
 export default {
 	name: "EventReview",
@@ -26,9 +23,9 @@ export default {
 		event: {},
 		update: {}
 	}),
-	mounted: function() {},
+	mounted() {},
 	methods: {
-		submit: async function(event) {
+		async submit(event) {
 			event.preventDefault()
 			this.loading = true
 

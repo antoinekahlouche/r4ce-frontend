@@ -32,7 +32,7 @@ export default {
 		}
 	},
 	methods: {
-		submit: async function(event) {
+		async submit(event) {
 			event.preventDefault()
 			this.loading = true
 

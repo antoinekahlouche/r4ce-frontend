@@ -23,7 +23,8 @@ export default {
 			str += ` ${i18n.t("text.from")} <b>${moment.display(state.search.from)}</b>`
 			str += ` ${i18n.t("text.to")} <b>${moment.display(state.search.to)}</b>`
 			return str
-		}
+		},
+		event: state => permalink => state.events.filter(event => event.permalink === permalink)[0] || null
 	},
 	mutations: {
 		SEARCH(state, search) {

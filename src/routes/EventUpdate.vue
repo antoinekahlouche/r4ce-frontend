@@ -158,15 +158,15 @@ export default {
 		initialCenter: null
 	}),
 	computed: {
-		isAdd: function() {
+		isAdd() {
 			return !this.$route.params.permalink
 		},
 		frontendUrl: () => process.env.VUE_APP_FRONTEND_URL
 	},
-	mounted: function() {
+	mounted() {
 		this.map = mapHelper.create("map", this.event.coordinates, this.isAdd ? 5 : 11)
 		const that = this
-		$("#ListMenu_menu_location").on("shown.bs.tab", function() {
+		$("#ListMenu_menu_location").on("shown.bs.tab", () => {
 			that.map.resize()
 		})
 		this.map.on("moveend", () => {
@@ -174,7 +174,7 @@ export default {
 		})
 	},
 	methods: {
-		submit: async function(event) {
+		async submit(event) {
 			event.preventDefault()
 			this.loading = true
 
@@ -230,7 +230,7 @@ export default {
 			this.loading = false
 			return
 		},
-		updatePermalink: function() {
+		updatePermalink() {
 			this.$set(
 				this.event,
 				"permalink",
@@ -241,15 +241,15 @@ export default {
 					.replace(/[^a-z0-9-]/g, "")
 			)
 		},
-		addRace: function(index) {
+		addRace(index) {
 			let races = this.event.races || []
 			races.push({})
 			this.$set(this.event, "races", races)
 		},
-		deleteRace: function(index) {
+		deleteRace(index) {
 			this.event.races.splice(index, 1)
 		},
-		resetCenter: function() {
+		resetCenter() {
 			let center
 			if (this.initialCenter) {
 				center = this.initialCenter

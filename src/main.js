@@ -7,16 +7,12 @@ import i18n from "@/plugins/i18n"
 
 Vue.config.productionTip = false
 
-mount()
-async function mount() {
-	await store.dispatch("user/get")
+new Vue({
+	i18n,
+	router,
+	store,
+	render: h => h(App)
+}).$mount("#app")
 
-	new Vue({
-		i18n,
-		router,
-		store,
-		render: h => h(App)
-	}).$mount("#app")
-
-	store.dispatch("terms/get")
-}
+store.dispatch("user/get")
+store.dispatch("terms/get")

@@ -62,29 +62,29 @@
 		<template #comments>
 			<div>
 				<ul v-if="$store.state.user.comments && $store.state.user.comments.length > 0" class="list-group">
-					<li href="#" v-for="comment in $store.state.user.comments" :key="comment._id" class="list-group-item pt-4">
-						{{ comment }}
+					<li href="#" v-for="(comment, i) in $store.state.user.comments" :key="comment._id" class="list-group-item pt-4">
 						<div>
 							<span class="font-weight-bold h5">
-								<!-- TODO {{this.event}} -->
+								{{ comment.eventName }}
 							</span>
 							<span class="float-right">
-								<!-- {{rating this.rating}} -->
+								<StarRating v-model="comment.rating" inactive-color="#EEEEEE" active-color="#FFC107" :border-width="3" border-color="#EEEEEE" active-border-color="#FFB300" :show-rating="false" :star-size="15" rounded-corners readOnly></StarRating>
 							</span>
 						</div>
-						<!-- <p>{{this.race}} {{#if this.year}} - {{/if}} {{this.year}} {{#if this.time}} - {{/if}} {{this.time}}</p> -->
+						<p>
+							{{ comment.race }}
+							<span v-if="comment.year">{{ comment.year }}</span>
+							<span v-if="comment.time">{{ comment.time }}</span>
+						</p>
 
-						<!-- <p>{{this.message}}</p> -->
+						<p>{{ comment.message }}</p>
 
-						<!-- <span class="float-right">
-						<form action="/comment/remove" method="POST">
-							<input type="hidden" name="idComment" value="{{this._id}}" />
-							<a href="#" onclick="this.parentNode.submit()">{{__ "button.delete"}}</a>
-						</form>
-					</span> -->
+						<span class="float-right">
+							<span class="spinner-border spinner-border-sm mr-1 text-primary" role="status" :class="{ 'd-none': !loadingDeleteIndexes.includes(i) }"></span>
+							<a href="#" @click="deleteComment(comment._id, i)" :style="{ display: loadingDeleteIndexes.includes(i) ? 'none' : 'block' }">{{ $t("button.delete") }}</a>
+						</span>
 					</li>
 				</ul>
-				<!-- {{pagination comment_pageCount comment_active comment_link}} -->
 				<div v-else class="alert alert-primary" role="alert">
 					{{ $t("alert.comment_list_empty") }}
 				</div>
@@ -121,6 +121,7 @@ import avataaars, { toLabel, toIndex } from "@/helpers/avataaars"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import ListMenu from "@/layouts/ListMenu"
+import StarRating from "vue-star-rating"
 
 export default {
 	name: "Profile",
@@ -129,7 +130,7 @@ export default {
 		path: "profile",
 		meta: { isSignedIn: true }
 	},
-	components: { Avataaars, Bloc, Label, ListMenu },
+	components: { Avataaars, Bloc, Label, ListMenu, StarRating },
 	data: () => ({
 		avataaars: avataaars,
 		avatar: {
@@ -151,9 +152,10 @@ export default {
 		lastName: null,
 		locale: null,
 		email: null,
-		verifyLinkSend: false
+		verifyLinkSend: false,
+		loadingDeleteIndexes: []
 	}),
-	mounted: async function() {
+	async mounted() {
 		this.firstName = this.$store.state.user.firstName
 		this.lastName = this.$store.state.user.lastName
 		this.locale = this.$store.state.user.locale
@@ -164,16 +166,15 @@ export default {
 			this.avatar[name] = toLabel(name, splittedAvataaarId[index])
 		})
 
-		// TODO on comments display
-		// this.$store.dispatch("user/getComments")
+		this.$store.dispatch("user/getComments")
 	},
 	computed: {
-		avataaarId: function() {
+		avataaarId() {
 			return avataaars.order.id.map((name, index) => toIndex(name, this.avatar[name])).join("-")
 		}
 	},
 	methods: {
-		saveUser: async function(event) {
+		async saveUser(event) {
 			event.preventDefault()
 			this.loading = true
 
@@ -187,7 +188,7 @@ export default {
 			this.loading = false
 			return
 		},
-		saveAvatar: async function(event) {
+		async saveAvatar(event) {
 			event.preventDefault()
 			this.loading = true
 
@@ -202,7 +203,7 @@ export default {
 			this.$store.dispatch("user/getVerify")
 			this.verifyLinkSend = true
 		},
-		redirect: function(role) {
+		redirect(role) {
 			switch (role.type) {
 				case "GLOBAL":
 					this.$router.push("/admin")
@@ -210,6 +211,16 @@ export default {
 
 				default:
 					break
+			}
+		},
+		async deleteComment(commentId, i) {
+			this.loadingDeleteIndexes.push(i)
+			await this.$store.dispatch("user/deleteComment", commentId)
+			this.$store.dispatch("alert/open", { type: "success", message: "comment_deleted" })
+
+			const index = this.loadingDeleteIndexes.indexOf(i)
+			if (index > -1) {
+				this.loadingDeleteIndexes.splice(index, 1)
 			}
 		}
 	}

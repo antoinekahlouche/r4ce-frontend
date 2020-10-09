@@ -64,11 +64,6 @@ export default {
 				setLocale(user.locale)
 			}
 		},
-		storeComments({ commit }, comments) {
-			if (comments) {
-				commit("COMMENTS", comments)
-			}
-		},
 		async get({ dispatch }) {
 			const response = await axios.get("/user")
 
@@ -77,11 +72,19 @@ export default {
 
 			return true
 		},
-		async getComments({ dispatch }) {
+		async deleteComment({ commit, state }, commentId) {
+			await axios.delete("/comment", { params: { commentId } })
+
+			commit(
+				"COMMENTS",
+				state.comments.filter(comment => comment._id !== commentId)
+			)
+		},
+		async getComments({ commit }) {
 			const response = await axios.get("/comments")
 
 			if (!response.data) return false
-			dispatch("storeComments", response.data.comments)
+			commit("COMMENTS", response.data.comments)
 
 			return true
 		},

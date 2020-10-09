@@ -137,7 +137,7 @@ export default {
 		}
 	},
 	methods: {
-		submit: function(event) {
+		submit(event) {
 			event.preventDefault()
 			this.$router.push("/event/map?" + this.$store.getters["search/query"])
 		}

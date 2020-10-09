@@ -17,7 +17,7 @@ export default {
 		path: "verify"
 	},
 	components: { Bloc, Simple },
-	mounted: async function() {
+	async mounted() {
 		const token = this.$route.query.token
 
 		if (token) {

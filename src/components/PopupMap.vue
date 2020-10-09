@@ -1,5 +1,5 @@
 <template>
-	<div class="card border-0 popup">
+	<div class="shadow-lg card border-0 popup">
 		<div v-if="event" class="card-body p-3">
 			<p class="h5 card-title font-weight-bold">{{ event.name }}</p>
 			<div class="h6 card-subtitle text-muted">
@@ -8,14 +8,14 @@
 					<div class="pt-2">
 						<div v-for="race in event.races" :key="race._id">
 							<span v-if="race.date === date">
-								- {{ $t("distance." + race.distance) }} : {{ $t("discipline." + race.discipline) }}
+								- {{ $t("discipline." + race.discipline) }} - {{ $t("distance." + race.distance) }} - {{ $t("format." + race.format) }}
 								<br />
 							</span>
 						</div>
 					</div>
 				</div>
 			</div>
-			<router-link :to="`/event/detail/${event.permalink}`" class="btn btn-primary btn-block mt-3">
+			<router-link :to="`/event/details/${event.permalink}`" class="btn btn-primary btn-block mt-3">
 				{{ $t("button.detail") }}
 			</router-link>
 		</div>
@@ -31,7 +31,6 @@
 
 <script>
 import moment from "@/plugins/moment"
-import i18n from "@/plugins/i18n"
 
 export default {
 	props: {
@@ -41,7 +40,6 @@ export default {
 	data: () => ({
 		moment
 	}),
-	mounted() {},
 	computed: {
 		distinctDate() {
 			return [...new Set(this.event.races.map(race => race.date))].sort()

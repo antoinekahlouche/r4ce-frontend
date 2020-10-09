@@ -33,7 +33,7 @@ export default {
 	}),
 	watch: {
 		"$route.path": {
-			handler: function(path) {
+			handler(path) {
 				const splittedPath = path.split("/")
 
 				if ([undefined, "", "event"].includes(splittedPath[2])) {

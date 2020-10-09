@@ -48,7 +48,7 @@ export default {
 		password: null
 	}),
 	methods: {
-		submit: async function(event) {
+		async submit(event) {
 			event.preventDefault()
 			this.loading = true
 
@@ -68,7 +68,7 @@ export default {
 			this.loading = false
 			return
 		},
-		to: function() {
+		to() {
 			let str = "/signup"
 			if (this.$route.query && this.$route.query.redirect) {
 				str += "?redirect=" + this.$route.query.redirect

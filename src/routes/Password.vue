@@ -42,12 +42,12 @@ export default {
 		password: null,
 		token: null
 	}),
-	mounted: function() {
+	mounted() {
 		this.token = this.$route.query.token
 		this.email = this.$route.query.email
 	},
 	methods: {
-		submit: async function(event) {
+		async submit(event) {
 			event.preventDefault()
 			this.loading = true
 			if (this.token) {
@@ -58,11 +58,11 @@ export default {
 			this.loading = false
 			return
 		},
-		submitGet: async function(event) {
+		async submitGet(event) {
 			await this.$store.dispatch("user/getPassword", { email: this.email })
 			this.$router.push("/signin")
 		},
-		submitPost: async function(event) {
+		async submitPost(event) {
 			const success = await this.$store.dispatch("user/setPassword", {
 				email: this.email,
 				token: this.token,

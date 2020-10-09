@@ -26,15 +26,15 @@ export default {
 		topType: ""
 	}),
 	watch: {
-		id: function(value) {
+		id(value) {
 			this.display(value)
 		}
 	},
-	mounted: function() {
+	mounted() {
 		this.display(this.id)
 	},
 	methods: {
-		display: function(id) {
+		display(id) {
 			const splittedId = id.split("-")
 			this.accessoriesType = avataaars.options["accessories_type"][splittedId[0]]
 			this.clotheType = avataaars.options["clothe_type"][splittedId[1]]

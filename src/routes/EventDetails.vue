@@ -1,13 +1,189 @@
-<template></template>
+<template>
+	<ListMenu v-if="event" title="about">
+		<template #races>
+			<div class="card-columns">
+				<div class="card" v-for="race in event.races" :key="race._id">
+					<div class="card-body">
+						<div>
+							<span class="font-weight-bold">{{ $t("label.sport") }} : </span>{{ $t("sport." + race.sport) }}<br />
+							<span class="font-weight-bold">{{ $t("label.discipline") }} : </span>{{ $t("discipline." + race.discipline) }}<br />
+							<span class="font-weight-bold">{{ $t("label.distance") }} : </span>{{ $t("distance." + race.distance) }}<br />
+							<span class="font-weight-bold">{{ $t("label.format") }} : </span>{{ $t("format." + race.format) }}<br />
+							<span class="font-weight-bold">{{ $t("label.date") }} : </span>{{ moment.display(race.date) }}<br />
+
+							<div v-if="race.time">
+								<span class="font-weight-bold">{{ $t("text.time") }} : </span>{{ race.time }}<br />
+							</div>
+							<div v-if="race.price">
+								<span class="font-weight-bold">{{ $t("text.price") }} : </span>{{ race.price }}<br />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<template #comments>
+			<div v-if="!$store.state.user.signedIn" class="alert alert-primary" role="alert" v-html="$t('alert.restriction_comments')"></div>
+
+			<div class="card-columns">
+				<div class="card text-white bg-primary">
+					<div class="card-header">{{ $t("text.average") }} - {{ $tc("text.answer", comments.length) }}</div>
+					<div class="card-body text-center p-0 pb-3">
+						<span class="font-weight-bold rating">{{ rating || "?" }}</span> / 5
+					</div>
+				</div>
+				<div v-for="comment in comments" :key="comment._id" class="card">
+					<div class="card-body py-1">
+						<div class="card-title row m-0">
+							<div class="col-auto">
+								<div class="username">
+									<Avataaars style="width:10rem;" class="mb-3" :id="comment.userAvatar" />
+								</div>
+							</div>
+							<div class="col m-auto">
+								<div class="font-weight-bold">{{ comment.userName }}</div>
+								<small class="text-muted">
+									{{ comment.race }}
+									<span v-if="comment.year">- {{ comment.year }}</span>
+									<span v-if="comment.time">- {{ comment.time }}</span>
+								</small>
+								<br />
+								<small class="text-muted">
+									<StarRating v-model="comment.rating" inactive-color="#EEEEEE" active-color="#FFC107" :border-width="3" border-color="#EEEEEE" active-border-color="#FFB300" :show-rating="false" :star-size="15" rounded-corners readOnly></StarRating>
+								</small>
+							</div>
+						</div>
+						<p v-if="comment.message" class="card-text py-3">{{ comment.message }}</p>
+					</div>
+				</div>
+			</div>
+
+			<div v-if="$store.state.user.signedIn">
+				<form @submit="submit">
+					<br />
+					<div class="border p-4 rounded-lg bg-light">
+						<div class="form-row">
+							<div class="form-group col-12 col-md-12">
+								<Label for="race" text="race" required />
+								<input type="text" class="form-control" name="race" v-model="comment.race" required />
+							</div>
+							<div class="form-group col-12 col-md-4">
+								<Label for="rating" text="rating" required />
+								<div class="h2 rate text-center d-flex justify-content-center">
+									<StarRating v-model="comment.rating" inactive-color="#EEEEEE" active-color="#FFC107" :border-width="3" border-color="#EEEEEE" active-border-color="#FFB300" :show-rating="false" :star-size="40" rounded-corners></StarRating>
+								</div>
+							</div>
+							<div class="form-group col-12 col-md-4">
+								<Label for="year" text="year" />
+								<input type="number" class="form-control" name="year" placeholder="aaaa" v-model="comment.year" />
+							</div>
+							<div class="form-group col-12 col-md-4">
+								<Label for="time" text="duration" />
+								<input type="text" class="form-control" name="time" placeholder="hh:mm:ss" v-model="comment.time" />
+							</div>
+						</div>
+						<div class="form-group">
+							<Label for="message" text="comment" />
+							<textarea name="message" class="form-control" rows="5" v-model="comment.comment"></textarea>
+						</div>
+					</div>
+					<br />
+					<div class="text-center">
+						<button type="submit" class="btn btn-success" :disabled="commentLoading">
+							<span class="spinner-border spinner-border-sm mr-1" role="status" :class="{ 'd-none': !commentLoading }"></span>
+							{{ $t("button.send") }}
+						</button>
+					</div>
+				</form>
+			</div>
+		</template>
+
+		<template #map></template>
+
+		<template #contact>
+			<Bloc></Bloc>
+		</template>
+	</ListMenu>
+</template>
 
 <script>
+import Avataaars from "@/components/Avataaars"
+import Bloc from "@/components/Bloc"
+import ListMenu from "@/layouts/ListMenu"
+import moment from "@/plugins/moment"
+import axios from "@/plugins/axios"
+import Label from "@/components/Label"
+import StarRating from "vue-star-rating"
+
+const initialComment = {
+	race: null,
+	rating: 5,
+	year: null,
+	time: null,
+	comment: null
+}
+
 export default {
 	name: "EventDetails",
 	route: {
 		name: "event_details",
 		path: "event/details/:permalink"
+	},
+	components: { Avataaars, Bloc, Label, ListMenu, StarRating },
+	data: () => ({
+		moment,
+		loading: true,
+		commentLoading: false,
+		event: null,
+		comments: null,
+		rating: null,
+		comment: { ...initialComment }
+	}),
+	async mounted() {
+		const permalink = this.$route.params.permalink
+
+		const response = await axios.get("/event", { params: { permalink } })
+		if (!response.data?.event) return this.$router.push("/error?code=404")
+		this.event = response.data.event
+		this.comments = response.data.comments.sort()
+		this.updateRating()
+
+		document.title = process.env.VUE_APP_PAGE_PREFIX + " - " + this.event.name
+		this.loading = false
+	},
+	methods: {
+		async submit() {
+			event.preventDefault()
+			this.commentLoading = true
+
+			const response = await axios.post("/comment", { eventId: this.event._id, ...this.comment })
+			if (!response.data?.comment) {
+				this.$store.dispatch("alert/open", { type: "danger", message: "comment_error" })
+				this.commentLoading = false
+				return
+			}
+
+			this.comment = { ...initialComment }
+			this.comments.unshift(response.data.comment)
+			this.$store.dispatch("alert/open", { type: "success", message: "comment_added" })
+			this.updateRating()
+
+			this.commentLoading = false
+			return
+		},
+		updateRating() {
+			const ratingSum = this.comments.reduce((accumulator, comment) => accumulator + comment.rating, 0)
+			const ratingAvg = ratingSum / this.comments.length
+			const ratingRnd = Math.round(ratingAvg * 100) / 100
+			this.rating = ratingRnd
+		}
 	}
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.rating {
+	font-size: 5rem;
+}
+</style>
