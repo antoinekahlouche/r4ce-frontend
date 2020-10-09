@@ -44,7 +44,7 @@ router.beforeEach((to, from, next) => {
 	if (to.meta.isSignedIn && !store.state.user.signedIn) {
 		store.dispatch("alert/open", { type: "warning", message: "restriction_authenticated", displayPage: "signin" })
 		next("/signin?redirect=" + to.path)
-	} else if (to.meta.isSignedIn === false && store.state.user.isSignedIn) {
+	} else if (to.meta.isSignedIn === false && store.state.user.signedIn) {
 		next("/profile")
 	} else if (to.meta.isVerified && !store.state.user.verified) {
 		store.dispatch("alert/open", { type: "warning", message: "restriction_unverified", displayPage: "profile" })

@@ -16,6 +16,7 @@ export default {
 	methods: {
 		close() {
 			this.$store.dispatch("alert/close")
+			// this.$store.commit("alert/CLOSE")
 		}
 	},
 	computed: {

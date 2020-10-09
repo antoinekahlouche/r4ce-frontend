@@ -26,7 +26,9 @@ export default {
 			commit("OPEN", value)
 		},
 		close({ commit, state }, pages) {
-			if (!pages.from || !state.displayPage) {
+			if (!pages) {
+				commit("CLOSE")
+			} else if (!pages.from || !state.displayPage) {
 				commit("CLOSE")
 			} else if (state.displayPage && state.displayPage === pages.from && pages.from !== pages.to) {
 				commit("CLOSE")

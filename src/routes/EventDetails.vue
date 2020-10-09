@@ -24,7 +24,9 @@
 		</template>
 
 		<template #comments>
-			<div v-if="!$store.state.user.signedIn" class="alert alert-primary" role="alert" v-html="$t('alert.restriction_comments')"></div>
+			<div v-if="!$store.state.user.signedIn" class="alert alert-primary" role="alert">
+				{{ $t("alert.restriction_comments") }}<router-link :to="'/signin?redirect=' + $route.fullPath" class="alert-link">{{ $t("text.connect") }}</router-link>
+			</div>
 
 			<div class="card-columns">
 				<div class="card text-white bg-primary">
@@ -71,7 +73,7 @@
 							<div class="form-group col-12 col-md-4">
 								<Label for="rating" text="rating" required />
 								<div class="h2 rate text-center d-flex justify-content-center">
-									<StarRating v-model="comment.rating" inactive-color="#EEEEEE" active-color="#FFC107" :border-width="3" border-color="#EEEEEE" active-border-color="#FFB300" :show-rating="false" :star-size="40" rounded-corners></StarRating>
+									<StarRating v-model="comment.rating" inactive-color="#EEEEEE" active-color="#FFC107" :border-width="3" border-color="#EEEEEE" active-border-color="#FFB300" :show-rating="false" :star-size="30" rounded-corners></StarRating>
 								</div>
 							</div>
 							<div class="form-group col-12 col-md-4">
@@ -99,10 +101,50 @@
 			</div>
 		</template>
 
-		<template #map></template>
+		<!-- <template #map></template> -->
 
 		<template #contact>
-			<Bloc></Bloc>
+			<Bloc>
+				<dl class="row">
+					<dt v-if="event.promoter" class="col-sm-4 text-sm-right">{{ $t("label.promoter") }} :</dt>
+					<dd v-if="event.promoter" class="col-sm-8">{{ event.promoter }}</dd>
+
+					<dt class="col-sm-4 text-sm-right">{{ $t("label.website") }} :</dt>
+					<dd class="col-sm-8">
+						<a target="_blank" :href="event.website">{{ event.website }}</a>
+					</dd>
+
+					<dt v-if="event.email" class="col-sm-4 text-sm-right">{{ $t("label.email") }} :</dt>
+					<dd v-if="event.email" class="col-sm-8">{{ event.email }}</dd>
+
+					<dt v-if="event.address" class="col-sm-4 text-sm-right">{{ $t("label.address") }} :</dt>
+					<dd v-if="event.address" class="col-sm-8">{{ event.address }}</dd>
+
+					<dt v-if="event.facebook || event.instagram || event.strava || event.twitter || event.youtube" class="col-sm-4 text-sm-right">{{ $t("label.social_network") }} :</dt>
+					<dd v-if="event.facebook || event.instagram || event.strava || event.twitter || event.youtube" class="col-sm-8">
+						<div v-if="event.facebook">
+							<a :href="event.facebook" role="button" class="my-2 mr-2 btn text-light facebook">{{ $t("text.facebook") }}</a>
+							<br />
+						</div>
+						<div v-if="event.instagram">
+							<a :href="event.instagram" role="button" class="my-2 mr-2 btn text-light instagram">{{ $t("text.instagre") }}</a>
+							<br />
+						</div>
+						<div v-if="event.strava">
+							<a :href="event.strava" role="button" class="my-2 mr-2 btn text-light strava">{{ $t("text.strava") }}</a>
+							<br />
+						</div>
+						<div v-if="event.twitter">
+							<a :href="event.twitter" role="button" class="my-2 mr-2 btn text-light twitter">{{ $t("text.twitter") }}</a>
+							<br />
+						</div>
+						<div v-if="event.youtube">
+							<a :href="event.youtube" role="button" class="my-2 btn text-light youtube">{{ $t("text.youtube") }}</a>
+							<br />
+						</div>
+					</dd>
+				</dl>
+			</Bloc>
 		</template>
 	</ListMenu>
 </template>
