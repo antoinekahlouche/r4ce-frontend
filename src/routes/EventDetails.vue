@@ -92,7 +92,7 @@
 							</div>
 						</div>
 						<br />
-						<div class="text-center">
+						<div class="text-right">
 							<button type="submit" class="btn btn-success" :disabled="loadingSubmit">
 								<Spinner v-if="loadingSubmit" />
 								{{ $t("button.send") }}
