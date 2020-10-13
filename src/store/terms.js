@@ -48,7 +48,7 @@ export default {
 			})
 
 			if (!response.data) return false
-			dispatch("store", response.data)
+			dispatch("store", response.data.terms)
 
 			return true
 		}
