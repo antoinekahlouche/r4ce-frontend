@@ -62,7 +62,7 @@
 import Bloc from "@/components/Bloc"
 import Button from "@/components/Label"
 import Label from "@/components/Label"
-import Global from "@/layouts/Global"
+import Global from "@/components/Layout"
 import eventHelper from "@/helpers/event"
 
 export default {

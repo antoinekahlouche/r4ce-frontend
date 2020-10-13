@@ -11,7 +11,7 @@
 
 <script>
 import Bloc from "@/components/Bloc"
-import Global from "@/layouts/Global"
+import Global from "@/components/Layout"
 
 export default {
 	name: "Error",

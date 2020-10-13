@@ -123,7 +123,7 @@ import avataaars, { toLabel, toIndex } from "@/helpers/avataaars"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import ListMenu from "@/components/ListMenu"
-import Global from "@/layouts/Global"
+import Global from "@/components/Layout"
 import StarRating from "vue-star-rating"
 import Spinner from "@/components/Spinner"
 

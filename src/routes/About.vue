@@ -102,7 +102,7 @@
 import Avataaars from "@/components/Avataaars"
 import Bloc from "@/components/Bloc"
 import ListMenu from "@/components/ListMenu"
-import Global from "@/layouts/Global"
+import Global from "@/components/Layout"
 
 export default {
 	name: "About",

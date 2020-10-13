@@ -27,7 +27,7 @@
 <script>
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
-import Global from "@/layouts/Global"
+import Global from "@/components/Layout"
 
 export default {
 	name: "Password",

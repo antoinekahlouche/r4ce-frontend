@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Fullscreen from "@/layouts/Fullscreen"
+import Fullscreen from "@/components/Fullscreen"
 import mapHelper from "@/helpers/map"
 import mapboxgl from "mapbox-gl"
 import moment from "@/plugins/moment"
