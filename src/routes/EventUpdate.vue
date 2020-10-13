@@ -145,6 +145,7 @@ import mapHelper from "@/helpers/map"
 import eventHelper from "@/helpers/event"
 import axios from "@/plugins/axios"
 import Spinner from "@/components/Spinner"
+import moment from "@/plugins/moment"
 
 export default {
 	name: "EventUpdate",
@@ -181,7 +182,15 @@ export default {
 		if (!this.isAdd) {
 			const response = await axios.get("/event", { params: { permalink: this.$route.params.permalink } })
 			if (!response.data?.event) return this.$router.push("/error?code=404")
-			this.event = response.data.event
+			const event = response.data.event
+			this.initialCenter = { lng: event.coordinates[0], lat: event.coordinates[1] }
+
+			for (const race of event.races) {
+				race.date = moment(race.date).format()
+			}
+
+			this.event = event
+			this.resetCenter()
 		}
 
 		this.loading = false
