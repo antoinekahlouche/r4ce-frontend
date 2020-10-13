@@ -233,7 +233,7 @@ export default {
 				details += "</ul>"
 				this.$store.dispatch("alert/open", { type: "warning", message: "field_error", details, displayPage: this.$route.name })
 			} else {
-				const response = await axios.post(this.isAdd ? "/eventadd" : "/eventedit", {
+				const response = await axios.post("/update", {
 					event: this.event
 				})
 
