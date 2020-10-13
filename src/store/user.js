@@ -81,7 +81,7 @@ export default {
 			)
 		},
 		async getComments({ commit }) {
-			const response = await axios.get("/comments")
+			const response = await axios.get("/commentsuser")
 
 			if (!response.data) return false
 			commit("COMMENTS", response.data.comments)

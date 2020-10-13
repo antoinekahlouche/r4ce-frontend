@@ -1,6 +1,6 @@
 <template>
 	<Global :title="event ? event.name : null" :translateTitle="false" :loading="loading">
-		<ListMenu v-if="event">
+		<ListMenu v-if="event && comments">
 			<template #races>
 				<div class="card-columns">
 					<div class="card" v-for="race in event.races" :key="race._id">
@@ -196,10 +196,12 @@ export default {
 	async mounted() {
 		const permalink = this.$route.params.permalink
 
-		const response = await axios.get("/event", { params: { permalink } })
-		if (!response.data?.event) return this.$router.push("/error?code=404")
-		this.event = response.data.event
-		this.comments = response.data.comments.sort()
+		const responseEvent = await axios.get("/event", { params: { permalink } })
+		if (!responseEvent.data?.event) return this.$router.push("/error?code=404")
+		this.event = responseEvent.data.event
+
+		const responseComments = await axios.get("/commentsevent", { params: { eventId: this.event._id } })
+		this.comments = responseComments.data.comments.sort()
 		this.updateRating()
 
 		document.title = process.env.VUE_APP_PAGE_PREFIX + " - " + this.event.name
