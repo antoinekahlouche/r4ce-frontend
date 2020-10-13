@@ -1,146 +1,150 @@
 <template>
-	<ListMenu :title="isAdd ? 'event_add' : 'event_update'">
-		<template #event>
-			<Bloc>
-				<div class="form-group">
-					<Label text="name" required />
-					<input type="text" class="form-control" v-model="event.name" required @change="updatePermalink()" />
-					<input id="eventPermalinkInput" type="hidden" class="form-control" v-model="event.permalink" required />
-					<small class="form-text text-muted">
-						{{ frontendUrl }}event/detail/<b>{{ event.permalink ? event.permalink : "..." }}</b>
-					</small>
-				</div>
-				<div class="form-group">
-					<Label text="promoter" />
-					<input type="text" class="form-control" v-model="event.promoter" />
-				</div>
-				<div class="form-group">
-					<Label text="website" required />
-					<input type="text" class="form-control" v-model="event.website" required />
-				</div>
-				<div class="form-group">
-					<Label text="email" />
-					<input type="email" class="form-control" v-model="event.email" />
-				</div>
-				<div class="form-group">
-					<Label text="country" required />
-					<select class="form-control" v-model="event.country" required>
-						<option value="FR">{{ $t("country.FR") }}</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<Label text="address" />
-					<input type="text" class="form-control" v-model="event.address" />
-				</div>
-				<div class="form-group">
-					<Label text="facebook" />
-					<input type="text" class="form-control" v-model="event.facebook" />
-				</div>
-				<div class="form-group">
-					<Label text="instagram" />
-					<input type="text" class="form-control" v-model="event.instagram" />
-				</div>
-				<div class="form-group">
-					<Label text="strava" />
-					<input type="text" class="form-control" v-model="event.strava" />
-				</div>
-				<div class="form-group">
-					<Label text="twitter" />
-					<input type="text" class="form-control" v-model="event.twitter" />
-				</div>
-				<div class="form-group">
-					<Label text="youtube" />
-					<input type="text" class="form-control" v-model="event.youtube" />
-				</div>
-			</Bloc>
-		</template>
-		<template #location>
-			<Bloc noPadding>
-				<div id="map" class="rounded-lg" />
-				<div id="pin" class="position-absolute" />
-			</Bloc>
-
-			<div class="text-right">
-				<button type="button" class="btn btn-secondary" @click="resetCenter()">{{ $t("button.reset") }}</button>
-			</div>
-		</template>
-		<template #races>
-			<div>
-				<Bloc v-for="(race, index) in event.races" :key="index">
+	<Global :title="isAdd ? 'event_add' : 'event_update'" :loading="loading">
+		<ListMenu>
+			<template #event>
+				<Bloc>
 					<div class="form-group">
-						<Label text="date" required />
-						<input type="date" class="form-control" v-model="event.races[index].date" required />
+						<Label text="name" required />
+						<input type="text" class="form-control" v-model="event.name" required @change="updatePermalink()" />
+						<input id="eventPermalinkInput" type="hidden" class="form-control" v-model="event.permalink" required />
+						<small class="form-text text-muted">
+							{{ frontendUrl }}event/detail/<b>{{ event.permalink ? event.permalink : "..." }}</b>
+						</small>
 					</div>
 					<div class="form-group">
-						<Label text="time" />
-						<input type="time" class="form-control" v-model="event.races[index].time" />
+						<Label text="promoter" />
+						<input type="text" class="form-control" v-model="event.promoter" />
 					</div>
 					<div class="form-group">
-						<Label text="sport" required />
-						<select name="sport" class="form-control" v-model="event.races[index].sport">
-							<option v-for="sport in eventHelper.sport()" :key="sport" :value="sport">{{ $t("sport." + sport) }}</option>
+						<Label text="website" required />
+						<input type="text" class="form-control" v-model="event.website" required />
+					</div>
+					<div class="form-group">
+						<Label text="email" />
+						<input type="email" class="form-control" v-model="event.email" />
+					</div>
+					<div class="form-group">
+						<Label text="country" required />
+						<select class="form-control" v-model="event.country" required>
+							<option value="FR">{{ $t("country.FR") }}</option>
 						</select>
 					</div>
 					<div class="form-group">
-						<Label text="discipline" required />
-						<select name="discipline" class="form-control" :disabled="!event.races[index].sport" v-model="event.races[index].discipline">
-							<option v-for="discipline in eventHelper.discipline(event.races[index].sport)" :key="discipline" :value="discipline">{{ $t("discipline." + discipline) }}</option>
-						</select>
+						<Label text="address" />
+						<input type="text" class="form-control" v-model="event.address" />
 					</div>
 					<div class="form-group">
-						<Label text="distance" required />
-						<select name="distance" class="form-control" :disabled="!event.races[index].sport" v-model="event.races[index].distance">
-							<option v-for="distance in eventHelper.distance(event.races[index].sport)" :key="distance" :value="distance">{{ $t("distance." + distance) }}</option>
-						</select>
+						<Label text="facebook" />
+						<input type="text" class="form-control" v-model="event.facebook" />
 					</div>
 					<div class="form-group">
-						<Label text="format" required />
-						<select name="format" class="form-control" v-model="event.races[index].format">
-							<option v-for="format in eventHelper.format()" :key="format" :value="format">{{ $t("format." + format) }}</option>
-						</select>
+						<Label text="instagram" />
+						<input type="text" class="form-control" v-model="event.instagram" />
 					</div>
-					<br />
-					<div class="text-right">
-						<button type="button" class="btn btn-danger" @click="deleteRace(index)">{{ $t("button.delete") }}</button>
+					<div class="form-group">
+						<Label text="strava" />
+						<input type="text" class="form-control" v-model="event.strava" />
 					</div>
+					<div class="form-group">
+						<Label text="twitter" />
+						<input type="text" class="form-control" v-model="event.twitter" />
+					</div>
+					<div class="form-group">
+						<Label text="youtube" />
+						<input type="text" class="form-control" v-model="event.youtube" />
+					</div>
+				</Bloc>
+			</template>
+			<template #location>
+				<Bloc noPadding>
+					<div id="map" class="rounded-lg" />
+					<div id="pin" class="position-absolute" />
 				</Bloc>
 
 				<div class="text-right">
-					<button type="button" class="btn btn-success" @click="addRace()">{{ $t("button.add_race") }}</button>
+					<button type="button" class="btn btn-secondary" @click="resetCenter()">{{ $t("button.reset") }}</button>
 				</div>
-			</div>
-		</template>
-		<template #recap>
-			<form @submit="submit">
-				<Bloc>
-					<div class="form-group custom-control custom-checkbox">
-						<input type="checkbox" id="valid_info" class="custom-control-input" required />
-						<Label class="custom-control-label" text="valid_info" for="valid_info" required />
+			</template>
+			<template #races>
+				<div>
+					<Bloc v-for="(race, index) in event.races" :key="index">
+						<div class="form-group">
+							<Label text="date" required />
+							<input type="date" class="form-control" v-model="event.races[index].date" required />
+						</div>
+						<div class="form-group">
+							<Label text="time" />
+							<input type="time" class="form-control" v-model="event.races[index].time" />
+						</div>
+						<div class="form-group">
+							<Label text="sport" required />
+							<select name="sport" class="form-control" v-model="event.races[index].sport">
+								<option v-for="sport in eventHelper.sport()" :key="sport" :value="sport">{{ $t("sport." + sport) }}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<Label text="discipline" required />
+							<select name="discipline" class="form-control" :disabled="!event.races[index].sport" v-model="event.races[index].discipline">
+								<option v-for="discipline in eventHelper.discipline(event.races[index].sport)" :key="discipline" :value="discipline">{{ $t("discipline." + discipline) }}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<Label text="distance" required />
+							<select name="distance" class="form-control" :disabled="!event.races[index].sport" v-model="event.races[index].distance">
+								<option v-for="distance in eventHelper.distance(event.races[index].sport)" :key="distance" :value="distance">{{ $t("distance." + distance) }}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<Label text="format" required />
+							<select name="format" class="form-control" v-model="event.races[index].format">
+								<option v-for="format in eventHelper.format()" :key="format" :value="format">{{ $t("format." + format) }}</option>
+							</select>
+						</div>
+						<br />
+						<div class="text-right">
+							<button type="button" class="btn btn-danger" @click="deleteRace(index)">{{ $t("button.delete") }}</button>
+						</div>
+					</Bloc>
+
+					<div class="text-right">
+						<button type="button" class="btn btn-success" @click="addRace()">{{ $t("button.add_race") }}</button>
 					</div>
-					<div v-if="isAdd" class="form-group custom-control custom-checkbox">
-						<input type="checkbox" id="event_allready_present" class="custom-control-input" required />
-						<Label class="custom-control-label" text="event_allready_present" for="event_allready_present" required />
-					</div>
-				</Bloc>
-				<div class="text-center">
-					<button type="button" class="btn btn-secondary mr-2">{{ $t("button.cancel") }}</button>
-					<button type="submit" class="btn btn-success" :disabled="loading">
-						<span class="spinner-border spinner-border-sm mr-1" role="status" :class="{ 'd-none': !loading }"></span>
-						{{ $t("button." + (isAdd ? "confirm_add" : "confirm_edit")) }}
-					</button>
 				</div>
-			</form>
-		</template>
-	</ListMenu>
+			</template>
+			<template #recap>
+				<form @submit="submit">
+					<Bloc>
+						<div class="form-group custom-control custom-checkbox">
+							<input type="checkbox" id="valid_info" class="custom-control-input" required />
+							<Label class="custom-control-label" text="valid_info" for="valid_info" required />
+						</div>
+						<div v-if="isAdd" class="form-group custom-control custom-checkbox">
+							<input type="checkbox" id="event_allready_present" class="custom-control-input" required />
+							<Label class="custom-control-label" text="event_allready_present" for="event_allready_present" required />
+						</div>
+					</Bloc>
+					<div class="text-center">
+						<button type="button" class="btn btn-secondary mr-2">{{ $t("button.cancel") }}</button>
+						<button type="submit" class="btn btn-success" :disabled="loadingSubmit">
+							<Spinner v-if="loadingSubmit" />
+							{{ $t("button." + (isAdd ? "confirm_add" : "confirm_edit")) }}
+						</button>
+					</div>
+				</form>
+			</template>
+		</ListMenu>
+	</Global>
 </template>
 
 <script>
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
-import ListMenu from "@/layouts/ListMenu"
+import ListMenu from "@/components/ListMenu"
+import Global from "@/layouts/Global"
 import mapHelper from "@/helpers/map"
 import eventHelper from "@/helpers/event"
 import axios from "@/plugins/axios"
+import Spinner from "@/components/Spinner"
 
 export default {
 	name: "EventUpdate",
@@ -149,9 +153,10 @@ export default {
 		path: "event/update/:permalink?",
 		meta: { isSignedIn: true, isVerified: true }
 	},
-	components: { Bloc, Label, ListMenu, Map },
+	components: { Bloc, Label, ListMenu, Map, Global, Spinner },
 	data: () => ({
-		loading: false,
+		loading: true,
+		loadingSubmit: false,
 		event: {},
 		eventHelper,
 		map: null,
@@ -163,7 +168,7 @@ export default {
 		},
 		frontendUrl: () => process.env.VUE_APP_FRONTEND_URL
 	},
-	mounted() {
+	async mounted() {
 		this.map = mapHelper.create("map", this.event.coordinates, this.isAdd ? 5 : 11)
 		const that = this
 		$("#ListMenu_menu_location").on("shown.bs.tab", () => {
@@ -172,11 +177,19 @@ export default {
 		this.map.on("moveend", () => {
 			this.event.coordinates = { lng: this.map.getCenter().lng, lat: this.map.getCenter().lat }
 		})
+
+		if (!this.isAdd) {
+			const response = await axios.get("/event", { params: { permalink: this.$route.params.permalink } })
+			if (!response.data?.event) return this.$router.push("/error?code=404")
+			this.event = response.data.event
+		}
+
+		this.loading = false
 	},
 	methods: {
 		async submit(event) {
 			event.preventDefault()
-			this.loading = true
+			this.loadingSubmit = true
 
 			const invalid = []
 
@@ -227,7 +240,7 @@ export default {
 				}
 			}
 
-			this.loading = false
+			this.loadingSubmit = false
 			return
 		},
 		updatePermalink() {

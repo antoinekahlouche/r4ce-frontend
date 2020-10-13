@@ -1,14 +1,9 @@
 <template>
-	<Fullscreen>
+	<Fullscreen :loading="loadingMap && loadingEvents">
 		<div id="map" class="flex-fill">
 			<router-link id="searchInfo" class="alert alert-primary fade show m-3 position-absolute" role="alert" to="/event/search">
 				<span v-html="$store.getters['map/message']" />
 			</router-link>
-		</div>
-		<div id="spinner" class="position-absolute" :class="{ 'd-none': !mapLoading && !eventsLoading }">
-			<div class="spinner-border" role="status">
-				<span class="sr-only">{{ $t("text.loading") }}...</span>
-			</div>
 		</div>
 	</Fullscreen>
 </template>
@@ -30,8 +25,8 @@ export default {
 	},
 	components: { Fullscreen, PopupMap },
 	data: () => ({
-		mapLoading: true,
-		eventsLoading: true,
+		loadingMap: true,
+		loadingEvents: true,
 		mapHelper,
 		map: null,
 		popup: null
@@ -55,10 +50,10 @@ export default {
 
 		if (JSON.stringify(this.$store.state.map.search) !== JSON.stringify(this.$store.state.search)) {
 			this.$store.dispatch("search/events").then(() => {
-				this.eventsLoading = false
+				this.loadingEvents = false
 			})
 		} else {
-			this.eventsLoading = false
+			this.loadingEvents = false
 		}
 	},
 	methods: {
@@ -66,7 +61,7 @@ export default {
 			this.map = this.mapHelper.create("map", this.$store.getters["map/center"], this.$store.state.map.zoom)
 
 			this.map.on("load", () => {
-				this.mapLoading = false
+				this.loadingMap = false
 
 				this.map.addSource("pin", {
 					type: "geojson",
@@ -238,15 +233,6 @@ export default {
 </script>
 
 <style scoped>
-#spinner {
-	top: 50%;
-	left: 50%;
-	margin-left: -1rem;
-	margin-top: -1rem;
-	width: 2rem;
-	color: var(--main-color);
-}
-
 #searchInfo {
 	z-index: 1;
 	font-size: 1rem !important;

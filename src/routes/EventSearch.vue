@@ -1,5 +1,5 @@
 <template>
-	<Simple title="search">
+	<Global title="search">
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">
@@ -55,14 +55,14 @@
 				<router-link to="/event/update">{{ $t("button.event_add") }}</router-link>
 			</div>
 		</form>
-	</Simple>
+	</Global>
 </template>
 
 <script>
 import Bloc from "@/components/Bloc"
 import Button from "@/components/Label"
 import Label from "@/components/Label"
-import Simple from "@/layouts/Simple"
+import Global from "@/layouts/Global"
 import eventHelper from "@/helpers/event"
 
 export default {
@@ -72,7 +72,7 @@ export default {
 		path: "",
 		alias: "event/search"
 	},
-	components: { Bloc, Button, Label, Simple },
+	components: { Bloc, Button, Label, Global },
 	data: () => ({
 		eventHelper
 	}),

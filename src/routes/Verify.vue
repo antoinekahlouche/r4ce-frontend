@@ -1,14 +1,14 @@
 <template>
-	<Simple title="verify">
+	<Global title="verify">
 		<Bloc class="text-center">
 			<img src="@/assets/undraw_Mail_sent_re_0ofv.svg" />
 		</Bloc>
-	</Simple>
+	</Global>
 </template>
 
 <script>
 import Bloc from "@/components/Bloc"
-import Simple from "@/layouts/Simple"
+import Global from "@/layouts/Global"
 
 export default {
 	name: "Verify",
@@ -16,7 +16,7 @@ export default {
 		name: "verify",
 		path: "verify"
 	},
-	components: { Bloc, Simple },
+	components: { Bloc, Global },
 	async mounted() {
 		const token = this.$route.query.token
 

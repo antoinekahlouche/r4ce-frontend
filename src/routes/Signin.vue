@@ -1,5 +1,5 @@
 <template>
-	<Simple title="signin">
+	<Global title="signin">
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">
@@ -15,7 +15,7 @@
 
 			<div class="text-center">
 				<button type="submit" class="btn btn-primary" :disabled="loading">
-					<span class="spinner-border spinner-border-sm mr-1" role="status" :class="{ 'd-none': !loading }"></span>
+					<Spinner v-if="loading" />
 					{{ $t("button.signin") }}
 				</button>
 			</div>
@@ -26,13 +26,14 @@
 				<router-link :to="to()">{{ $t("button.signup") }}</router-link>
 			</div>
 		</form>
-	</Simple>
+	</Global>
 </template>
 
 <script>
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
-import Simple from "@/layouts/Simple"
+import Global from "@/layouts/Global"
+import Spinner from "@/components/Spinner"
 
 export default {
 	name: "Signin",
@@ -41,7 +42,7 @@ export default {
 		path: "signin",
 		meta: { isSignedIn: false }
 	},
-	components: { Bloc, Label, Simple },
+	components: { Bloc, Label, Global, Spinner },
 	data: () => ({
 		loading: false,
 		email: null,
