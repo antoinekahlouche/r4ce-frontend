@@ -20,11 +20,20 @@ axios.interceptors.response.use(
 				store.dispatch("user/signout")
 				store.dispatch("alert/open", { type: "warning", message: "restriction_authenticated", displayPage: "signin" })
 				router.push("/signin")
-			} else if (response.status === 403) router.push("/error?code=403")
-			else if (response.status === 404) router.push("/error?code=404")
-			else router.push("/error?code=500")
+				return null
+			} else if (response.status === 403) {
+				router.push("/error?code=403")
+				return null
+			} else if (response.status === 404) {
+				router.push("/error?code=404")
+				return null
+			} else {
+				router.push("/error?code=500")
+				return null
+			}
 		} else if (response.data.alert) {
 			store.dispatch("alert/open", response.data.alert)
+			return null
 		}
 
 		return response

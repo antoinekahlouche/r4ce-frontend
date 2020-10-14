@@ -197,14 +197,16 @@ export default {
 		const permalink = this.$route.params.permalink
 
 		const responseEvent = await axios.get("/event", { params: { permalink } })
-		if (!responseEvent.data?.event) return this.$router.push("/error?code=404")
+		if (!responseEvent || !responseEvent.data?.event) return this.$router.push("/error?code=404")
 		this.event = responseEvent.data.event
+		document.title = process.env.VUE_APP_PAGE_PREFIX + " - " + this.event.name
 
 		const responseComments = await axios.get("/commentsevent", { params: { eventId: this.event._id } })
-		this.comments = responseComments.data.comments.sort()
-		this.updateRating()
+		if (responseComments) {
+			this.comments = responseComments.data.comments.sort()
+			this.updateRating()
+		}
 
-		document.title = process.env.VUE_APP_PAGE_PREFIX + " - " + this.event.name
 		this.loading = false
 	},
 	methods: {
@@ -213,7 +215,7 @@ export default {
 			this.loadingSubmit = true
 
 			const response = await axios.post("/comment", { eventId: this.event._id, ...this.comment })
-			if (!response.data?.comment) {
+			if (!response) {
 				this.$store.dispatch("alert/open", { type: "danger", message: "comment_error" })
 				this.loadingSubmit = false
 				return

@@ -181,7 +181,8 @@ export default {
 
 		if (!this.isAdd) {
 			const response = await axios.get("/event", { params: { permalink: this.$route.params.permalink } })
-			if (!response.data?.event) return this.$router.push("/error?code=404")
+			if (!response || !response.data?.event) return this.$router.push("/error?code=404")
+
 			const event = response.data.event
 			this.initialCenter = { lng: event.coordinates[0], lat: event.coordinates[1] }
 
@@ -236,17 +237,17 @@ export default {
 				const response = await axios.post("/update", {
 					event: this.event
 				})
-
-				if (response.data?.alert) {
-					this.$store.dispatch("alert/open", { type: response.data.alert.type, message: response.data.alert.message, displayPage: this.$route.name })
-				} else {
-					this.$store.dispatch("alert/open", {
-						type: "success",
-						message: this.isAdd ? "event_update_add" : "event_update_edit",
-						displayPage: this.isAdd ? "event_search" : "event_details"
-					})
-					this.$router.push(this.isAdd ? "/event/search" : "/event/details/" + this.$route.params.permalink)
+				if (!response) {
+					this.loadingSubmit = false
+					return
 				}
+
+				this.$store.dispatch("alert/open", {
+					type: "success",
+					message: this.isAdd ? "event_update_add" : "event_update_edit",
+					displayPage: this.isAdd ? "event_search" : "event_details"
+				})
+				this.$router.push(this.isAdd ? "/event/search" : "/event/details/" + this.$route.params.permalink)
 			}
 
 			this.loadingSubmit = false
