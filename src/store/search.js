@@ -46,11 +46,10 @@ export default {
 		},
 		async events({ dispatch, state }) {
 			const response = await axios.get("/events", { params: state })
+			if (!response) return false
 
-			if (!response.data) return false
 			dispatch("map/search", { ...state }, { root: true })
 			dispatch("map/events", response.data.events, { root: true })
-
 			return true
 		}
 	}
