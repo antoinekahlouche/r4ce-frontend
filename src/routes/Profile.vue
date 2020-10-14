@@ -1,5 +1,5 @@
 <template>
-	<Global title="profile">
+	<Layout title="profile">
 		<ListMenu withSignout>
 			<template #details>
 				<form @submit="saveUser">
@@ -114,7 +114,7 @@
 				</div>
 			</template>
 		</ListMenu>
-	</Global>
+	</Layout>
 </template>
 
 <script>
@@ -123,7 +123,7 @@ import avataaars, { toLabel, toIndex } from "@/helpers/avataaars"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import ListMenu from "@/components/ListMenu"
-import Global from "@/components/Layout"
+import Layout from "@/components/Layout"
 import StarRating from "vue-star-rating"
 import Spinner from "@/components/Spinner"
 
@@ -134,7 +134,7 @@ export default {
 		path: "profile",
 		meta: { isSignedIn: true }
 	},
-	components: { Avataaars, Bloc, Label, ListMenu, StarRating, Global, Spinner },
+	components: { Avataaars, Bloc, Label, ListMenu, StarRating, Layout, Spinner },
 	data: () => ({
 		avataaars: avataaars,
 		avatar: {

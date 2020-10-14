@@ -1,5 +1,5 @@
 <template>
-	<Global :title="event ? event.name : null" :translateTitle="false" :loading="loading">
+	<Layout :title="event ? event.name : null" :translateTitle="false" :loading="loading">
 		<ListMenu v-if="event && comments">
 			<template #races>
 				<div class="card-columns">
@@ -155,14 +155,14 @@
 				<router-link :to="'/event/update/' + event.permalink">{{ $t("title.event_update") }}</router-link>
 			</div>
 		</div>
-	</Global>
+	</Layout>
 </template>
 
 <script>
 import Avataaars from "@/components/Avataaars"
 import Bloc from "@/components/Bloc"
 import ListMenu from "@/components/ListMenu"
-import Global from "@/components/Layout"
+import Layout from "@/components/Layout"
 import moment from "@/plugins/moment"
 import axios from "@/plugins/axios"
 import Label from "@/components/Label"
@@ -183,7 +183,7 @@ export default {
 		name: "event_details",
 		path: "event/details/:permalink"
 	},
-	components: { Avataaars, Bloc, Label, ListMenu, StarRating, Global, Spinner },
+	components: { Avataaars, Bloc, Label, ListMenu, StarRating, Layout, Spinner },
 	data: () => ({
 		moment,
 		loading: true,

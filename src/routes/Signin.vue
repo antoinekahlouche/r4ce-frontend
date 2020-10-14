@@ -1,5 +1,5 @@
 <template>
-	<Global title="signin">
+	<Layout title="signin">
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">
@@ -26,13 +26,13 @@
 				<router-link :to="to()">{{ $t("button.signup") }}</router-link>
 			</div>
 		</form>
-	</Global>
+	</Layout>
 </template>
 
 <script>
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
-import Global from "@/components/Layout"
+import Layout from "@/components/Layout"
 import Spinner from "@/components/Spinner"
 
 export default {
@@ -42,7 +42,7 @@ export default {
 		path: "signin",
 		meta: { isSignedIn: false }
 	},
-	components: { Bloc, Label, Global, Spinner },
+	components: { Bloc, Label, Layout, Spinner },
 	data: () => ({
 		loading: false,
 		email: null,

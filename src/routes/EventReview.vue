@@ -1,14 +1,14 @@
 <template>
-	<Global title="event_review">
+	<Layout title="event_review">
 		<Bloc>
 			aze
 		</Bloc>
-	</Global>
+	</Layout>
 </template>
 
 <script>
 import Bloc from "@/components/Bloc"
-import Global from "@/components/Layout"
+import Layout from "@/components/Layout"
 
 export default {
 	name: "EventReview",
@@ -17,7 +17,7 @@ export default {
 		path: "event/review/:updateId",
 		meta: { isSignedIn: true, isVerified: true, isAdmin: true }
 	},
-	components: { Bloc, Global, Map },
+	components: { Bloc, Layout, Map },
 	data: () => ({
 		loading: false,
 		event: {},

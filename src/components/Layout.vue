@@ -6,7 +6,7 @@
 
 			<div :class="{ visibility: loading ? 'hidden' : 'visible' }">
 				<Breadcrumb v-if="links" :title="title" :links="links" />
-				<h1 class="mb-3 mb-lg-5">{{ translateTitle ? $t("title." + title) : title }}</h1>
+				<h1 v-if="title" class="mb-3 mb-lg-5">{{ translateTitle ? $t("title." + title) : title }}</h1>
 				<Alert />
 				<slot />
 			</div>
@@ -23,7 +23,7 @@ import Header from "@/components/Header"
 import Spinner from "@/components/Spinner"
 
 export default {
-	name: "Global",
+	name: "Layout",
 	components: { Alert, Breadcrumb, Footer, Header, Spinner },
 	props: {
 		title: String,

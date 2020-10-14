@@ -1,5 +1,5 @@
 <template>
-	<Global title="password">
+	<Layout title="password">
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">
@@ -21,13 +21,13 @@
 				<router-link to="/signin">{{ $t("button.signin") }}</router-link>
 			</div>
 		</form>
-	</Global>
+	</Layout>
 </template>
 
 <script>
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
-import Global from "@/components/Layout"
+import Layout from "@/components/Layout"
 
 export default {
 	name: "Password",
@@ -35,7 +35,7 @@ export default {
 		name: "password",
 		path: "password"
 	},
-	components: { Bloc, Label, Global },
+	components: { Bloc, Label, Layout },
 	data: () => ({
 		loading: false,
 		email: null,

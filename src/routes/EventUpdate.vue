@@ -1,5 +1,5 @@
 <template>
-	<Global :title="isAdd ? 'event_add' : 'event_update'" :loading="loading">
+	<Layout :title="isAdd ? 'event_add' : 'event_update'" :loading="loading">
 		<ListMenu>
 			<template #event>
 				<Bloc>
@@ -133,14 +133,14 @@
 				</form>
 			</template>
 		</ListMenu>
-	</Global>
+	</Layout>
 </template>
 
 <script>
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import ListMenu from "@/components/ListMenu"
-import Global from "@/components/Layout"
+import Layout from "@/components/Layout"
 import mapHelper from "@/helpers/map"
 import eventHelper from "@/helpers/event"
 import axios from "@/plugins/axios"
@@ -154,7 +154,7 @@ export default {
 		path: "event/update/:permalink?",
 		meta: { isSignedIn: true, isVerified: true }
 	},
-	components: { Bloc, Label, ListMenu, Map, Global, Spinner },
+	components: { Bloc, Label, ListMenu, Map, Layout, Spinner },
 	data: () => ({
 		loading: true,
 		loadingSubmit: false,

@@ -1,5 +1,5 @@
 <template>
-	<Global title="about">
+	<Layout title="about">
 		<ListMenu>
 			<template #legal>
 				<Bloc>
@@ -95,14 +95,14 @@
 				</div>
 			</template>
 		</ListMenu>
-	</Global>
+	</Layout>
 </template>
 
 <script>
 import Avataaars from "@/components/Avataaars"
 import Bloc from "@/components/Bloc"
 import ListMenu from "@/components/ListMenu"
-import Global from "@/components/Layout"
+import Layout from "@/components/Layout"
 
 export default {
 	name: "About",
@@ -110,7 +110,7 @@ export default {
 		name: "about",
 		path: "about"
 	},
-	components: { Avataaars, Bloc, ListMenu, Global },
+	components: { Avataaars, Bloc, ListMenu, Layout },
 	data: () => ({
 		credits: [
 			{
