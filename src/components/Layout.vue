@@ -4,7 +4,7 @@
 		<div class="p-3 p-lg-5 flex-grow-1">
 			<Spinner v-if="loading" fullscreen />
 
-			<div :class="{ visibility: loading ? 'hidden' : 'visible' }">
+			<div :class="{ invisible: loading }">
 				<Breadcrumb v-if="links" :title="title" :links="links" />
 				<h1 v-if="title" class="mb-3 mb-lg-5">{{ translateTitle ? $t("title." + title) : title }}</h1>
 				<Alert />
