@@ -15,44 +15,13 @@
 			</div>
 		</Bloc>
 
-		<Bloc noPadding style="background:#212121;">
+		<Bloc noPadding class="bg-dark">
 			<div class="m-auto" style="max-width:800px;">
 				<div class="embed-responsive embed-responsive-16by9">
 					<iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/5yx6BWlEVcY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				</div>
 			</div>
 		</Bloc>
-
-		<div class="card-deck">
-			<div class="card bg-light">
-				<div class="card-body">
-					<h5 class="card-title">
-						<b>Etape 1</b><br />
-						Rechercher votre évènement
-					</h5>
-					<p class="card-text"></p>
-				</div>
-			</div>
-			<div class="card bg-light">
-				<div class="card-body">
-					<h5 class="card-title">
-						<b>Etape 2</b><br />
-						Revendiquer votre évènement
-					</h5>
-					<p class="card-text">Des informations vous serront demander pour éviter toute fraude.</p>
-				</div>
-			</div>
-			<div class="card bg-light">
-				<div class="card-body">
-					<h5 class="card-title">
-						<b>Etape 3</b><br />
-						Personnaliser l'inscription
-					</h5>
-					<p class="card-text">Indiquer les informations nécessaire à l'inscription de chaqune de vos course.</p>
-				</div>
-			</div>
-		</div>
-		<br />
 
 		<Bloc>
 			<div class="container-fluid">
@@ -138,6 +107,37 @@
 				</div>
 			</div>
 		</Bloc>
+
+		<div class="card-deck">
+			<div class="card bg-light">
+				<div class="card-body">
+					<h5 class="card-title">
+						<b>Etape 1</b><br />
+						Rechercher votre évènement
+					</h5>
+					<p class="card-text"></p>
+				</div>
+			</div>
+			<div class="card bg-light">
+				<div class="card-body">
+					<h5 class="card-title">
+						<b>Etape 2</b><br />
+						Revendiquer votre évènement
+					</h5>
+					<p class="card-text">Des informations vous serront demander pour éviter toute fraude.</p>
+				</div>
+			</div>
+			<div class="card bg-light">
+				<div class="card-body">
+					<h5 class="card-title">
+						<b>Etape 3</b><br />
+						Personnaliser l'inscription
+					</h5>
+					<p class="card-text">Indiquer les informations nécessaire à l'inscription de chaqune de vos course.</p>
+				</div>
+			</div>
+		</div>
+		<br />
 
 		<div class="text-center">
 			<router-link class="btn btn-primary btn-lg my-5" to="/event/search">Rechercher mon évènement</router-link>
