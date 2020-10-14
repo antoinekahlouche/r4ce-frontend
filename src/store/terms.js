@@ -1,55 +1,37 @@
 import axios from "@/plugins/axios"
 
-const initialState = {
-	GDPR: null,
-	USAGE: null
-}
-
-const versions = {
-	GDPR: 1,
-	USAGE: 1
-}
-
 export default {
 	namespaced: true,
-	state: { ...initialState },
+	state: {
+		accepted: []
+	},
 	getters: {
 		showGDPRToast: state => {
-			if (!state.GDPR) return true
-			else return state.GDPR.version !== versions.GDPR
-		},
-		versions: () => versions
+			if (state.accepted.includes("GDPR")) return false
+			return true
+		}
 	},
 	mutations: {
-		TERMS(state, value) {
-			for (const key in initialState) {
-				state[key] = value[key]
-			}
+		SET(state, value) {
+			state.accepted = value
+		},
+		PUSH(state, value) {
+			state.accepted.push(value)
 		}
 	},
 	actions: {
-		store({ commit }, terms) {
-			if (terms) {
-				commit("TERMS", terms)
-			}
-		},
-		async get({ dispatch }) {
+		async get({ commit }) {
 			const response = await axios.get("/terms")
+			if (!response) return false
 
-			if (!response.data) return false
-			dispatch("store", response.data.terms)
-
+			commit("SET", response.data.terms)
 			return true
 		},
-		async set({ dispatch }, type) {
-			const response = await axios.post("/terms", {
-				type,
-				version: versions[type]
-			})
+		async set({ commit }, type) {
+			const response = await axios.post("/terms", { type })
+			if (!response) return false
 
-			if (!response.data) return false
-			dispatch("store", response.data.terms)
-
+			commit("PUSH", type)
 			return true
 		}
 	}
