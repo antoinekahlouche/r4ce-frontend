@@ -1,6 +1,6 @@
 <template>
 	<Layout title="error">
-		<div class="alert alert-danger" role="alert">{{ $t("alert." + code) }}</div>
+		<div class="alert alert-danger" role="alert">{{ $t("error." + code) }}</div>
 		<Bloc class="text-center">
 			<img v-if="code === 403" src="@/assets/undraw_authentication_fsn5.svg" />
 			<img v-else-if="code === 404" src="@/assets/undraw_page_not_found_su7k.svg" />
@@ -23,6 +23,19 @@ export default {
 	components: { Bloc, Layout },
 	props: {
 		code: { type: Number, required: true }
+	},
+	i18n: {
+		messages: {
+			fr: {
+				error: {
+					"401": "Une authentification est nécessaire pour accéder à la ressource",
+					"403": "Vos droits d'accès ne permettent pas d'accéder à la ressource",
+					"404": "Ressource non trouvée",
+					"500": "Erreur interne du serveur",
+					"503": "Service temporairement indisponible ou en maintenance"
+				}
+			}
+		}
 	}
 }
 </script>

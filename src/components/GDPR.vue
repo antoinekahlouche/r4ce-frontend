@@ -1,6 +1,6 @@
 <template>
-	<form @submit="submit">
-		<div class="toast position-fixed m-4" :class="{ show: show }" role="alert" data-animation="false" data-autohide="false">
+	<form v-if="show" @submit="submit">
+		<div class="toast position-fixed m-4" role="alert" data-animation="false" data-autohide="false">
 			<div class="toast-header">
 				<strong class="my-2">{{ $t("title.gdpr") }}</strong>
 			</div>
@@ -8,7 +8,7 @@
 				<p>{{ $t("text.gdpr") }}</p>
 				<div class="clearfix">
 					<div class="float-right">
-						<router-link to="/about?active=gdpr" class="mr-2">{{ $t("button.more_info") }}</router-link>
+						<router-link to="/gdpr" class="mr-2">{{ $t("button.more_info") }}</router-link>
 						<button type="submit" class="btn btn-primary ml-2" :disabled="loading">
 							<Spinner v-if="loading" />
 							{{ $t("button.accept") }}

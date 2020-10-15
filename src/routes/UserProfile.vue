@@ -4,7 +4,7 @@
 			<template #details>
 				<form @submit="saveUser">
 					<div v-if="!$store.state.user.verified && !verifyLinkSend" class="alert alert-warning" role="alert">
-						{{ $t("alert.user_unverified") }} <a href="#" @click="sendVerifyLink()">{{ $t("text.resend_verify") }}</a>
+						{{ $t("text.user_unverified") }} <a href="#" @click="sendVerifyLink()">{{ $t("text.resend_verify") }}</a>
 					</div>
 					<Bloc container="sm">
 						<div class="form-group">
@@ -42,14 +42,9 @@
 				<form @submit="saveAvatar">
 					<Bloc container="sm">
 						<div class="text-center">
-							<Avataaars class="m-auto avatar pb-3" :id="avataaarId" />
+							<Avataaars class="m-auto avatar pb-3" :id="avatar" />
 						</div>
-						<div v-for="key in avataaars.order.display" :key="key" class="form-group">
-							<Label :for="key" :text="key" required />
-							<select :id="key" class="form-control" required v-model="avatar[key]">
-								<option v-for="option in avataaars.options[key]" :key="option" :value="option">{{ $t("avatar." + key + "." + option) }}</option>
-							</select>
-						</div>
+						<AvataaarsOptions v-model="avatar" />
 					</Bloc>
 					<div class="text-center">
 						<button type="submit" class="btn btn-success" :disabled="loading">
@@ -87,7 +82,7 @@
 						</li>
 					</ul>
 					<div v-else class="alert alert-primary" role="alert">
-						{{ $t("alert.comment_list_empty") }}
+						{{ $t("text.comment_list_empty") }}
 					</div>
 				</div>
 			</template>
@@ -119,7 +114,7 @@
 
 <script>
 import Avataaars from "@/components/Avataaars"
-import avataaars, { toLabel, toIndex } from "@/helpers/avataaars"
+import AvataaarsOptions from "@/components/AvataaarsOptions"
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import ListMenu from "@/components/ListMenu"
@@ -134,28 +129,14 @@ export default {
 		path: "profile",
 		meta: { isSignedIn: true }
 	},
-	components: { Avataaars, Bloc, Label, ListMenu, StarRating, Layout, Spinner },
+	components: { Avataaars, Bloc, Label, ListMenu, StarRating, Layout, Spinner, AvataaarsOptions },
 	data: () => ({
-		avataaars: avataaars,
-		avatar: {
-			accessories_type: "",
-			clothe_type: "",
-			clothe_color: "",
-			eyebrow_type: "",
-			eye_type: "",
-			facial_hair_color: "",
-			facial_hair_type: "",
-			graphic_type: "",
-			hair_color: "",
-			mouth_type: "",
-			skin_color: "",
-			top_type: ""
-		},
 		loading: false,
 		firstName: null,
 		lastName: null,
 		locale: null,
 		email: null,
+		avatar: null,
 		verifyLinkSend: false,
 		loadingDeleteIndexes: []
 	}),
@@ -164,18 +145,9 @@ export default {
 		this.lastName = this.$store.state.user.lastName
 		this.locale = this.$store.state.user.locale
 		this.email = this.$store.state.user.email
-
-		const splittedAvataaarId = this.$store.state.user.avatar.split("-")
-		avataaars.order.id.forEach((name, index) => {
-			this.avatar[name] = toLabel(name, splittedAvataaarId[index])
-		})
+		this.avatar = this.$store.state.user.avatar
 
 		this.$store.dispatch("user/getComments")
-	},
-	computed: {
-		avataaarId() {
-			return avataaars.order.id.map((name, index) => toIndex(name, this.avatar[name])).join("-")
-		}
 	},
 	methods: {
 		async saveUser(event) {
@@ -197,7 +169,7 @@ export default {
 			this.loading = true
 
 			await this.$store.dispatch("user/updateAvatar", {
-				avatar: this.avataaarId
+				avatar: this.avatar
 			})
 
 			this.loading = false

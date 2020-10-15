@@ -13,13 +13,11 @@ const options = {
 	hair_color: ["Auburn", "Black", "Blonde", "BlondeGolden", "Brown", "BrownDark", "PastelPink", "Platinum", "Red", "SilverGray"]
 }
 
-const order = {
-	id: ["accessories_type", "clothe_type", "clothe_color", "eyebrow_type", "eye_type", "facial_hair_color", "facial_hair_type", "graphic_type", "hair_color", "mouth_type", "skin_color", "top_type"],
-	display: ["clothe_type", "clothe_color", "graphic_type", "skin_color", "eyebrow_type", "eye_type", "accessories_type", "mouth_type", "facial_hair_type", "facial_hair_color", "top_type", "hair_color"]
-}
+const idOrder = ["accessories_type", "clothe_type", "clothe_color", "eyebrow_type", "eye_type", "facial_hair_color", "facial_hair_type", "graphic_type", "hair_color", "mouth_type", "skin_color", "top_type"]
+
 
 export function random() {
-	return Object.values(order.id)
+	return Object.values(idOrder)
 		.map(value => Math.floor(Math.random() * options[value].length))
 		.join("-")
 }
@@ -32,4 +30,8 @@ export function toIndex(option, label) {
 	return options[option].indexOf(label)
 }
 
-export default { options, order }
+export function orderIndex( option) {
+	return idOrder.indexOf(option)
+}
+
+export default { options, idOrder }

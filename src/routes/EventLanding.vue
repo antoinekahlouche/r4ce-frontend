@@ -1,12 +1,13 @@
 <template>
 	<Layout>
-		<Bloc>
+		<Bloc style="padding: 100px 0 !important;">
 			<div class="container-fluid">
 				<div class="row no-gutters align-items-center">
 					<div class="col-12 col-lg-6 text-center">
-						<div class="brand mt-5">R4CE</div>
-						<div class="h2 my-5">Organiser votre évènement sportif facilement</div>
-						<router-link class="btn btn-primary btn-lg mb-5" to="/event/search">Rechercher mon évènement</router-link>
+						<div class="brand my-5">R4CE</div>
+						<VueTyper class="h2" text="Organiser votre évènement sportif facilement !" :pre-erase-delay="5000" :erase-delay="1000" caret-animation="smooth" />
+						<br />
+						<router-link class="btn btn-primary btn-lg my-5" to="/event/search">Je suis intéressé</router-link>
 					</div>
 					<div class="col-12 col-lg-6 p-3 text-center">
 						<img class="img-fluid" src="@/assets/undraw_finish_line_katerina_limpitsouni_xy20.svg" />
@@ -23,7 +24,7 @@
 			</div>
 		</Bloc>
 
-		<Bloc>
+		<Bloc style="padding: 100px 0 !important;">
 			<div class="container-fluid">
 				<div class="row no-gutters align-items-center">
 					<div class="col-12 col-lg-6 p-3 text-center">
@@ -52,7 +53,7 @@
 			</div>
 		</Bloc>
 
-		<Bloc>
+		<Bloc style="padding: 100px 0 !important;">
 			<div class="container-fluid">
 				<div class="row no-gutters align-items-center">
 					<div class="col-12 col-lg-6 p-3 text-center">
@@ -108,40 +109,45 @@
 			</div>
 		</Bloc>
 
-		<div class="card-deck">
-			<div class="card bg-light">
-				<div class="card-body">
-					<h5 class="card-title">
-						<b>Etape 1</b><br />
-						Rechercher votre évènement
-					</h5>
-					<p class="card-text"></p>
+		<Bloc style="padding: 100px 0 !important;">
+			<div class="container-fluid">
+				<div class="row no-gutters align-items-center">
+					<div class="col-12 col-lg-6 p-3 text-center">
+						<img class="img-fluid" style="width:70%;" src="@/assets/undraw_Mail_sent_re_0ofv.svg" />
+					</div>
+					<div class="col-12 col-lg-6">
+						<h2 class="text-center">Contact</h2>
+						<br />
+						<p>
+							Me tenir informé lors de l'ouverture du service.
+						</p>
+						<br />
+						<form @submit="submit">
+							<div class="form-group">
+								<Label for="name" text="name" required />
+								<input id="name" type="text" class="form-control" v-model="name" required />
+							</div>
+							<div class="form-group">
+								<Label for="email" text="email" required />
+								<input id="email" type="email" class="form-control" v-model="email" required />
+							</div>
+							<div class="form-group">
+								<Label for="comment" text="comment" />
+								<textarea id="comment" rows="5" class="form-control" v-model="comment" />
+							</div>
+							<br />
+							<br />
+							<div class="text-center">
+								<button type="submit" class="btn btn-lg btn-primary" :disabled="loading">
+									<Spinner v-if="loading" />
+									{{ $t("button.send") }}
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
-			<div class="card bg-light">
-				<div class="card-body">
-					<h5 class="card-title">
-						<b>Etape 2</b><br />
-						Revendiquer votre évènement
-					</h5>
-					<p class="card-text">Des informations vous serront demander pour éviter toute fraude.</p>
-				</div>
-			</div>
-			<div class="card bg-light">
-				<div class="card-body">
-					<h5 class="card-title">
-						<b>Etape 3</b><br />
-						Personnaliser l'inscription
-					</h5>
-					<p class="card-text">Indiquer les informations nécessaire à l'inscription de chaqune de vos course.</p>
-				</div>
-			</div>
-		</div>
-		<br />
-
-		<div class="text-center">
-			<router-link class="btn btn-primary btn-lg my-5" to="/event/search">Rechercher mon évènement</router-link>
-		</div>
+		</Bloc>
 	</Layout>
 </template>
 
@@ -150,6 +156,7 @@ import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import Button from "@/components/Label"
 import Layout from "@/components/Layout"
+import { VueTyper } from "vue-typer"
 
 export default {
 	name: "EventLanding",
@@ -157,9 +164,13 @@ export default {
 		name: "event_landing",
 		path: "event"
 	},
-	components: { Bloc, Button, Layout, Label },
+	components: { Bloc, Button, Layout, Label, VueTyper },
 	data: () => ({
-		price: 25
+		loading: false,
+		price: 25,
+		name: null,
+		email: null,
+		comment: null
 	}),
 	computed: {
 		stripeFee() {
@@ -175,7 +186,8 @@ export default {
 	methods: {
 		round(value) {
 			return Math.round(value * 100) / 100
-		}
+		},
+		submit() {}
 	}
 }
 </script>

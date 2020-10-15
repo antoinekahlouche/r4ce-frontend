@@ -26,7 +26,7 @@
 
 			<template #comments>
 				<div v-if="!$store.state.user.signedIn" class="alert alert-primary" role="alert">
-					{{ $t("alert.restriction_comments") }}<router-link :to="'/signin?redirect=' + $route.fullPath" class="alert-link">{{ $t("text.connect") }}</router-link>
+					{{ $t("text.restriction_comments") }}<router-link :to="'/signin?redirect=' + $route.fullPath" class="alert-link">{{ $t("text.connect") }}</router-link>
 				</div>
 
 				<div class="card-columns">
