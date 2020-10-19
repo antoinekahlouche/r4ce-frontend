@@ -10,7 +10,7 @@
 						<a href="#contact" class="btn btn-primary btn-lg my-5">Je suis intéressé</a>
 					</div>
 					<div class="col-12 col-lg-6 p-3 text-center">
-						<img class="img-fluid" src="@/assets/undraw_finish_line_katerina_limpitsouni_xy20.svg" />
+						<img class="img-fluid" src="@/assets/finish_line.svg" />
 					</div>
 				</div>
 			</div>
@@ -28,7 +28,7 @@
 			<div class="container-fluid">
 				<div class="row no-gutters align-items-center">
 					<div class="col-12 col-lg-6 p-3 text-center">
-						<img class="img-fluid" style="width:70%;" src="@/assets/undraw_To_do_list_re_9nt7.svg" />
+						<img class="img-fluid" style="width:70%;" src="@/assets/to_do_list.svg" />
 					</div>
 					<div class="col-12 col-lg-6">
 						<h2 class="text-center">Services</h2>
@@ -57,7 +57,7 @@
 			<div class="container-fluid">
 				<div class="row no-gutters align-items-center">
 					<div class="col-12 col-lg-6 p-3 text-center">
-						<img class="img-fluid" style="width:70%;" src="@/assets/undraw_Calculator_0evy.svg" />
+						<img class="img-fluid" style="width:70%;" src="@/assets/calculator.svg" />
 					</div>
 					<div class="col-12 col-lg-6">
 						<h2 class="text-center">Tarif</h2>
@@ -113,7 +113,7 @@
 			<div class="container-fluid">
 				<div class="row no-gutters align-items-center">
 					<div class="col-12 col-lg-6 p-3 text-center">
-						<img class="img-fluid" style="width:70%;" src="@/assets/undraw_Mail_sent_re_0ofv.svg" />
+						<img class="img-fluid" style="width:70%;" src="@/assets/mail_sent.svg" />
 					</div>
 					<div class="col-12 col-lg-6">
 						<h2 class="text-center">Contact</h2>

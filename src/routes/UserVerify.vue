@@ -1,7 +1,7 @@
 <template>
 	<Layout title="verify">
 		<Bloc class="text-center">
-			<img src="@/assets/undraw_Mail_sent_re_0ofv.svg" />
+			<img src="@/assets/mail_sent.svg" />
 		</Bloc>
 	</Layout>
 </template>

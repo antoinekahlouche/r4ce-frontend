@@ -2,9 +2,9 @@
 	<Layout title="error">
 		<div class="alert alert-danger" role="alert">{{ $t("error." + code) }}</div>
 		<Bloc class="text-center">
-			<img v-if="code === 403" src="@/assets/undraw_authentication_fsn5.svg" />
-			<img v-else-if="code === 404" src="@/assets/undraw_page_not_found_su7k.svg" />
-			<img v-else src="@/assets/undraw_warning_cyit.svg" />
+			<img v-if="code === 403" src="@/assets/authentication.svg" />
+			<img v-else-if="code === 404" src="@/assets/page_not_found.svg" />
+			<img v-else src="@/assets/warning.svg" />
 		</Bloc>
 	</Layout>
 </template>

@@ -24,7 +24,7 @@
 
 			<div class="mb-5">
 				<h2>{{ $t("text.host") }}</h2>
-				<img class="img-fluid m-4" style="width:100px;" src="@/assets/Amazon_Web_Services_Logo.svg" /> <br />
+				<img class="img-fluid m-4" style="width:100px;" src="@/assets/aws.svg" /> <br />
 				Amazon Web Services LLC <br />
 				P.O. Box 81226 <br />
 				Seattle, WA 98108-1226 <br />
@@ -35,7 +35,7 @@
 
 			<div>
 				<h2>{{ $t("text.payement") }}</h2>
-				<img class="img-fluid m-4" style="width:150px;" src="@/assets/Stripe_Logo.svg" /> <br />
+				<img class="img-fluid m-4" style="width:150px;" src="@/assets/stripe.svg" /> <br />
 				<br />
 				<a href="https://stripe.com/fr" target="_blank">stripe.com</a>
 			</div>
