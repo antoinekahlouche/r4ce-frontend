@@ -1,13 +1,13 @@
 <template>
 	<Layout>
-		<Bloc style="padding: 100px 0 !important;">
+		<Bloc class="bloc">
 			<div class="container-fluid">
 				<div class="row no-gutters align-items-center">
 					<div class="col-12 col-lg-6 text-center">
 						<div class="brand my-5">R4CE</div>
 						<VueTyper class="h2" text="Organiser votre évènement sportif facilement !" :pre-erase-delay="5000" :erase-delay="1000" caret-animation="smooth" />
 						<br />
-						<router-link class="btn btn-primary btn-lg my-5" to="/event/search">Je suis intéressé</router-link>
+						<a href="#contact" class="btn btn-primary btn-lg my-5">Je suis intéressé</a>
 					</div>
 					<div class="col-12 col-lg-6 p-3 text-center">
 						<img class="img-fluid" src="@/assets/undraw_finish_line_katerina_limpitsouni_xy20.svg" />
@@ -16,15 +16,15 @@
 			</div>
 		</Bloc>
 
-		<Bloc noPadding class="bg-dark">
+		<!-- <Bloc class="bg-dark bloc">
 			<div class="m-auto" style="max-width:800px;">
 				<div class="embed-responsive embed-responsive-16by9">
 					<iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/5yx6BWlEVcY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				</div>
 			</div>
-		</Bloc>
+		</Bloc> -->
 
-		<Bloc style="padding: 100px 0 !important;">
+		<Bloc class="bloc">
 			<div class="container-fluid">
 				<div class="row no-gutters align-items-center">
 					<div class="col-12 col-lg-6 p-3 text-center">
@@ -53,7 +53,7 @@
 			</div>
 		</Bloc>
 
-		<Bloc style="padding: 100px 0 !important;">
+		<Bloc class="bloc">
 			<div class="container-fluid">
 				<div class="row no-gutters align-items-center">
 					<div class="col-12 col-lg-6 p-3 text-center">
@@ -109,7 +109,7 @@
 			</div>
 		</Bloc>
 
-		<Bloc style="padding: 100px 0 !important;">
+		<Bloc id="contact" class="bloc">
 			<div class="container-fluid">
 				<div class="row no-gutters align-items-center">
 					<div class="col-12 col-lg-6 p-3 text-center">
@@ -122,7 +122,7 @@
 							Me tenir informé lors de l'ouverture du service.
 						</p>
 						<br />
-						<form @submit="submit">
+						<form @submit="contact">
 							<div class="form-group">
 								<Label for="name" text="name" required />
 								<input id="name" type="text" class="form-control" v-model="name" required />
@@ -132,13 +132,13 @@
 								<input id="email" type="email" class="form-control" v-model="email" required />
 							</div>
 							<div class="form-group">
-								<Label for="comment" text="comment" />
-								<textarea id="comment" rows="5" class="form-control" v-model="comment" />
+								<Label for="comment" text="comment" required />
+								<textarea id="comment" rows="5" class="form-control" v-model="comment" required />
 							</div>
 							<br />
 							<br />
 							<div class="text-center">
-								<button type="submit" class="btn btn-lg btn-primary" :disabled="loading">
+								<button type="submit" class="btn btn-primary" :disabled="loading">
 									<Spinner v-if="loading" />
 									{{ $t("button.send") }}
 								</button>
@@ -156,7 +156,9 @@ import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import Button from "@/components/Label"
 import Layout from "@/components/Layout"
+import axios from "@/plugins/axios"
 import { VueTyper } from "vue-typer"
+import Spinner from "@/components/Spinner"
 
 export default {
 	name: "EventLanding",
@@ -164,7 +166,7 @@ export default {
 		name: "event_landing",
 		path: "event"
 	},
-	components: { Bloc, Button, Layout, Label, VueTyper },
+	components: { Bloc, Button, Layout, Label, VueTyper, Spinner },
 	data: () => ({
 		loading: false,
 		price: 25,
@@ -187,7 +189,28 @@ export default {
 		round(value) {
 			return Math.round(value * 100) / 100
 		},
-		submit() {}
+		async contact(event) {
+			event.preventDefault()
+			this.loading = true
+
+			const response = await axios.post("/contact", {
+				name: this.name,
+				email: this.email,
+				locale: this.$i18n.locale.toUpperCase(),
+				comment: this.comment
+			})
+
+			if (!response) {
+				this.$store.dispatch("alert/open", { type: "error", message: "email_contact_error", details: process.env.VUE_APP_EMAIL_CONTACT })
+				return
+			}
+
+			this.$store.dispatch("alert/open", { type: "success", message: "email_contact_sent" })
+			this.name = null
+			this.email = null
+			this.comment = null
+			this.loading = false
+		}
 	}
 }
 </script>
@@ -198,5 +221,9 @@ export default {
 	letter-spacing: 0.2rem;
 	font-size: 6rem;
 	font-family: "Lilita One";
+}
+
+.bloc {
+	padding: 100px 0 !important;
 }
 </style>

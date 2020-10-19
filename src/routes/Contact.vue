@@ -30,6 +30,7 @@ import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import Layout from "@/components/Layout"
 import Spinner from "@/components/Spinner"
+import axios from "@/plugins/axios"
 
 export default {
 	name: "Contact",
@@ -40,7 +41,6 @@ export default {
 	components: { Bloc, Label, Layout, Spinner },
 	data: () => ({
 		loading: false,
-		price: 25,
 		name: null,
 		email: null,
 		comment: null
@@ -50,18 +50,22 @@ export default {
 			event.preventDefault()
 			this.loading = true
 
-			// const success = await this.$store.dispatch("user/signin", {
-			// 	email: this.email,
-			// 	password: this.password
-			// })
+			const response = await axios.post("/contact", {
+				name: this.name,
+				email: this.email,
+				locale: this.$i18n.locale.toUpperCase(),
+				comment: this.comment
+			})
 
-			// if (success) {
-			// 	if (this.$route.query && this.$route.query.redirect) {
-			// 		this.$router.push(this.$route.query.redirect)
-			// 	} else {
-			// 		this.$router.push("/profile")
-			// 	}
-			// }
+			if (!response) {
+				this.$store.dispatch("alert/open", { type: "error", message: "email_contact_error", details: process.env.VUE_APP_EMAIL_CONTACT })
+				return
+			}
+
+			this.$store.dispatch("alert/open", { type: "success", message: "email_contact_sent" })
+			this.name = null
+			this.email = null
+			this.comment = null
 
 			this.loading = false
 			return
