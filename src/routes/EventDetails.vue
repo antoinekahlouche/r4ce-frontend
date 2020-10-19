@@ -6,11 +6,18 @@
 					<div class="card" v-for="race in event.races" :key="race._id">
 						<div class="card-body">
 							<div>
-								<span class="font-weight-bold">{{ $t("label.sport") }} : </span>{{ $t("sport." + race.sport) }}<br />
-								<span class="font-weight-bold">{{ $t("label.discipline") }} : </span>{{ $t("discipline." + race.discipline) }}<br />
-								<span class="font-weight-bold">{{ $t("label.distance") }} : </span>{{ $t("distance." + race.distance) }}<br />
-								<span class="font-weight-bold">{{ $t("label.format") }} : </span>{{ $t("format." + race.format) }}<br />
-								<span class="font-weight-bold">{{ $t("label.date") }} : </span>{{ moment.display(race.date) }}<br />
+								<dl class="row m-0">
+									<dt class="col-sm-4 text-sm-right"><Label text="sport" /> :</dt>
+									<dd class="col-sm-8">{{ $t("sport." + race.sport) }}</dd>
+									<dt class="col-sm-4 text-sm-right"><Label text="discipline" /> :</dt>
+									<dd class="col-sm-8">{{ $t("discipline." + race.discipline) }}</dd>
+									<dt class="col-sm-4 text-sm-right"><Label text="distance" /> :</dt>
+									<dd class="col-sm-8">{{ $t("distance." + race.distance) }}</dd>
+									<dt class="col-sm-4 text-sm-right"><Label text="format" /> :</dt>
+									<dd class="col-sm-8">{{ $t("format." + race.format) }}</dd>
+									<dt class="col-sm-4 text-sm-right"><Label text="date" /> :</dt>
+									<dd class="col-sm-8">{{ moment.display(race.date) }}</dd>
+								</dl>
 
 								<div v-if="race.time">
 									<span class="font-weight-bold">{{ $t("text.time") }} : </span>{{ race.time }}<br />
@@ -107,21 +114,21 @@
 			<template #contact>
 				<Bloc>
 					<dl class="row">
-						<dt v-if="event.promoter" class="col-sm-4 text-sm-right">{{ $t("label.promoter") }} :</dt>
+						<dt v-if="event.promoter" class="col-sm-4 text-sm-right"><Label text="promoter" /> :</dt>
 						<dd v-if="event.promoter" class="col-sm-8">{{ event.promoter }}</dd>
 
-						<dt class="col-sm-4 text-sm-right">{{ $t("label.website") }} :</dt>
+						<dt class="col-sm-4 text-sm-right"><Label text="website" /> :</dt>
 						<dd class="col-sm-8">
 							<a target="_blank" :href="event.website">{{ event.website }}</a>
 						</dd>
 
-						<dt v-if="event.email" class="col-sm-4 text-sm-right">{{ $t("label.email") }} :</dt>
+						<dt v-if="event.email" class="col-sm-4 text-sm-right"><Label text="email" /> :</dt>
 						<dd v-if="event.email" class="col-sm-8">{{ event.email }}</dd>
 
-						<dt v-if="event.address" class="col-sm-4 text-sm-right">{{ $t("label.address") }} :</dt>
+						<dt v-if="event.address" class="col-sm-4 text-sm-right"><Label text="address" /> :</dt>
 						<dd v-if="event.address" class="col-sm-8">{{ event.address }}</dd>
 
-						<dt v-if="event.facebook || event.instagram || event.strava || event.twitter || event.youtube" class="col-sm-4 text-sm-right">{{ $t("label.social_network") }} :</dt>
+						<dt v-if="event.facebook || event.instagram || event.strava || event.twitter || event.youtube" class="col-sm-4 text-sm-right"><Label text="social_network" /> :</dt>
 						<dd v-if="event.facebook || event.instagram || event.strava || event.twitter || event.youtube" class="col-sm-8">
 							<div v-if="event.facebook">
 								<a :href="event.facebook" role="button" class="my-2 mr-2 btn text-light facebook">{{ $t("text.facebook") }}</a>
