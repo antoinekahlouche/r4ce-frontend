@@ -72,6 +72,7 @@ export default {
 					review_handled: "La mise à jour à été traité",
 					search_max: "La recherche à retourné plus de 500 résultats, veuillez affiner vos critères de recherches",
 					social_network_inexisten: "Aucun lien social pour le moment",
+					unsubscribe_success:"Votre addresse email ne recevra plus d'email non désirés.",
 					user_connected: "Connecté",
 					user_created: "Utilisateur créer, un e-mail vous a été envoyé pour le vérifier",
 					user_inexistent: "L'utilisateur n'existe pas"
