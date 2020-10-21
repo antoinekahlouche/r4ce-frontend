@@ -1,9 +1,10 @@
 {
+	"name": "R4CE",
 	"short_name": "R4CE",
 	"lang": "fr",
 	"start_url": "https://r4ce.co",
-	"background_color": "#c62828",
-	"theme_color": "#c62828",
+	"background_color": "#C62828",
+	"theme_color": "#C62828",
 	"dir": "ltr",
 	"display": "standalone",
 	"orientation": "portrait",
