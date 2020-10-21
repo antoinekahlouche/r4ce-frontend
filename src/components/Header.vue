@@ -1,7 +1,7 @@
 <template>
 	<header>
 		<nav class="navbar navbar-expand-md navbar-dark px-3 px-lg-5">
-			<router-link to="/event/search" class="mr-3">
+			<router-link to="/event/search" class="mx-auto navbar-header">
 				<div class="navbar-brand my-1 align-middle m-0">R4CE</div>
 			</router-link>
 
@@ -57,6 +57,12 @@ export default {
 <style scoped>
 .navbar {
 	background-color: var(--main-color);
+}
+
+@media (max-width: 767px) {
+	.navbar-header {
+		padding-left: 57px;
+	}
 }
 
 .navbar-brand {
