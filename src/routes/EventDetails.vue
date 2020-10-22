@@ -5,27 +5,13 @@
 				<div class="card-columns">
 					<div class="card" v-for="race in event.races" :key="race._id">
 						<div class="card-body">
-							<div>
-								<dl class="row m-0">
-									<dt class="col-sm-4 text-sm-right"><Label text="sport" condensed /> :</dt>
-									<dd class="col-sm-8 m-0">{{ $t("sport." + race.sport) }}</dd>
-									<dt class="col-sm-4 text-sm-right"><Label text="discipline" condensed /> :</dt>
-									<dd class="col-sm-8 m-0">{{ $t("discipline." + race.discipline) }}</dd>
-									<dt class="col-sm-4 text-sm-right"><Label text="distance" condensed /> :</dt>
-									<dd class="col-sm-8 m-0">{{ $t("distance." + race.distance) }}</dd>
-									<dt class="col-sm-4 text-sm-right"><Label text="format" condensed /> :</dt>
-									<dd class="col-sm-8 m-0">{{ $t("format." + race.format) }}</dd>
-									<dt class="col-sm-4 text-sm-right"><Label text="date" condensed /> :</dt>
-									<dd class="col-sm-8 m-0">{{ moment.display(race.date) }}</dd>
-								</dl>
-
-								<div v-if="race.time">
-									<span class="font-weight-bold">{{ $t("text.time") }} : </span>{{ race.time }}<br />
-								</div>
-								<div v-if="race.price">
-									<span class="font-weight-bold">{{ $t("text.price") }} : </span>{{ race.price }}<br />
-								</div>
-							</div>
+							<Label text="sport" condensed /> : {{ $t("sport." + race.sport) }}<br />
+							<Label text="discipline" condensed /> : {{ $t("discipline." + race.discipline) }}<br />
+							<Label text="distance" condensed /> : {{ $t("distance." + race.distance) }}<br />
+							<Label text="format" condensed /> : {{ $t("format." + race.format) }}<br />
+							<Label text="date" condensed /> : {{ moment.display(race.date) }}
+							<span v-if="race.time"><br /><Label text="time" condensed /> : {{ race.time }}</span>
+							<span v-if="race.price"><br /><Label text="price" condensed /> : {{ race.price }}</span>
 						</div>
 					</div>
 				</div>
@@ -113,45 +99,34 @@
 
 			<template #contact>
 				<Bloc>
-					<dl class="row">
-						<dt v-if="event.promoter" class="col-sm-4 text-sm-right"><Label text="promoter" /> :</dt>
-						<dd v-if="event.promoter" class="col-sm-8">{{ event.promoter }}</dd>
+					<span v-if="event.promoter"><Label text="promoter" /> : {{ event.promoter }}</span>
+					<Label text="website" /> : <a target="_blank" :href="event.website">{{ event.website }}</a>
+					<span v-if="event.email"><Label text="email" /> : {{ event.email }}</span>
+					<span v-if="event.address"><Label text="address" /> : {{ event.address }}</span>
 
-						<dt class="col-sm-4 text-sm-right"><Label text="website" /> :</dt>
-						<dd class="col-sm-8">
-							<a target="_blank" :href="event.website">{{ event.website }}</a>
-						</dd>
-
-						<dt v-if="event.email" class="col-sm-4 text-sm-right"><Label text="email" /> :</dt>
-						<dd v-if="event.email" class="col-sm-8">{{ event.email }}</dd>
-
-						<dt v-if="event.address" class="col-sm-4 text-sm-right"><Label text="address" /> :</dt>
-						<dd v-if="event.address" class="col-sm-8">{{ event.address }}</dd>
-
-						<dt v-if="event.facebook || event.instagram || event.strava || event.twitter || event.youtube" class="col-sm-4 text-sm-right"><Label text="social_network" /> :</dt>
-						<dd v-if="event.facebook || event.instagram || event.strava || event.twitter || event.youtube" class="col-sm-8">
-							<div v-if="event.facebook">
-								<a :href="event.facebook" role="button" class="my-2 mr-2 btn text-light facebook">{{ $t("text.facebook") }}</a>
-								<br />
-							</div>
-							<div v-if="event.instagram">
-								<a :href="event.instagram" role="button" class="my-2 mr-2 btn text-light instagram">{{ $t("text.instagre") }}</a>
-								<br />
-							</div>
-							<div v-if="event.strava">
-								<a :href="event.strava" role="button" class="my-2 mr-2 btn text-light strava">{{ $t("text.strava") }}</a>
-								<br />
-							</div>
-							<div v-if="event.twitter">
-								<a :href="event.twitter" role="button" class="my-2 mr-2 btn text-light twitter">{{ $t("text.twitter") }}</a>
-								<br />
-							</div>
-							<div v-if="event.youtube">
-								<a :href="event.youtube" role="button" class="my-2 btn text-light youtube">{{ $t("text.youtube") }}</a>
-								<br />
-							</div>
-						</dd>
-					</dl>
+					<span v-if="event.facebook || event.instagram || event.strava || event.twitter || event.youtube">
+						<Label text="social_network" /> :
+						<div v-if="event.facebook">
+							<a :href="event.facebook" role="button" class="my-2 mr-2 btn text-light facebook">{{ $t("text.facebook") }}</a>
+							<br />
+						</div>
+						<div v-if="event.instagram">
+							<a :href="event.instagram" role="button" class="my-2 mr-2 btn text-light instagram">{{ $t("text.instagre") }}</a>
+							<br />
+						</div>
+						<div v-if="event.strava">
+							<a :href="event.strava" role="button" class="my-2 mr-2 btn text-light strava">{{ $t("text.strava") }}</a>
+							<br />
+						</div>
+						<div v-if="event.twitter">
+							<a :href="event.twitter" role="button" class="my-2 mr-2 btn text-light twitter">{{ $t("text.twitter") }}</a>
+							<br />
+						</div>
+						<div v-if="event.youtube">
+							<a :href="event.youtube" role="button" class="my-2 btn text-light youtube">{{ $t("text.youtube") }}</a>
+							<br />
+						</div>
+					</span>
 				</Bloc>
 			</template>
 		</ListMenu>
