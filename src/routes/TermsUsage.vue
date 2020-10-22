@@ -2,11 +2,11 @@
 	<Layout icon="file-alt" title="terms_usage">
 		<Bloc>
 			<div v-for="(value, key) in $t('usage')" :key="key">
-				<div v-if="key.endsWith('title')" class="mb-5">
+				<div v-if="key.endsWith('title')" class="mb-3 mb-lg-5">
 					<h2 v-if="key.split('_').length === 2">{{ key.split("_")[0] }} {{ value }}</h2>
 					<h3 v-if="key.split('_').length === 3">{{ key.split("_")[0] }}.{{ key.split("_")[1] }} {{ value }}</h3>
 				</div>
-				<div v-else-if="key.endsWith('content')" class="mb-5" v-html="value"></div>
+				<div v-else-if="key.endsWith('content')" class="mb-3 mb-lg-5" v-html="value"></div>
 			</div>
 		</Bloc>
 	</Layout>

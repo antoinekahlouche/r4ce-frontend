@@ -7,7 +7,7 @@
 			<div :class="{ invisible: loading }">
 				<Breadcrumb v-if="links" :title="title" :links="links" />
 				<h1 v-if="title" class="mb-3 mb-lg-5">
-					<Icon v-if="icon" class="mr-4" :icon="icon" />
+					<Icon v-if="icon" class="mr-1 mr-lg-3" :icon="icon" />
 					{{ translateTitle ? $t("title." + title) : title }}
 				</h1>
 				<Alert />
