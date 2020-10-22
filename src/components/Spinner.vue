@@ -1,20 +1,14 @@
 <template>
-	<div v-if="fullscreen" class="position-absolute fullscreen">
+	<div class="position-absolute fullscreen">
 		<div class="spinner-border" role="status">
 			<span class="sr-only">{{ $t("text.loading") }}...</span>
 		</div>
 	</div>
-	<span v-else class="spinner-border spinner-border-sm mr-1" role="status">
-		<span class="sr-only">{{ $t("text.loading") }}...</span>
-	</span>
 </template>
 
 <script>
 export default {
-	name: "Spinner",
-	props: {
-		fullscreen: { type: Boolean, default: false }
-	}
+	name: "Spinner"
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-	<Layout title="legal">
+	<Layout icon="info" title="legal">
 		<Bloc>
 			<div class="mb-5">
 				<h2>{{ $t("text.editor") }}</h2>

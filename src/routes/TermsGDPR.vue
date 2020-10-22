@@ -1,5 +1,5 @@
 <template>
-	<Layout title="terms_gdpr">
+	<Layout icon="file-alt" title="terms_gdpr">
 		<Bloc>
 			<div v-for="(value, key) in $t('gdpr')" :key="key">
 				<div v-if="key.endsWith('title')" class="mb-5">

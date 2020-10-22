@@ -1,5 +1,5 @@
 <template>
-	<Layout title="team">
+	<Layout icon="users" title="team">
 		<Bloc class="text-center">
 			<Avataaars class="m-auto avatar pb-3" />
 			<h2>Antoine Kahlouche</h2>

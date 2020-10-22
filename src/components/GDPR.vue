@@ -10,7 +10,7 @@
 					<div class="float-right">
 						<router-link to="/gdpr" class="mr-2">{{ $t("button.more_info") }}</router-link>
 						<button type="submit" class="btn btn-primary ml-2" :disabled="loading">
-							<Spinner v-if="loading" />
+							<Icon v-if="loading" class="mr-2" icon="spinner" pulse />
 							{{ $t("button.accept") }}
 						</button>
 					</div>
@@ -21,11 +21,8 @@
 </template>
 
 <script>
-import Spinner from "@/components/Spinner"
-
 export default {
 	name: "GDPR",
-	components: { Spinner },
 	data: () => ({
 		loading: false
 	}),

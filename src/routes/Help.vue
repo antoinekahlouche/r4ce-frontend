@@ -1,5 +1,5 @@
 <template>
-	<Layout title="help">
+	<Layout icon="question" title="help">
 		<div class="alert alert-primary" role="alert">{{ $t("text.empty_section") }}</div>
 	</Layout>
 </template>

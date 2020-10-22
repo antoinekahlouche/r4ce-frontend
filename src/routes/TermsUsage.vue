@@ -1,5 +1,5 @@
 <template>
-	<Layout title="terms_usage">
+	<Layout icon="file-alt" title="terms_usage">
 		<Bloc>
 			<div v-for="(value, key) in $t('usage')" :key="key">
 				<div v-if="key.endsWith('title')" class="mb-5">

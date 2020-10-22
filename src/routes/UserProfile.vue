@@ -1,5 +1,5 @@
 <template>
-	<Layout title="profile">
+	<Layout icon="user" title="profile">
 		<ListMenu withSignout>
 			<template #details>
 				<form @submit="saveUser">
@@ -31,7 +31,7 @@
 					</Bloc>
 					<div class="text-center">
 						<button type="submit" class="btn btn-success" :disabled="loading">
-							<Spinner v-if="loading" />
+							<Icon v-if="loading" class="mr-2" icon="spinner" pulse />
 							{{ $t("button.save") }}
 						</button>
 					</div>
@@ -48,7 +48,7 @@
 					</Bloc>
 					<div class="text-center">
 						<button type="submit" class="btn btn-success" :disabled="loading">
-							<span class="spinner-border spinner-border-sm mr-1" role="status" :class="{ 'd-none': !loading }"></span>
+							<Icon v-if="loading" class="mr-2" icon="spinner" pulse />
 							{{ $t("button.save") }}
 						</button>
 					</div>
@@ -76,8 +76,10 @@
 							<p>{{ comment.message }}</p>
 
 							<span class="float-right">
-								<span class="spinner-border spinner-border-sm mr-1 text-primary" role="status" :class="{ 'd-none': !loadingDeleteIndexes.includes(i) }"></span>
-								<a href="#" @click="deleteComment(comment._id, i)" :style="{ display: loadingDeleteIndexes.includes(i) ? 'none' : 'block' }">{{ $t("button.delete") }}</a>
+								<a href="#" @click="deleteComment(comment._id, i)" :style="{ display: loadingDeleteIndexes.includes(i) ? 'none' : 'block' }">
+									<Icon v-if="loadingDeleteIndexes.includes(i)" class="mr-2" icon="spinner" pulse />
+									{{ $t("button.delete") }}
+								</a>
 							</span>
 						</li>
 					</ul>
@@ -120,7 +122,6 @@ import Label from "@/components/Label"
 import ListMenu from "@/components/ListMenu"
 import Layout from "@/components/Layout"
 import StarRating from "vue-star-rating"
-import Spinner from "@/components/Spinner"
 
 export default {
 	name: "Profile",
@@ -129,7 +130,7 @@ export default {
 		path: "profile",
 		meta: { isSignedIn: true }
 	},
-	components: { Avataaars, Bloc, Label, ListMenu, StarRating, Layout, Spinner, AvataaarsOptions },
+	components: { Avataaars, Bloc, Label, ListMenu, StarRating, Layout, AvataaarsOptions },
 	data: () => ({
 		loading: false,
 		firstName: null,

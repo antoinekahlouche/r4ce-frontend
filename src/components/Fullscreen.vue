@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Header />
-		<Spinner v-if="loading" fullscreen />
+		<Spinner v-if="loading" />
 		<slot :class="{ visibility: loading ? 'hidden' : 'visible' }" />
 		<Footer />
 	</div>

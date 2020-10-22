@@ -2,11 +2,14 @@
 	<div>
 		<Header />
 		<div class="p-3 p-lg-5 flex-grow-1">
-			<Spinner v-if="loading" fullscreen />
+			<Spinner v-if="loading" />
 
 			<div :class="{ invisible: loading }">
 				<Breadcrumb v-if="links" :title="title" :links="links" />
-				<h1 v-if="title" class="mb-3 mb-lg-5">{{ translateTitle ? $t("title." + title) : title }}</h1>
+				<h1 v-if="title" class="mb-3 mb-lg-5">
+					<Icon v-if="icon" class="mr-4" :icon="icon" />
+					{{ translateTitle ? $t("title." + title) : title }}
+				</h1>
 				<Alert />
 				<slot />
 			</div>
@@ -26,6 +29,7 @@ export default {
 	name: "Layout",
 	components: { Alert, Breadcrumb, Footer, Header, Spinner },
 	props: {
+		icon: String,
 		title: String,
 		links: Object,
 		translateTitle: { type: Boolean, default: true },

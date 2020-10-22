@@ -1,5 +1,5 @@
 <template>
-	<Layout :title="event ? event.name : null" :translateTitle="false" :loading="loading">
+	<Layout icon="calendar-day" :title="event ? event.name : null" :translateTitle="false" :loading="loading">
 		<ListMenu v-if="event && comments">
 			<template #races>
 				<div class="card-columns">
@@ -7,16 +7,16 @@
 						<div class="card-body">
 							<div>
 								<dl class="row m-0">
-									<dt class="col-sm-4 text-sm-right"><Label text="sport" /> :</dt>
-									<dd class="col-sm-8">{{ $t("sport." + race.sport) }}</dd>
-									<dt class="col-sm-4 text-sm-right"><Label text="discipline" /> :</dt>
-									<dd class="col-sm-8">{{ $t("discipline." + race.discipline) }}</dd>
-									<dt class="col-sm-4 text-sm-right"><Label text="distance" /> :</dt>
-									<dd class="col-sm-8">{{ $t("distance." + race.distance) }}</dd>
-									<dt class="col-sm-4 text-sm-right"><Label text="format" /> :</dt>
-									<dd class="col-sm-8">{{ $t("format." + race.format) }}</dd>
-									<dt class="col-sm-4 text-sm-right"><Label text="date" /> :</dt>
-									<dd class="col-sm-8">{{ moment.display(race.date) }}</dd>
+									<dt class="col-sm-4 text-sm-right"><Label text="sport" condensed /> :</dt>
+									<dd class="col-sm-8 m-0">{{ $t("sport." + race.sport) }}</dd>
+									<dt class="col-sm-4 text-sm-right"><Label text="discipline" condensed /> :</dt>
+									<dd class="col-sm-8 m-0">{{ $t("discipline." + race.discipline) }}</dd>
+									<dt class="col-sm-4 text-sm-right"><Label text="distance" condensed /> :</dt>
+									<dd class="col-sm-8 m-0">{{ $t("distance." + race.distance) }}</dd>
+									<dt class="col-sm-4 text-sm-right"><Label text="format" condensed /> :</dt>
+									<dd class="col-sm-8 m-0">{{ $t("format." + race.format) }}</dd>
+									<dt class="col-sm-4 text-sm-right"><Label text="date" condensed /> :</dt>
+									<dd class="col-sm-8 m-0">{{ moment.display(race.date) }}</dd>
 								</dl>
 
 								<div v-if="race.time">
@@ -101,7 +101,7 @@
 						<br />
 						<div class="text-right">
 							<button type="submit" class="btn btn-success" :disabled="loadingSubmit">
-								<Spinner v-if="loadingSubmit" />
+								<Icon v-if="loadingSubmit" class="mr-2" icon="spinner" pulse />
 								{{ $t("button.send") }}
 							</button>
 						</div>
@@ -174,7 +174,6 @@ import moment from "@/plugins/moment"
 import axios from "@/plugins/axios"
 import Label from "@/components/Label"
 import StarRating from "vue-star-rating"
-import Spinner from "@/components/Spinner"
 
 const initialComment = {
 	race: null,
@@ -190,7 +189,7 @@ export default {
 		name: "event_details",
 		path: "event/details/:permalink"
 	},
-	components: { Avataaars, Bloc, Label, ListMenu, StarRating, Layout, Spinner },
+	components: { Avataaars, Bloc, Label, ListMenu, StarRating, Layout },
 	data: () => ({
 		moment,
 		loading: true,

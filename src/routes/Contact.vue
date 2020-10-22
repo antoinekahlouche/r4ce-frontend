@@ -1,5 +1,5 @@
 <template>
-	<Layout title="contact">
+	<Layout icon="envelope" title="contact">
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">
@@ -17,7 +17,7 @@
 			</Bloc>
 			<div class="text-center">
 				<button type="submit" class="btn btn-primary" :disabled="loading">
-					<Spinner v-if="loading" />
+					<Icon v-if="loading" class="mr-2" icon="spinner" pulse />
 					{{ $t("button.send") }}
 				</button>
 			</div>
@@ -29,7 +29,6 @@
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import Layout from "@/components/Layout"
-import Spinner from "@/components/Spinner"
 import axios from "@/plugins/axios"
 
 export default {
@@ -38,7 +37,7 @@ export default {
 		name: "contact",
 		path: "contact"
 	},
-	components: { Bloc, Label, Layout, Spinner },
+	components: { Bloc, Label, Layout },
 	data: () => ({
 		loading: false,
 		name: null,

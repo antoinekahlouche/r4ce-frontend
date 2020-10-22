@@ -1,5 +1,5 @@
 <template>
-	<Layout title="signup">
+	<Layout icon="sign-in-alt" title="signup">
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-row">
@@ -37,7 +37,7 @@
 
 			<div class="text-center">
 				<button type="submit" class="btn btn-primary" :disabled="loading">
-					<Spinner v-if="loading" />
+					<Icon v-if="loading" class="mr-2" icon="spinner" pulse />
 					{{ $t("button.signup") }}
 				</button>
 			</div>
@@ -53,7 +53,6 @@
 import Bloc from "@/components/Bloc"
 import Label from "@/components/Label"
 import Layout from "@/components/Layout"
-import Spinner from "@/components/Spinner"
 
 export default {
 	name: "Signup",
@@ -62,7 +61,7 @@ export default {
 		path: "signup",
 		meta: { isSignedIn: false }
 	},
-	components: { Bloc, Label, Layout, Spinner },
+	components: { Bloc, Label, Layout },
 	data: () => ({
 		loading: false,
 		firstName: null,

@@ -1,5 +1,5 @@
 <template>
-	<Layout title="search">
+	<Layout icon="search" title="search">
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">

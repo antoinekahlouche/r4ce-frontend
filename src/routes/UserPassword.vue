@@ -1,5 +1,5 @@
 <template>
-	<Layout title="password">
+	<Layout icon="key" title="password">
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">

@@ -1,5 +1,5 @@
 <template>
-	<Layout title="claim">
+	<Layout icon="hands-helping" title="claim">
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">

@@ -12,11 +12,17 @@
 			<div class="collapse navbar-collapse" id="Navbar_links">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item" :class="{ active: eventActif }">
-						<router-link to="/event/search" class="nav-link">{{ $t("title.events") }}</router-link>
+						<router-link to="/event/search" class="nav-link">
+							<Icon class="mr-2" icon="calendar-day" size="lg" />
+							{{ $t("title.events") }}
+						</router-link>
 					</li>
 
 					<li class="nav-item" :class="{ active: profileActif }">
-						<router-link to="/profile" class="nav-link">{{ $t("title.profile") }}</router-link>
+						<router-link to="/profile" class="nav-link">
+							<Icon class="mr-2" icon="user" size="lg" />
+							{{ $t("title.profile") }}
+						</router-link>
 					</li>
 				</ul>
 			</div>

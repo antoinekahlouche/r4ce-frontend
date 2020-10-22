@@ -1,5 +1,5 @@
 <template>
-	<Layout title="verify">
+	<Layout icon="user-check" title="verify">
 		<Bloc class="text-center">
 			<img src="@/assets/mail_sent.svg" />
 		</Bloc>

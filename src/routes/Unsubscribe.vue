@@ -1,5 +1,5 @@
 <template>
-	<Layout title="unsubscribe">
+	<Layout icon="envelope" title="unsubscribe">
 		<Bloc class="text-center">
 			<img src="@/assets/mail_stop.svg" />
 		</Bloc>

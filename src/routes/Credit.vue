@@ -1,5 +1,5 @@
 <template>
-	<Layout title="credit">
+	<Layout icon="hands-helping" title="credit">
 		<div class="row">
 			<div v-for="(value, key) in credits" :key="key" class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
 				<div class="card h-100">
@@ -90,7 +90,7 @@ export default {
 				sourceLink: "https://fontawesome.com",
 				license: "specific",
 				licenseLink: "https://fontawesome.com/license",
-				update: true
+				update: false
 			}
 		]
 	})

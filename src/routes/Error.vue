@@ -1,5 +1,5 @@
 <template>
-	<Layout title="error">
+	<Layout icon="exclamation-triangle" title="error">
 		<div class="alert alert-danger" role="alert">{{ $t("error." + code) }}</div>
 		<Bloc class="text-center">
 			<img v-if="code === 403" src="@/assets/authentication.svg" />

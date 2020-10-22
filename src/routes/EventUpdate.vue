@@ -1,5 +1,5 @@
 <template>
-	<Layout :title="isAdd ? 'event_add' : 'event_update'" :loading="loading">
+	<Layout icon="edit" :title="isAdd ? 'event_add' : 'event_update'" :loading="loading">
 		<ListMenu>
 			<template #event>
 				<Bloc>
@@ -126,7 +126,7 @@
 					<div class="text-center">
 						<button type="button" class="btn btn-secondary mr-2">{{ $t("button.cancel") }}</button>
 						<button type="submit" class="btn btn-success" :disabled="loadingSubmit">
-							<Spinner v-if="loadingSubmit" />
+							<Icon v-if="loadingSubmit" class="mr-2" icon="spinner" pulse />
 							{{ $t("button." + (isAdd ? "confirm_add" : "confirm_edit")) }}
 						</button>
 					</div>
@@ -144,7 +144,6 @@ import Layout from "@/components/Layout"
 import mapHelper from "@/helpers/map"
 import eventHelper from "@/helpers/event"
 import axios from "@/plugins/axios"
-import Spinner from "@/components/Spinner"
 import moment from "@/plugins/moment"
 
 export default {
@@ -154,7 +153,7 @@ export default {
 		path: "event/update/:permalink?",
 		meta: { isSignedIn: true, isVerified: true }
 	},
-	components: { Bloc, Label, ListMenu, Map, Layout, Spinner },
+	components: { Bloc, Label, ListMenu, Map, Layout },
 	data: () => ({
 		loading: true,
 		loadingSubmit: false,

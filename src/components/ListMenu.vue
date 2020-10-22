@@ -2,13 +2,15 @@
 	<div class="row">
 		<div class="col-12 col-lg-3 mb-3">
 			<div class="list-group active-param" role="tablist">
-				<div v-for="(value, key) in $slots" :key="key" :id="'ListMenu_menu_' + key" class="list-group-item list-group-item-action pointer" data-toggle="list" :href="'#ListMenu_content_' + key" @click="changeMenu(key)">{{ $t("title." + key) }}</div>
+				<div v-for="(value, key) in $slots" :key="key" :id="'ListMenu_menu_' + key" class="list-group-item list-group-item-action pointer" data-toggle="list" :href="'#ListMenu_content_' + key" @click="changeMenu(key)">
+					{{ $t("title." + key) }}
+				</div>
 			</div>
 
 			<div v-if="withSignout" class="list-group">
 				<br />
 				<button id="signoutMenuButton" type="button" class="btn btn-danger text-left" :disabled="loading" @click="signout">
-					<Spinner v-if="loading" />
+					<Icon v-if="loading" class="mr-2" icon="spinner" pulse />
 					{{ $t("button.signout") }}
 				</button>
 			</div>
@@ -29,11 +31,10 @@ import Alert from "@/components/Alert"
 import Breadcrumb from "@/components/Breadcrumb"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
-import Spinner from "@/components/Spinner"
 
 export default {
 	name: "ListMenu",
-	components: { Alert, Breadcrumb, Footer, Header,Spinner },
+	components: { Alert, Breadcrumb, Footer, Header },
 	props: {
 		withSignout: { type: Boolean, default: false }
 	},

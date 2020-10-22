@@ -1,5 +1,5 @@
 <template>
-	<Layout title="event_review">
+	<Layout icon="check" title="event_review">
 		<Bloc>
 			aze
 		</Bloc>

@@ -19,10 +19,37 @@
 		<!-- <Bloc class="bg-dark bloc">
 			<div class="m-auto" style="max-width:800px;">
 				<div class="embed-responsive embed-responsive-16by9">
-					<iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/5yx6BWlEVcY" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					<iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/..." allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 				</div>
 			</div>
 		</Bloc> -->
+
+		<Bloc class="bloc bg-light">
+			<div class="container-fluid">
+				<div class="row no-gutters align-items-center">
+					<div class="col-12 col-lg-6 mx-auto">
+						<h2 class="text-center">R4CE : Qu'es ce que c'est ?</h2>
+						<br />
+						<p>Le but de R4CE est de faciliter et améliorer l'<b>accès aux évènements sportifs amateurs</b>.</p>
+						<p>
+							R4CE est avant tout un moteur de recherche d'évènements sportifs amateurs.
+							<br />
+							Pour cela R4CE répertorie et met en avant ces évènements.
+						</p>
+						<p>
+							R4CE met en place des services à destination des organisateur de ces évènements (Cf. bloc suivant).
+							<br />
+							...
+						</p>
+						<p>
+							Le projet est en constante évolution et vous pouvez nous faire part de vos idées / requettes / etc ... via le formulaire de
+							<a href="#contact">contact</a>.
+						</p>
+						<br />
+					</div>
+				</div>
+			</div>
+		</Bloc>
 
 		<Bloc class="bloc">
 			<div class="container-fluid">
@@ -45,7 +72,7 @@
 
 						<h4>Visibilité de l'évènement</h4>
 						<ul>
-							<li>Accéder Gérer vos informations sur le moteur de recherche R4ce</li>
+							<li>Accéder Gérer vos informations sur le moteur de recherche R4CE</li>
 							<li>Statistiques de fréquentation de l'épreuve</li>
 						</ul>
 					</div>
@@ -63,9 +90,9 @@
 						<h2 class="text-center">Tarif</h2>
 						<br />
 						<p>
-							Tarification <span class="text-uppercase font-weight-bold">unique</span> est <span class="text-uppercase font-weight-bold">claire</span>. <br />L'inscription est gratuite, R4ce se rémunère en prélevant une commission sur les inscriptions.
+							Tarification <span class="text-uppercase font-weight-bold">unique</span> est <span class="text-uppercase font-weight-bold">claire</span>. <br />L'inscription est gratuite, R4CE se rémunère en prélevant une commission sur les inscriptions.
 							<!-- <small class="form-text text-muted">Les frais bancaires sont fixés par <a href="https://stripe.com/fr/pricing" target="_blank">Stripe</a> : 1,4% + 0,25€</small>
-							<small class="form-text text-muted">La commission R4ce : 5%</small> -->
+							<small class="form-text text-muted">La commission R4CE : 5%</small> -->
 						</p>
 						<br />
 						<div class="form-group row">
@@ -118,9 +145,6 @@
 					<div class="col-12 col-lg-6">
 						<h2 class="text-center">Contact</h2>
 						<br />
-						<p>
-							Me tenir informé lors de l'ouverture du service.
-						</p>
 						<br />
 						<form @submit="contact">
 							<div class="form-group">
@@ -139,7 +163,7 @@
 							<br />
 							<div class="text-center">
 								<button type="submit" class="btn btn-primary" :disabled="loading">
-									<Spinner v-if="loading" />
+									<Icon v-if="loading" class="mr-2" icon="spinner" pulse />
 									{{ $t("button.send") }}
 								</button>
 							</div>
@@ -158,7 +182,6 @@ import Button from "@/components/Label"
 import Layout from "@/components/Layout"
 import axios from "@/plugins/axios"
 import { VueTyper } from "vue-typer"
-import Spinner from "@/components/Spinner"
 
 export default {
 	name: "EventLanding",
@@ -166,13 +189,13 @@ export default {
 		name: "event_landing",
 		path: "event"
 	},
-	components: { Bloc, Button, Layout, Label, VueTyper, Spinner },
+	components: { Bloc, Button, Layout, Label, VueTyper },
 	data: () => ({
 		loading: false,
 		price: 25,
 		name: null,
 		email: null,
-		comment: null
+		comment: "Tennez-moi informé de l'ouverture du service."
 	}),
 	computed: {
 		stripeFee() {
@@ -183,6 +206,12 @@ export default {
 		},
 		total() {
 			return this.round(this.price - this.stripeFee - this.r4ceFee)
+		}
+	},
+	mounted() {
+		if (this.$store.state.user.signedIn) {
+			this.name = this.$store.state.user.firstName + " " + this.$store.state.user.lastName
+			this.email = this.$store.state.user.email
 		}
 	},
 	methods: {
@@ -224,6 +253,7 @@ export default {
 }
 
 .bloc {
-	padding: 100px 0 !important;
+	padding-top: 100px !important;
+	padding-bottom: 100px !important;
 }
 </style>
