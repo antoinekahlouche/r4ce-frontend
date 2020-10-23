@@ -8,6 +8,7 @@ const initialState = {
 
 	comments: [],
 
+	_id: null,
 	avatar: null,
 	email: null,
 	firstName: null,

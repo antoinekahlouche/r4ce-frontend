@@ -1,5 +1,14 @@
 <template>
-	<Layout icon="calendar-day" :title="event ? event.name : null" :translateTitle="false" :loading="loading">
+	<Layout
+		icon="calendar-day"
+		:title="event ? event.name : ''"
+		:translateTitle="false"
+		:loading="loading"
+		:links="[
+			{ name: 'search', link: '/event/search' },
+			{ name: 'map', link: '/event/map?' + this.$store.getters['search/query'] }
+		]"
+	>
 		<ListMenu v-if="event && comments">
 			<template #races>
 				<div class="card-columns">
@@ -85,8 +94,8 @@
 							</div>
 						</div>
 						<br />
-						<div class="text-right">
-							<button type="submit" class="btn btn-success" :disabled="loadingSubmit">
+						<div class="text-center">
+							<button type="submit" class="btn btn-primary" :disabled="loadingSubmit">
 								<Icon v-if="loadingSubmit" class="mr-2" icon="spinner" pulse />
 								{{ $t("button.send") }}
 							</button>

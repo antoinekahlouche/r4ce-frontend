@@ -1,13 +1,15 @@
 <template>
 	<Layout icon="cog" title="admin" :titleComplement="event && event.name" :loading="loading">
-		<ListMenu :externalLink="{ event: '/event/update/' + $route.params.permalink, apply: '' }">
+		<ListMenu :externalLink="{ event: '/event/update/' + $route.params.permalink }">
 			<template #stats>
 				<Bloc></Bloc>
 			</template>
 
 			<template #event> </template>
 
-			<template #apply> </template>
+			<template #apply>
+				<Bloc></Bloc>
+			</template>
 
 			<template #participants>
 				<Bloc></Bloc>
@@ -44,7 +46,7 @@ export default {
 	}),
 	async mounted() {
 		const response = await axios.get("/event", { params: { permalink: this.$route.params.permalink } })
-		if (!response || !response.data?.event) return this.$router.push("/error?code=404")
+		if (!response.data?.event) return this.$router.push("/error?code=404")
 		this.event = response.data.event
 
 		this.loading = false

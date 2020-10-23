@@ -8,7 +8,7 @@
 					<div class="pt-2">
 						<div v-for="race in event.races" :key="race._id">
 							<span v-if="race.date === date">
-								- {{ $t("discipline." + race.discipline) }} - {{ $t("distance." + race.distance) }} - {{ $t("format." + race.format) }}
+								- {{ $t("discipline." + race.discipline) }} - <b>{{ $t("distance." + race.distance) }}</b> - {{ $t("format." + race.format) }}
 								<br />
 							</span>
 						</div>

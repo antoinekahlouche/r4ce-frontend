@@ -1,5 +1,5 @@
 <template>
-	<Layout icon="key" title="password">
+	<Layout icon="key" title="password" :links="[{ name: 'signin', link: '/signin' }]">
 		<form @submit="submit">
 			<Bloc container="sm">
 				<div class="form-group">

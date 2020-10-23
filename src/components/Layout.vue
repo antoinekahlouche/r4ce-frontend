@@ -5,7 +5,7 @@
 			<Spinner v-if="loading" />
 
 			<div :class="{ invisible: loading }">
-				<Breadcrumb v-if="links" :title="title" :links="links" />
+				<Breadcrumb v-if="links" :title="title" :translateTitle="translateTitle" :links="links" />
 				<h1 v-if="title" class="mb-3 mb-lg-5">
 					<Icon v-if="icon" class="mr-1 mr-lg-3" :icon="icon" />
 					{{ translateTitle ? $t("title." + title) : title }}{{ titleComplement ? " : " + titleComplement : "" }}
@@ -32,7 +32,7 @@ export default {
 		icon: { type: String },
 		title: { type: String },
 		titleComplement: { type: String },
-		links: { type: Object },
+		links: { type: Array },
 		translateTitle: { type: Boolean, default: true },
 		loading: { type: Boolean }
 	}

@@ -61,7 +61,7 @@ export default {
 			}
 		},
 		changeMenu(menu) {
-			if (Object.keys(this.externalLink).includes(menu)) {
+			if (this.externalLink && Object.keys(this.externalLink).includes(menu)) {
 				this.$router.push(this.externalLink[menu])
 				return
 			}

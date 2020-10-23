@@ -1,5 +1,21 @@
 <template>
-	<Layout icon="edit" :title="isAdd ? 'event_add' : 'event_update'" :titleComplement="event && event.name" :loading="loading">
+	<Layout
+		icon="edit"
+		:title="isAdd ? 'event_add' : 'event_update'"
+		:titleComplement="initialName"
+		:loading="loading"
+		:links="
+			isAdd
+				? [{ name: 'search', link: '/event/search' }]
+				: isAdmin
+				? [{ name: 'admin', link: '/event/admin/' + this.$route.params.permalink }]
+				: [
+						{ name: 'search', link: '/event/search' },
+						{ name: 'map', link: '/event/map?' + this.$store.getters['search/query'] },
+						{ name: initialName, translate: false, link: '/event/details/' + this.$route.params.permalink }
+				  ]
+		"
+	>
 		<ListMenu>
 			<template #event>
 				<Bloc>
@@ -8,7 +24,7 @@
 						<input type="text" class="form-control" v-model="event.name" required @change="updatePermalink()" />
 						<input id="eventPermalinkInput" type="hidden" class="form-control" v-model="event.permalink" required />
 						<small class="form-text text-muted">
-							{{ frontendUrl }}event/detail/<b>{{ event.permalink ? event.permalink : "..." }}</b>
+							{{ frontendUrl }}event/details/<b>{{ event.permalink ? event.permalink : "..." }}</b>
 						</small>
 					</div>
 					<div class="form-group">
@@ -158,6 +174,7 @@ export default {
 	},
 	components: { Bloc, Label, ListMenu, Map, Layout },
 	data: () => ({
+		initialName: "",
 		loading: true,
 		loadingSubmit: false,
 		event: {},
@@ -168,6 +185,9 @@ export default {
 	computed: {
 		isAdd() {
 			return !this.$route.params.permalink
+		},
+		isAdmin() {
+			return this.event.admin === this.$store.state.user._id
 		},
 		frontendUrl: () => process.env.VUE_APP_FRONTEND_URL
 	},
@@ -186,6 +206,7 @@ export default {
 			if (!response || !response.data?.event) return this.$router.push("/error?code=404")
 
 			const event = response.data.event
+			this.initialName = event.name
 			this.initialCenter = { lng: event.coordinates[0], lat: event.coordinates[1] }
 
 			for (const race of event.races) {
