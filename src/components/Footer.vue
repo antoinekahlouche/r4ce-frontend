@@ -1,7 +1,7 @@
 <template>
 	<footer class="mt-auto px-3 px-lg-5 text-light bg-dark py-3">
-		<ul class="navbar-nav">
-			<li class="nav-item dropup">
+		<ul class="navbar-nav mr-auto flex-row">
+			<li class="nav-item dropdown">
 				<a class="nav-link text-muted dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ $t("title.about") }}</a>
 				<div class="dropdown-menu">
 					<router-link class="dropdown-item" to="/legal">
@@ -34,6 +34,15 @@
 					</router-link>
 				</div>
 			</li>
+			<!-- <li class="nav-item ml-auto my-auto flex-1">
+				<Icon class="ml-2 text-muted" :icon="['fab', 'facebook']" size="lg" fixed-width />
+				<Icon class="ml-2 text-muted" :icon="['fab', 'github']" size="lg" fixed-width />
+				<Icon class="ml-2 text-muted" :icon="['fab', 'instagram']" size="lg" fixed-width />
+				<Icon class="ml-2 text-muted" :icon="['fab', 'linkedin']" size="lg" fixed-width />
+				<Icon class="ml-2 text-muted" :icon="['fab', 'twitch']" size="lg" fixed-width />
+				<Icon class="ml-2 text-muted" :icon="['fab', 'twitter']" size="lg" fixed-width />
+				<Icon class="ml-2 text-muted" :icon="['fab', 'youtube']" size="lg" fixed-width />
+			</li> -->
 		</ul>
 	</footer>
 </template>

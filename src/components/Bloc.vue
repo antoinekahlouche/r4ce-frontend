@@ -11,8 +11,8 @@
 export default {
 	name: "Bloc",
 	props: {
-		container: String,
-		noPadding: Boolean
+		container: { type: String },
+		noPadding: { type: Boolean }
 	}
 }
 </script>

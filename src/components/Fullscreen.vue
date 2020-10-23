@@ -16,7 +16,7 @@ export default {
 	name: "Fullscreen",
 	components: { Footer, Header, Spinner },
 	props: {
-		loading: { type: Boolean, default: false }
+		loading: { type: Boolean }
 	}
 }
 </script>

@@ -8,7 +8,7 @@
 				<Breadcrumb v-if="links" :title="title" :links="links" />
 				<h1 v-if="title" class="mb-3 mb-lg-5">
 					<Icon v-if="icon" class="mr-1 mr-lg-3" :icon="icon" />
-					{{ translateTitle ? $t("title." + title) : title }}
+					{{ translateTitle ? $t("title." + title) : title }}{{ titleComplement ? " : " + titleComplement : "" }}
 				</h1>
 				<Alert />
 				<slot />
@@ -29,11 +29,12 @@ export default {
 	name: "Layout",
 	components: { Alert, Breadcrumb, Footer, Header, Spinner },
 	props: {
-		icon: String,
-		title: String,
-		links: Object,
+		icon: { type: String },
+		title: { type: String },
+		titleComplement: { type: String },
+		links: { type: Object },
 		translateTitle: { type: Boolean, default: true },
-		loading: { type: Boolean, default: false }
+		loading: { type: Boolean }
 	}
 }
 </script>

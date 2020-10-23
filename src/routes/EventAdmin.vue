@@ -1,19 +1,25 @@
 <template>
-	<Layout icon="cog" title="admin" :loading="loading">
-		<ListMenu>
-			<template #stats external>
-				aze
+	<Layout icon="cog" title="admin" :titleComplement="event && event.name" :loading="loading">
+		<ListMenu :externalLink="{ event: '/event/update/' + $route.params.permalink, apply: '' }">
+			<template #stats>
+				<Bloc></Bloc>
 			</template>
 
-			<template #event>aze</template>
+			<template #event> </template>
 
-			<template #apply>aze</template>
+			<template #apply> </template>
 
-			<template #participants>aze</template>
+			<template #participants>
+				<Bloc></Bloc>
+			</template>
 
-			<template #transfer>aze</template>
+			<template #transfer>
+				<Bloc></Bloc>
+			</template>
 
-			<template #configuration>aze</template>
+			<template #config>
+				<Bloc></Bloc>
+			</template>
 		</ListMenu>
 	</Layout>
 </template>
@@ -22,6 +28,7 @@
 import Bloc from "@/components/Bloc"
 import ListMenu from "@/components/ListMenu"
 import Layout from "@/components/Layout"
+import axios from "@/plugins/axios"
 
 export default {
 	name: "EventAdmin",
@@ -32,8 +39,16 @@ export default {
 	},
 	components: { Bloc, ListMenu, Layout },
 	data: () => ({
-		loading: false
-	})
+		loading: true,
+		event: null
+	}),
+	async mounted() {
+		const response = await axios.get("/event", { params: { permalink: this.$route.params.permalink } })
+		if (!response || !response.data?.event) return this.$router.push("/error?code=404")
+		this.event = response.data.event
+
+		this.loading = false
+	}
 }
 </script>
 

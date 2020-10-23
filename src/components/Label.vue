@@ -1,5 +1,5 @@
 <template>
-	<label :class="{'m-0':condensed}">
+	<label :class="{ 'm-0': condensed }">
 		<b>
 			<span v-html="$t('label.' + text)"></span>
 			<span v-if="required" class="text-danger">&nbsp;*</span>
@@ -12,8 +12,8 @@ export default {
 	name: "EventSearch",
 	props: {
 		text: { type: String, required: true },
-		required: Boolean,
-		condensed: Boolean
+		required: { type: Boolean },
+		condensed: { type: Boolean }
 	},
 	i18n: {
 		messages: {

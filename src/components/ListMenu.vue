@@ -4,6 +4,7 @@
 			<div class="list-group active-param" role="tablist">
 				<div v-for="(value, key) in $slots" :key="key" :id="'ListMenu_menu_' + key" class="list-group-item list-group-item-action pointer" data-toggle="list" :href="'#ListMenu_content_' + key" @click="changeMenu(key)">
 					{{ $t("title." + key) }}
+					<Icon v-if="externalLink && Object.keys(externalLink).includes(key)" class="ml-2" icon="external-link-alt" />
 				</div>
 			</div>
 
@@ -36,7 +37,8 @@ export default {
 	name: "ListMenu",
 	components: { Alert, Breadcrumb, Footer, Header },
 	props: {
-		withSignout: { type: Boolean, default: false }
+		withSignout: { type: Boolean },
+		externalLink: { type: Object }
 	},
 	data: () => ({
 		loading: false
@@ -59,6 +61,11 @@ export default {
 			}
 		},
 		changeMenu(menu) {
+			if (Object.keys(this.externalLink).includes(menu)) {
+				this.$router.push(this.externalLink[menu])
+				return
+			}
+
 			const { active, ...otherQuery } = this.$route.query
 			if (active === menu) return
 			this.$router.replace({ path: this.$route.currentPath, query: { active: menu, ...otherQuery } })

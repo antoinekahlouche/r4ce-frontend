@@ -1,5 +1,5 @@
 <template>
-	<Layout icon="edit" :title="isAdd ? 'event_add' : 'event_update'" :loading="loading">
+	<Layout icon="edit" :title="isAdd ? 'event_add' : 'event_update'" :titleComplement="event && event.name" :loading="loading">
 		<ListMenu>
 			<template #event>
 				<Bloc>
@@ -55,6 +55,7 @@
 					</div>
 				</Bloc>
 			</template>
+
 			<template #location>
 				<Bloc noPadding>
 					<div id="map" class="rounded-lg" />
@@ -65,6 +66,7 @@
 					<button type="button" class="btn btn-secondary" @click="resetCenter()">{{ $t("button.reset") }}</button>
 				</div>
 			</template>
+
 			<template #races>
 				<div>
 					<Bloc v-for="(race, index) in event.races" :key="index">
@@ -111,6 +113,7 @@
 					</div>
 				</div>
 			</template>
+
 			<template #recap>
 				<form @submit="submit">
 					<Bloc>
