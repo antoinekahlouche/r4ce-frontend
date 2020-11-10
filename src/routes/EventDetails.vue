@@ -41,22 +41,19 @@
 					<div v-for="comment in comments" :key="comment._id" class="card">
 						<div class="card-body py-1">
 							<div class="card-title row m-0">
-								<div class="col-auto">
-									<div class="username">
-										<Avataaars style="width:10rem;" class="mb-3" :id="comment.userAvatar" />
-									</div>
+								<div class="col-auto p-0 m-auto">
+									<Avataaars style="max-width:8rem;" class="mb-3" :id="comment.userAvatar" />
 								</div>
 								<div class="col m-auto">
 									<div class="font-weight-bold">{{ comment.userName }}</div>
-									<small class="text-muted">
-										{{ comment.race }}
-										<span v-if="comment.year">- {{ comment.year }}</span>
-										<span v-if="comment.time">- {{ comment.time }}</span>
-									</small>
-									<br />
-									<small class="text-muted">
-										<StarRating v-model="comment.rating" inactive-color="#EEEEEE" active-color="#FFC107" :border-width="3" border-color="#EEEEEE" active-border-color="#FFB300" :show-rating="false" :star-size="15" rounded-corners readOnly></StarRating>
-									</small>
+									<div class="mb-1">
+										<small class="text-muted">
+											{{ comment.race }}
+											<span v-if="comment.year">- {{ comment.year }}</span>
+											<span v-if="comment.time">- {{ comment.time }}</span>
+										</small>
+									</div>
+									<StarRating v-model="comment.rating" inactive-color="#EEEEEE" active-color="#FFC107" :border-width="3" border-color="#EEEEEE" active-border-color="#FFB300" :show-rating="false" :star-size="15" rounded-corners readOnly></StarRating>
 								</div>
 							</div>
 							<p v-if="comment.message" class="card-text py-3">{{ comment.message }}</p>
