@@ -4,11 +4,11 @@
 			<Bloc container="sm">
 				<div class="form-group">
 					<Label for="name" text="name" required />
-					<input id="name" type="text" class="form-control" v-model="name" required />
+					<input id="name" type="text" class="form-control" v-model="name" required :disabled="$store.state.user.signedIn" />
 				</div>
 				<div class="form-group">
 					<Label for="email" text="email" required />
-					<input id="email" type="email" class="form-control" v-model="email" required />
+					<input id="email" type="email" class="form-control" v-model="email" required :disabled="$store.state.user.signedIn" />
 				</div>
 				<div class="form-group">
 					<Label for="comment" text="comment" required />
@@ -44,6 +44,13 @@ export default {
 		email: null,
 		comment: null
 	}),
+	mounted() {
+		if (this.$store.state.user.signedIn) {
+			const user = this.$store.state.user
+			this.name = user.firstName + " " + user.lastName
+			this.email = user.email
+		}
+	},
 	methods: {
 		async submit(event) {
 			event.preventDefault()
@@ -62,8 +69,10 @@ export default {
 			}
 
 			this.$store.dispatch("alert/open", { type: "success", message: "email_contact_sent" })
-			this.name = null
-			this.email = null
+			if (!this.$store.state.user.signedIn) {
+				this.name = null
+				this.email = null
+			}
 			this.comment = null
 
 			this.loading = false
