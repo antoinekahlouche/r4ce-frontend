@@ -30,7 +30,7 @@
 					<div class="col-12 col-lg-6 mx-auto">
 						<h2 class="text-center">R4CE : Qu'es ce que c'est ?</h2>
 						<br />
-						<p>Le but de R4CE est de faciliter et améliorer l'<b>accès aux évènements sportifs amateurs</b>.</p>
+						<p>R4CE facilite et améliore l'<b>accès aux évènements sportifs amateurs</b>.</p>
 						<p>
 							R4CE est avant tout un moteur de recherche d'évènements sportifs amateurs.
 							<br />
@@ -149,11 +149,11 @@
 						<form @submit="contact">
 							<div class="form-group">
 								<Label for="name" text="name" required />
-								<input id="name" type="text" class="form-control" v-model="name" required />
+								<input id="name" type="text" class="form-control" v-model="name" required :disabled="$store.state.user.signedIn" />
 							</div>
 							<div class="form-group">
 								<Label for="email" text="email" required />
-								<input id="email" type="email" class="form-control" v-model="email" required />
+								<input id="email" type="email" class="form-control" v-model="email" required :disabled="$store.state.user.signedIn" />
 							</div>
 							<div class="form-group">
 								<Label for="comment" text="comment" required />
@@ -173,6 +173,99 @@
 			</div>
 		</Bloc>
 	</Layout>
+	<!-- 
+GRATUIT Visibilité de vos courses dans notre moteur de recherche
+GRATUIT SEO de votre evènement pour une meilleur visibilité sur Google
+GRATUIT Diffusez votre projet ; Partagez la page de votre projet à vos contacts et sur les réseaux sociaux. Vous pouvez aussi directement l’intégrer sur votre site.
+GRATUIT Formulaire d'inscription 100% personnalisable
+GRATUIT Options illimitées
+GRATUIT Pré-inscription (pas de paiement en ligne)
+GRATUIT Inscriptions gratuites
+GRATUIT Reverse mensuel des fonds collectés
+GRATUIT Inscriptions saisies ou importées
+GRATUIT Statistiques sur mesure detaillées
+GRATUIT Accés Back Office illimité
+GRATUIT Export de données illimité
+Montant de la commission :
+
+
+R4CE accompagne l'ensemble des organisateurs d'événements sportifs jusqu’à la ligne de départ.
+Avec ses applications web & mobile, R4CE vous propose de gérer l'inscription en ligne de vos participants et de nombreux services annexes : retrait des dossards, covoiturage…
+Que vous soyez des professionnels du sport ou des bénévoles passionnés, notre application s’adapte à tous et permet de répondre à des besoins aussi simples que complexes
+
+Pour maîtriser chaque étape avant le jour j...
+De la construction de votre formulaire en ligne sur mesure, à la collecte et la gestion de vos inscriptions
+en un clin d’oeil, en passant par le contrôle de vos finances, ou encore le retrait des dossards digitalisé
+avec son application dédiée… Nous vous accompagnons jusqu’à la ligne de départ en toute sérénité
+Creation Inscriptions Finances Retrait de dossards
+
+
+Ils en parlent ...
+
+
+
+Créez votre compte
+Inscrivez votre association gratuitement et en quelques clics. Accédez ensuite à l’espace de votre association.
+Lancez votre projet
+Créez une billetterie, un formulaire d’adhésion, un appel au don. Le tout facilement et sans connaissances particulières en informatique.
+Diffusez votre projet
+Partagez la page de votre projet à vos contacts et sur les réseaux sociaux. Vous pouvez aussi directement l’intégrer sur votre site.
+Collectez des paiements
+Recevez des paiements en ligne et financez vos activités. HelloAsso vous verse chaque € collecté sur votre compte bancaire, tous les mois ou à la demande.
+
+
+Aucune connaissance technique nécessaire
+Pas besoin d’être informaticien, ni graphiste, chacun peut lancer simplement et en quelques minutes les formulaires de paiement pour son association.
+
+Une équipe qui vous accompagne
+Besoin d’une réponse ou d’un conseil ? Notre équipe est là pour vous accompagner par e-mail. Nous traitons les demandes rapidement.
+
+
+Remboursement des coureurs
+Une blessure, ca peut arriver. Vous pouvez rembourser le sportif en un clic
+
+
+
+
+
+1. Pourquoi choisir R4CE ?
+C'est gratuit
+En tant qu'organisateur, vous utilisez tous nos services gratuitement
+
+Vous n'êtes jamais seuls
+Nous sommes à votre disposition par téléphone ou par email
+
+
+
+
+4. Exploitez vos données
+Statistiques par date
+Visualiser l'évolution des inscriptions
+
+Comparatif des inscriptions
+En avance ? en retard ? vous pouvez comparer vos données d'année en année
+
+Statistiques géographiques
+Visualisez sur une carte d'où viennent vos inscrits
+
+5. Ma course approche !
+Mail d'informations
+Envoyez un mail en un clic à tous vos inscrits
+
+Numérotez...puis imprimez
+Nous vous fournissons des fiches par ordre alphabétique ou par numéro de dossards
+
+Dossards par SMS
+C'est nouveau, vous pouvez envoyer les numéros de dossards par SMS aux sportifs
+
+
+
+
+1. S'inscrire
+2. Se déclarer comme responsable de l'évènement
+3. Creation du formulaire d'inscription
+4. Collectez les inscriptions
+	 -->
 </template>
 
 <script>
