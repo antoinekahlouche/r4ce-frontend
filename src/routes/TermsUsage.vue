@@ -109,7 +109,7 @@ export default {
 					"20_title": "Loi applicable et juridiction",
 					"20_content": "<p>Les présentes conditions générales sont régies par la loi française.</p><p>En cas de contestation sur la validité, l'interprétation et/ou l'exécution des présentes conditions générales, les parties conviennent que les tribunaux de Paris seront exclusivement compétents pour en juger, sauf règles de procédure impératives contraires.</p>",
 					"21_title": "Entrée en vigueur",
-					"21_content": "<p>Les présentes conditions générales sont entrées en vigueur le 21/02/2020</p>"
+					"21_content": "<p>Les présentes conditions générales sont entrées en vigueur le 01/11/2020</p>"
 				}
 			}
 		}

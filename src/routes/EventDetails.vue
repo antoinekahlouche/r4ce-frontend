@@ -138,8 +138,8 @@
 		</ListMenu>
 		<div v-if="event && !event.admin" class="row mt-3">
 			<div class="col text-right">
-				<router-link :to="'/event/claim/' + event.permalink">{{ $t("text.event_admin") }}</router-link>
-				<br />
+				<!-- <router-link :to="'/event/claim/' + event.permalink">{{ $t("text.event_admin") }}</router-link>
+				<br /> -->
 				<router-link :to="'/event/update/' + event.permalink">{{ $t("title.event_update") }}</router-link>
 			</div>
 		</div>

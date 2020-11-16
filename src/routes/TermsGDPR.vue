@@ -67,7 +67,7 @@ export default {
 					"15_title": "Modifications",
 					"15_content": "<p>Nous nous réservons le droit, à notre seule discrétion, de modifier à tout moment la présente charte, en totalité ou en partie. Ces modifications entreront en vigueur à compter de la publication de la nouvelle charte. Votre utilisation du site suite à l'entrée en vigueur de ces modifications vaudra reconnaissance et acceptation de la nouvelle charte. A défaut et si cette nouvelle charte ne vous convient pas, vous ne devrez plus accéder au site.</p>",
 					"16_title": "Entrée en vigueur",
-					"16_content": "<p>La présente charte est entrée en vigueur le 21/02/2020.</p>"
+					"16_content": "<p>La présente charte est entrée en vigueur le 01/11/2020.</p>"
 				}
 			}
 		}

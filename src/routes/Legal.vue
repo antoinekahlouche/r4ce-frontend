@@ -33,12 +33,12 @@
 				<a href="https://aws.amazon.com" target="_blank">aws.amazon.com</a>
 			</div>
 
-			<div>
+			<!-- <div>
 				<h2>{{ $t("text.payement") }}</h2>
 				<img class="img-fluid m-4" style="width:150px;" src="@/assets/stripe.svg" /> <br />
 				<br />
 				<a href="https://stripe.com/fr" target="_blank">stripe.com</a>
-			</div>
+			</div> -->
 		</Bloc>
 	</Layout>
 </template>
