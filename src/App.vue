@@ -1,5 +1,9 @@
 <template>
 	<div id="app" class="d-flex flex-column">
+		<div class="p-2 text-center" style="background:red; color:white;">
+			<p class="m-0"><b>Version développement :</b> les données sont factices et les informations que vous insérez seront supprimées.</p>
+		</div>
+
 		<Watcher />
 		<GDPR />
 		<router-view class="flex-grow-1 d-flex flex-column" />
