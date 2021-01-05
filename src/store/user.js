@@ -97,16 +97,13 @@ export default {
 				avatar: random(),
 				email,
 				firstName,
-				gdprVersion: rootGetters["terms/versions"].GDPR,
 				locale: i18n.locale.toUpperCase(),
 				lastName,
-				password,
-				usageVersion: rootGetters["terms/versions"].USAGE
+				password
 			})
 			if (!response) return false
 
 			dispatch("store", response.data.user)
-			dispatch("terms/get", null, { root: true })
 			return true
 		},
 		async signin({ dispatch }, { email, password }) {
@@ -114,7 +111,6 @@ export default {
 			if (!response) return false
 
 			dispatch("store", response.data.user)
-			dispatch("terms/get", null, { root: true })
 			return true
 		},
 		async signout({ commit }) {
