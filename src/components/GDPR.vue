@@ -2,13 +2,13 @@
 	<form v-if="show" @submit="submit">
 		<div class="toast position-fixed m-4" role="alert" data-animation="false" data-autohide="false">
 			<div class="toast-header">
-				<strong class="my-2">{{ $t("title.gdpr") }}</strong>
+				<strong class="my-2">{{ $t("title.terms_gdpr") }}</strong>
 			</div>
 			<div class="toast-body">
 				<p>{{ $t("text.gdpr") }}</p>
 				<div class="clearfix">
 					<div class="float-right">
-						<router-link to="/gdpr" class="mr-2">{{ $t("button.more_info") }}</router-link>
+						<router-link to="/terms/gdpr" class="mr-2">{{ $t("button.more_info") }}</router-link>
 						<button type="submit" class="btn btn-primary ml-2" :disabled="loading">
 							<Icon v-if="loading" class="mr-2" icon="spinner" pulse />
 							{{ $t("button.accept") }}
@@ -50,5 +50,6 @@ export default {
 	bottom: 0;
 	z-index: 3;
 	background-color: #ffffff;
+	opacity: 1;
 }
 </style>

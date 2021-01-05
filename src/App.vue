@@ -5,7 +5,7 @@
 		</div>
 
 		<Watcher />
-		<GDPR />
+		<!-- <GDPR /> -->
 		<router-view class="flex-grow-1 d-flex flex-column" />
 	</div>
 </template>
